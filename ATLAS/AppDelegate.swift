@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  ATLAS
-//
-//  Created by Eric Rodriguez on 10/10/24.
-//
-
 import UIKit
 
 @main

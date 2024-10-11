@@ -1,11 +1,7 @@
-//
-//  ViewController.swift
-//  ATLAS
-//
-//  Created by Eric Rodriguez on 10/10/24.
-//
-
 import UIKit
+
+// Note from Eric, make sure to make a file for the view controller class you are doing
+// also change the corresponding VC in story board to the class acccordingly
 
 class ViewController: UIViewController {
 
