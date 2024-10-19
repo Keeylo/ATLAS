@@ -15,6 +15,8 @@ class GameInstructionsViewController: UIViewController {
     
     @IBOutlet weak var instructionsLabel: UILabel!
     
+    var instructions: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,20 +25,9 @@ class GameInstructionsViewController: UIViewController {
         
         instructionsLabel.layer.masksToBounds = true
         instructionsLabel.layer.cornerRadius = 10
-        instructionsLabel
 
-        // Do any additional setup after loading the view.
+        instructionsLabel.text = instructions
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

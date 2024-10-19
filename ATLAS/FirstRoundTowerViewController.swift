@@ -9,21 +9,37 @@ import UIKit
 
 class FirstRoundTowerViewController: UIViewController {
 
+    @IBOutlet weak var towerButton: UIButton!
+    
+    var delegate: UIViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        towerButton.frame = CGRect(x: 267, y: 265, width: 39, height: 83)
+        
+        var configuration = UIButton.Configuration.filled()
+
+        configuration.image = UIImage(named: "Image")
+        configuration.imagePadding = 8
+        configuration.imagePlacement = .leading
+        towerButton.configuration = configuration
+        
+        let rotationAngle = CGFloat(-30) * CGFloat.pi / 180
+        towerButton.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        towerButton.backgroundColor = .clear
+        towerButton.tintColor = .clear
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func towerButtonPressed(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let round2VC = storyboard.instantiateViewController(withIdentifier: "SecondRoundTower") as? SecondRoundTowerViewController
+        round2VC?.delegate = delegate
+        
+        let otherVC = delegate as! ScreenChanger
+        otherVC.changeScreen(vc: round2VC!)
     }
-    */
+    
 
 }
