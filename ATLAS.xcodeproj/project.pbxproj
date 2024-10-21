@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */; };
+		42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */; };
 		49923EDB2CB7A1C700D2CBA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923EDA2CB7A1C700D2CBA2 /* AppDelegate.swift */; };
 		49923EDD2CB7A1C700D2CBA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923EDC2CB7A1C700D2CBA2 /* SceneDelegate.swift */; };
 		49923EDF2CB7A1C700D2CBA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923EDE2CB7A1C700D2CBA2 /* ViewController.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserSetupViewController.swift; sourceTree = "<group>"; };
+		42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotChangePasswordViewController.swift; sourceTree = "<group>"; };
 		49923ED72CB7A1C700D2CBA2 /* ATLAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATLAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49923EDA2CB7A1C700D2CBA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49923EDC2CB7A1C700D2CBA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				49923EDE2CB7A1C700D2CBA2 /* ViewController.swift */,
 				D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */,
 				49923EE02CB7A1C700D2CBA2 /* Main.storyboard */,
+				42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */,
+				42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */,
 				D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */,
 				D5BF14502CC07C8A00A0604C /* ThirdRoundTowerViewController.swift */,
 				D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */,
@@ -237,10 +243,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */,
 				49923EDF2CB7A1C700D2CBA2 /* ViewController.swift in Sources */,
 				D5BF14512CC07C8A00A0604C /* ThirdRoundTowerViewController.swift in Sources */,
 				D596C2852CBF39F60047E563 /* MiniGameViewController.swift in Sources */,
 				D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */,
+				42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */,
 				49923EDB2CB7A1C700D2CBA2 /* AppDelegate.swift in Sources */,
 				D5BF14532CC0C79C00A0604C /* WonGameViewController.swift in Sources */,
 				D5BF144D2CC0579700A0604C /* FirstRoundTowerViewController.swift in Sources */,
