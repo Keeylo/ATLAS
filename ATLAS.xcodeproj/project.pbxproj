@@ -13,9 +13,7 @@
 		49923EE22CB7A1C700D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE12CB7A1C700D2CBA2 /* Base */; };
 		49923EE42CB7A1C900D2CBA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */; };
 		49923EE72CB7A1C900D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE62CB7A1C900D2CBA2 /* Base */; };
-<<<<<<< HEAD
 		499951452CBECBEF00791937 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499951442CBECBEF00791937 /* MapViewController.swift */; };
-=======
 		D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */; };
 		D596C2852CBF39F60047E563 /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596C2842CBF39F60047E563 /* MiniGameViewController.swift */; };
 		D5BF144D2CC0579700A0604C /* FirstRoundTowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */; };
@@ -47,7 +45,6 @@
 		D5BF14822CC17D1E00A0604C /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D5BF14812CC17D1E00A0604C /* FirebaseStorageCombine-Community */; };
 		D5BF14842CC17D1E00A0604C /* FirebaseVertexAI-Preview in Frameworks */ = {isa = PBXBuildFile; productRef = D5BF14832CC17D1E00A0604C /* FirebaseVertexAI-Preview */; };
 		D5BF14862CC17E8900A0604C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */; };
->>>>>>> main
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,9 +56,7 @@
 		49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49923EE62CB7A1C900D2CBA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49923EE82CB7A1C900D2CBA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		499951442CBECBEF00791937 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-=======
 		D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsViewController.swift; sourceTree = "<group>"; };
 		D596C2842CBF39F60047E563 /* MiniGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
 		D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRoundTowerViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +64,6 @@
 		D5BF14502CC07C8A00A0604C /* ThirdRoundTowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdRoundTowerViewController.swift; sourceTree = "<group>"; };
 		D5BF14522CC0C79C00A0604C /* WonGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonGameViewController.swift; sourceTree = "<group>"; };
 		D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
->>>>>>> main
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,11 +248,8 @@
 				D5BF14532CC0C79C00A0604C /* WonGameViewController.swift in Sources */,
 				D5BF144D2CC0579700A0604C /* FirstRoundTowerViewController.swift in Sources */,
 				49923EDD2CB7A1C700D2CBA2 /* SceneDelegate.swift in Sources */,
-<<<<<<< HEAD
 				499951452CBECBEF00791937 /* MapViewController.swift in Sources */,
-=======
 				D5BF144F2CC0727400A0604C /* SecondRoundTowerViewController.swift in Sources */,
->>>>>>> main
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
