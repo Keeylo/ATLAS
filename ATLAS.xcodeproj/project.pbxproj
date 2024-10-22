@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E65EBD32CC78E6A00972C99 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E65EBD22CC78E6A00972C99 /* logo.png */; };
 		42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */; };
 		42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */; };
 		493358532CC7076900AD4797 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358522CC7076900AD4797 /* MapViewController.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E65EBD22CC78E6A00972C99 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserSetupViewController.swift; sourceTree = "<group>"; };
 		42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotChangePasswordViewController.swift; sourceTree = "<group>"; };
 		493358522CC7076900AD4797 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */,
 				49923EE52CB7A1C900D2CBA2 /* LaunchScreen.storyboard */,
 				49923EE82CB7A1C900D2CBA2 /* Info.plist */,
+				2E65EBD22CC78E6A00972C99 /* logo.png */,
 			);
 			path = ATLAS;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				D5BF14862CC17E8900A0604C /* GoogleService-Info.plist in Resources */,
 				493358552CC71A1300AD4797 /* UserGuideStoryboard.storyboard in Resources */,
 				49923EE72CB7A1C900D2CBA2 /* Base in Resources */,
+				2E65EBD32CC78E6A00972C99 /* logo.png in Resources */,
 				49923EE22CB7A1C700D2CBA2 /* Base in Resources */,
 				4933585B2CC745D700AD4797 /* UnlockedAreasStoryboard.storyboard in Resources */,
 			);
