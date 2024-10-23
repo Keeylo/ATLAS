@@ -11,6 +11,8 @@ import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    @IBOutlet weak var menuButton: UIButton!
+    
     @IBOutlet weak var atlasMap: MKMapView!
     var polyOverlay: MKPolygon? // for updating UTs overlay
     let manager = CLLocationManager() // start and stop location operations
@@ -59,6 +61,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // make the entire fillIn only once
         polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count) // great but I want a circle damnit
         atlasMap.addOverlay(polyOverlay!)
+        
+        let buttonSize: CGFloat = 30
+        menuButton.frame = CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 65, width: buttonSize, height: buttonSize)
+
+
     }
     
     // this happens every time the view has appeared on the screen, it is reoccuring
@@ -190,6 +197,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let mapPoint = MKMapPoint(coordinate)
 
         return fillIn.boundingMapRect.contains(mapPoint)
+    }
+    
+    
+    @IBAction func menuButtonPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let popUpMenu = storyboard.instantiateViewController(withIdentifier: "MenuPopUp") as? MenuPopUpViewController
+        
+        let menuHeight = self.view.frame.height / 4.5
+        popUpMenu!.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: menuHeight)
+        
+        addChild(popUpMenu!)
+        view.addSubview(popUpMenu!.view)
+        popUpMenu!.didMove(toParent: self)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            popUpMenu!.view.frame.origin.y = self.view.frame.height - menuHeight
+        })
+
     }
 }
 
