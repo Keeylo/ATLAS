@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TbA-iX-Zed">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TbA-iX-Zed">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -107,15 +107,25 @@
             </objects>
             <point key="canvasLocation" x="2671" y="1439"/>
         </scene>
-        <!--UserGuideStoryboard-->
+        <!--UnlockedAreasStoryboard-->
         <scene sceneID="174-Uc-oR4">
             <objects>
-                <viewControllerPlaceholder storyboardName="UserGuideStoryboard" id="tnt-st-7v9" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="UnlockedAreasStoryboard" id="tnt-st-7v9" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="z6W-yB-bHm"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFn-ka-Oe8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3422" y="1199"/>
+        </scene>
+        <!--UserGuideStoryboard-->
+        <scene sceneID="K6q-eL-tkT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserGuideStoryboard" id="ZRH-gS-Y2y" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fmI-ih-uUG"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FIK-Yz-Qyw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3774" y="1199"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="AHd-3s-eLj">
@@ -399,7 +409,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Unlocked Areas"/>
                                 <connections>
-                                    <segue destination="HWg-mR-3rU" kind="show" id="RXK-F1-YrM"/>
+                                    <segue destination="tnt-st-7v9" kind="show" identifier="" destinationCreationSelector="UnlockedAreas:" id="jdd-6l-2t5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-IP-WK9">
@@ -415,7 +425,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="User Guide"/>
                                 <connections>
-                                    <segue destination="tnt-st-7v9" kind="show" id="oJ0-oi-qUh"/>
+                                    <segue destination="ZRH-gS-Y2y" kind="show" id="b0i-Wt-U2s"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -27301,15 +27311,15 @@ GB2RABgdmQAYHZsAGB2dABgdnwAYHaEAGC9BABgvRgAYL1MAGC9WABgvYwAYL2gAGC9wABgvcwAYL3gA
 GC+AAAAAAAAABAEAAAAAAAAAaAAAAAAAAAAAAAAAAAAYL4M
 </mutableData>
         </image>
-        <image name="play.fill" catalog="system" width="120" height="128"/>
+        <image name="play.fill" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

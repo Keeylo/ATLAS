@@ -7,26 +7,31 @@
 
 import UIKit
 
-class UserGuideViewController: UIViewController {
-
-    @IBOutlet weak var sunnySideUp: UIImageView!
+class UserGuideViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    let data = ["Location 1", "Location 2", "Location 3"] // Sample data
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let rotationAngle = CGFloat(-15) * CGFloat(Double.pi) / 180  // 45 degrees in radians
-        sunnySideUp.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        // Do any additional setup after loading the view.
+
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
     }
-    */
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = data[indexPath.row]
+        return cell
+    }
+
+    @IBAction func backButtonPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }

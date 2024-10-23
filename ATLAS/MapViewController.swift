@@ -191,7 +191,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         return fillIn.boundingMapRect.contains(mapPoint)
     }
+    
 }
-
 
 // I wanna go to bed
