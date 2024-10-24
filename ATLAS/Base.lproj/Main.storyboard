@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MUA-zc-5Lg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="96X-Ij-15R">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -86,7 +86,7 @@
         <!--Settings-->
         <scene sceneID="b2W-Qb-q2q">
             <objects>
-                <viewController storyboardIdentifier="UserSettings" id="V8w-yK-q6P" customClass="ViewController" customModule="ATLAS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserSettings" id="V8w-yK-q6P" customClass="UserSettingsViewController" customModule="ATLAS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ZM-nh-4o3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gid-Gv-6Va">
                                 <rect key="frame" x="105" y="156.66666666666652" width="183" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nes-SQ-JIJ">
                                 <rect key="frame" x="34" y="490" width="74" height="21"/>
@@ -145,12 +144,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOutPressed:" destination="V8w-yK-q6P" eventType="touchUpInside" id="aSI-kp-TZF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPv-ms-HMO">
                                 <rect key="frame" x="126" y="734" width="141" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Delete Account"/>
+                                <connections>
+                                    <action selector="deleteAccountPressed:" destination="V8w-yK-q6P" eventType="touchUpInside" id="syY-ny-18B"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heE-8i-TSj">
                                 <rect key="frame" x="34" y="392" width="79" height="21"/>
@@ -164,6 +169,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="hMg-PX-PgV"/>
+                    <connections>
+                        <outlet property="deleteAccountButton" destination="HPv-ms-HMO" id="SzZ-zJ-biF"/>
+                        <outlet property="logOutButton" destination="ywq-oi-Y4h" id="HkM-aE-Xd2"/>
+                        <segue destination="mkm-MK-m2n" kind="presentation" identifier="LoginScreenSegue" modalPresentationStyle="fullScreen" id="bAw-Hj-ftJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RWH-dz-1fM" sceneMemberID="firstResponder"/>
             </objects>
@@ -184,7 +194,7 @@
             <objects>
                 <viewController id="Kql-TO-cCh" customClass="ViewController" customModule="ATLAS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qss-b0-H5N">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User guide" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlb-Bc-ZXJ">
@@ -341,30 +351,6 @@
             </objects>
             <point key="canvasLocation" x="2669" y="699"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="nSk-Cx-6QF">
-            <objects>
-                <viewController id="4b1-aK-p2E" customClass="ViewController" customModule="ATLAS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mmG-jl-AQI">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mini game Win Screen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7F-9R-bAf">
-                                <rect key="frame" x="157" y="416" width="170" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="fcP-Jc-ghg"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Miv-TY-kbB" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1804" y="699"/>
-        </scene>
         <!--Mini Game View Controller-->
         <scene sceneID="pr2-Xe-BTP">
             <objects>
@@ -383,6 +369,7 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Quit Mini Game?"/>
                                 <connections>
                                     <action selector="quitButtonPressed:" destination="96X-Ij-15R" eventType="touchUpInside" id="b1t-Py-2PQ"/>
+                                    <segue destination="MUA-zc-5Lg" kind="presentation" modalPresentationStyle="fullScreen" id="tBS-tT-0bo"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFx-lk-qiC">
@@ -681,6 +668,7 @@
                         <viewLayoutGuide key="safeArea" id="YGB-DZ-TVv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="za3-Bw-uX9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Huv-sW-rSE" sceneMemberID="firstResponder"/>
             </objects>
@@ -873,7 +861,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="userGuidePressed:" destination="LJP-Tl-uRv" eventType="touchUpInside" id="4Rq-I3-rkF"/>
-                                    <segue destination="Kql-TO-cCh" kind="show" id="YAd-Eg-ms9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4x-nA-3g6">
@@ -1020,7 +1007,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Y4-gd-kY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1764" y="2087"/>
+            <point key="canvasLocation" x="1804" y="699"/>
         </scene>
     </scenes>
     <resources>

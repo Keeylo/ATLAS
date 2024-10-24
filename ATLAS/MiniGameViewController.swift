@@ -14,6 +14,7 @@ protocol ScreenChanger {
     func changeScreen(vc: UIViewController)
 }
 
+// protocol that pauses the timer
 protocol TimerStops {
     func stopsTimer()
 }
@@ -75,6 +76,8 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         
     }
     
+    // changes the Container View to display the child VC 
+    // passed in as parameter
     func displayChildViewController(_ child: UIViewController) {
         // Remove the current child view controller if any
         if let currentChild = currentChildViewController {
@@ -93,12 +96,16 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         currentChildViewController = child
     }
     
+    // reveals the next hint if the game has started,
+    // or displays no more hints label if the user ran out
     @IBAction func hintsButtonPressed(_ sender: Any) {
         if (hintCount == totalHints && gameStarted) {
             revealHints()
         }
     }
     
+    // reveals the next hint or displays no more hints if
+    // the user has run out
     func revealHints() {
         if (hintCount > 0) {
             if (hintsIndex == 0) {
@@ -112,22 +119,27 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         }
     }
     
-    // reveals next hint, or if there are no more hints, it tells the user they are out of hints
+    // reveals next hint, or if there are no more hints, 
+    // it tells the user they are out of hints
     @IBAction func anotherHintButtonPressed(_ sender: Any) {
         revealHints()
     }
     
-    // if the quit button is pressed, then user is taken back to the map screen
+    // if the quit button is pressed, then user is taken back
+    // to the map screen
     @IBAction func quitButtonPressed(_ sender: Any) {
-        
+        // need to add alert asking user if they're sure they'd like to quit
     }
     
-    
-    
+    // pauses/plays game
     @IBAction func playButtonPressed(_ sender: Any) {
         pauseResumeGame()
     }
     
+    // if the game has just started, the right VCs are displayed
+    // depending on which game is being played. Also changes image
+    // of pause/play button accordingly. Pauses and resumes game
+    // based on response user gives to the alert. Handles timer
     func pauseResumeGame() {
         if (gameStarted == false) {
             gameStarted = true
@@ -151,6 +163,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         }
     }
     
+    // shows alert prompting user to restart or resume the game
     func showPausedAlert() {
         let blurEffect = UIBlurEffect(style: .light)
         let blurVisualEffectView = UIVisualEffectView(effect: blurEffect)
@@ -172,12 +185,16 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         present(controller, animated: true)
     }
     
+    // starts timer
     func startCountdown() {
         timer?.invalidate()
 
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountdown), userInfo: nil, repeats: true)
     }
 
+    // updates the time left and pauses timer if the user won and
+    // shows alert if the user ran out of time and asks if they
+    // would like to try again
     @objc func updateCountdown() {
         if timeLeft > 0 {
             timeLeft -= 1
@@ -201,6 +218,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         }
     }
 
+    // updates timer label to reflect correct time
     func updateTimerLabel() {
         timerLabel.text = "Timer: \(timeLeft)s"
     }
@@ -210,6 +228,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         //timer = nil // Clear the timer reference
     }
     
+    // resets the whole game
     func resetMiniGame() {
         
         pausePlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
@@ -242,10 +261,12 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         displayChildViewController(instructionsVC!)
     }
     
+    // changes the Container View to display the VC that is passed in
     func changeScreen(vc: UIViewController) {
         displayChildViewController(vc)
     }
     
+    // pauses the timer
     func stopsTimer() {
         pauseTimer()
     }
