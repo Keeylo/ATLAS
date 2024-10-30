@@ -67,7 +67,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         anotherHintButton.isHidden = true
         hintCount = totalHints
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
         let instructionsVC = storyboard.instantiateViewController(withIdentifier: "GameInstructions") as? GameInstructionsViewController
         
         instructionsVC?.instructions = gameInstructions
@@ -144,7 +144,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         if (gameStarted == false) {
             gameStarted = true
             if (gameLocation == "Tower") {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
                 let round1VC = storyboard.instantiateViewController(withIdentifier: "FirstRoundTower") as? FirstRoundTowerViewController
                 round1VC?.delegate = self
                 displayChildViewController(round1VC!)
@@ -253,7 +253,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         hintsIndex = 0
         
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
         let instructionsVC = storyboard.instantiateViewController(withIdentifier: "GameInstructions") as? GameInstructionsViewController
         
         instructionsVC?.instructions = gameInstructions

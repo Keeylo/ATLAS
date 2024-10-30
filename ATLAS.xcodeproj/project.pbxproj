@@ -14,13 +14,22 @@
 		493358552CC71A1300AD4797 /* UserGuideStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */; };
 		493358572CC71F7800AD4797 /* UserGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358562CC71F7800AD4797 /* UserGuideViewController.swift */; };
 		493358592CC745B300AD4797 /* UnlockedAreasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358582CC745B200AD4797 /* UnlockedAreasViewController.swift */; };
-		4933585B2CC745D700AD4797 /* UnlockedAreasStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4933585A2CC745D700AD4797 /* UnlockedAreasStoryboard.storyboard */; };
 		49923EDB2CB7A1C700D2CBA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923EDA2CB7A1C700D2CBA2 /* AppDelegate.swift */; };
 		49923EDD2CB7A1C700D2CBA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923EDC2CB7A1C700D2CBA2 /* SceneDelegate.swift */; };
 		49923EDF2CB7A1C700D2CBA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49923EDE2CB7A1C700D2CBA2 /* ViewController.swift */; };
 		49923EE22CB7A1C700D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE12CB7A1C700D2CBA2 /* Base */; };
 		49923EE42CB7A1C900D2CBA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */; };
 		49923EE72CB7A1C900D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE62CB7A1C900D2CBA2 /* Base */; };
+		49A44DFD2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44DFC2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard */; };
+		49A44E012CD17F880005FD65 /* NewUserSetupStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E002CD17F880005FD65 /* NewUserSetupStoryboard.storyboard */; };
+		49A44E032CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E022CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard */; };
+		49A44E052CD17F8A0005FD65 /* MapStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E042CD17F8A0005FD65 /* MapStoryboard.storyboard */; };
+		49A44E072CD17F8A0005FD65 /* MiniGameStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E062CD17F8A0005FD65 /* MiniGameStoryboard.storyboard */; };
+		49A44E092CD17F8B0005FD65 /* LocationInfoStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E082CD17F8B0005FD65 /* LocationInfoStoryboard.storyboard */; };
+		49A44E0B2CD17F8C0005FD65 /* HamburgerMenuStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E0A2CD17F8C0005FD65 /* HamburgerMenuStoryboard.storyboard */; };
+		49A44E0D2CD17F8C0005FD65 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E0C2CD17F8C0005FD65 /* SettingsStoryboard.storyboard */; };
+		49A44E152CD1E82C0005FD65 /* LoadingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */; };
+		49A44E202CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */; };
 		D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */; };
 		D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53967402CC9CD570090A39E /* UserSettingsViewController.swift */; };
 		D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */; };
@@ -64,7 +73,6 @@
 		493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserGuideStoryboard.storyboard; sourceTree = "<group>"; };
 		493358562CC71F7800AD4797 /* UserGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideViewController.swift; sourceTree = "<group>"; };
 		493358582CC745B200AD4797 /* UnlockedAreasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockedAreasViewController.swift; sourceTree = "<group>"; };
-		4933585A2CC745D700AD4797 /* UnlockedAreasStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnlockedAreasStoryboard.storyboard; sourceTree = "<group>"; };
 		49923ED72CB7A1C700D2CBA2 /* ATLAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATLAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49923EDA2CB7A1C700D2CBA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49923EDC2CB7A1C700D2CBA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +81,16 @@
 		49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49923EE62CB7A1C900D2CBA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49923EE82CB7A1C900D2CBA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49A44DFC2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginPageViewStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E002CD17F880005FD65 /* NewUserSetupStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewUserSetupStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E022CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "ForgotChangePasswordStoryboard .storyboard"; sourceTree = "<group>"; };
+		49A44E042CD17F8A0005FD65 /* MapStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MapStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E062CD17F8A0005FD65 /* MiniGameStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MiniGameStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E082CD17F8B0005FD65 /* LocationInfoStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationInfoStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E0A2CD17F8C0005FD65 /* HamburgerMenuStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HamburgerMenuStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E0C2CD17F8C0005FD65 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingStoryboard.storyboard; sourceTree = "<group>"; };
+		49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnlockedStoryboard.storyboard; sourceTree = "<group>"; };
 		D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpViewController.swift; sourceTree = "<group>"; };
 		D53967402CC9CD570090A39E /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsViewController.swift; sourceTree = "<group>"; };
@@ -138,15 +156,24 @@
 		49923ED92CB7A1C700D2CBA2 /* ATLAS */ = {
 			isa = PBXGroup;
 			children = (
+				49923EE02CB7A1C700D2CBA2 /* Main.storyboard */,
+				49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */,
+				49A44E0C2CD17F8C0005FD65 /* SettingsStoryboard.storyboard */,
+				49A44E0A2CD17F8C0005FD65 /* HamburgerMenuStoryboard.storyboard */,
+				49A44E082CD17F8B0005FD65 /* LocationInfoStoryboard.storyboard */,
+				49A44E062CD17F8A0005FD65 /* MiniGameStoryboard.storyboard */,
+				49A44E042CD17F8A0005FD65 /* MapStoryboard.storyboard */,
+				49A44E022CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard */,
+				49A44E002CD17F880005FD65 /* NewUserSetupStoryboard.storyboard */,
+				49A44DFC2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard */,
+				493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */,
+				49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */,
 				49923EDA2CB7A1C700D2CBA2 /* AppDelegate.swift */,
 				D53967402CC9CD570090A39E /* UserSettingsViewController.swift */,
 				D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */,
 				D596C2842CBF39F60047E563 /* MiniGameViewController.swift */,
 				D5BF14522CC0C79C00A0604C /* WonGameViewController.swift */,
 				49923EDC2CB7A1C700D2CBA2 /* SceneDelegate.swift */,
-				49923EE02CB7A1C700D2CBA2 /* Main.storyboard */,
-				493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */,
-				4933585A2CC745D700AD4797 /* UnlockedAreasStoryboard.storyboard */,
 				49923EDE2CB7A1C700D2CBA2 /* ViewController.swift */,
 				42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */,
 				42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */,
@@ -253,13 +280,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A44E0B2CD17F8C0005FD65 /* HamburgerMenuStoryboard.storyboard in Resources */,
 				49923EE42CB7A1C900D2CBA2 /* Assets.xcassets in Resources */,
 				D5BF14862CC17E8900A0604C /* GoogleService-Info.plist in Resources */,
+				49A44E092CD17F8B0005FD65 /* LocationInfoStoryboard.storyboard in Resources */,
 				493358552CC71A1300AD4797 /* UserGuideStoryboard.storyboard in Resources */,
+				49A44E0D2CD17F8C0005FD65 /* SettingsStoryboard.storyboard in Resources */,
+				49A44E202CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard in Resources */,
+				49A44E012CD17F880005FD65 /* NewUserSetupStoryboard.storyboard in Resources */,
+				49A44E072CD17F8A0005FD65 /* MiniGameStoryboard.storyboard in Resources */,
 				49923EE72CB7A1C900D2CBA2 /* Base in Resources */,
 				2E65EBD32CC78E6A00972C99 /* logo.png in Resources */,
+				49A44E152CD1E82C0005FD65 /* LoadingStoryboard.storyboard in Resources */,
+				49A44DFD2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard in Resources */,
 				49923EE22CB7A1C700D2CBA2 /* Base in Resources */,
-				4933585B2CC745D700AD4797 /* UnlockedAreasStoryboard.storyboard in Resources */,
+				49A44E032CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard in Resources */,
+				49A44E052CD17F8A0005FD65 /* MapStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bmR-2d-xPo">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="kxb-MX-A4s">
+            <objects>
+                <viewController id="bmR-2d-xPo" customClass="MapViewController" customModule="ATLAS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="frj-fB-L9R">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aAe-7d-6UU">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rh1-7f-xnW">
+                                <rect key="frame" x="299" y="759" width="82" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Image 11" title=""/>
+                                <connections>
+                                    <action selector="menuButtonPressed:" destination="bmR-2d-xPo" eventType="touchUpInside" id="mOG-Um-c4f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XSE-ZP-kiK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="8hq-IU-LXq"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="atlasMap" destination="aAe-7d-6UU" id="FYC-Ig-LYy"/>
+                        <outlet property="menuButton" destination="Rh1-7f-xnW" id="isK-BG-Hlm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dn0-ah-AWR" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1807" y="699"/>
+        </scene>
+        <!--Menu Pop Up View Controller-->
+        <scene sceneID="99j-Xb-Run">
+            <objects>
+                <viewController storyboardIdentifier="MenuPopUp" id="z3R-fg-Akn" customClass="MenuPopUpViewController" customModule="ATLAS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Gv-bx-BZn">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-qg-Jth">
+                                <rect key="frame" x="146.66666666666666" y="668" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="OVP-uB-YTH"/>
+                                    <constraint firstAttribute="height" constant="50" id="pTa-2c-Grm"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="User Guide">
+                                    <color key="baseBackgroundColor" red="0.85326849490000001" green="0.35849399230000001" blue="0.1541027146" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="userGuidePressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="yTL-9J-ggQ"/>
+                                    <segue destination="CJq-Ko-B4q" kind="presentation" modalPresentationStyle="fullScreen" id="tkj-PV-Gce"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvx-eT-SC5">
+                                <rect key="frame" x="21.666666666666671" y="668" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2Wf-1x-uLe"/>
+                                    <constraint firstAttribute="width" constant="100" id="Tpu-qc-Kyg"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Unlocked Areas">
+                                    <color key="baseBackgroundColor" red="0.85326849490000001" green="0.35849399230000001" blue="0.1541027146" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="unlockedPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="0vU-Gx-h3m"/>
+                                    <segue destination="Hpq-RO-5NR" kind="presentation" modalPresentationStyle="fullScreen" id="4kB-Lc-Z0M"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ur2-HX-3Wv">
+                                <rect key="frame" x="271.66666666666669" y="668" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Flh-pc-4uy"/>
+                                    <constraint firstAttribute="height" constant="50" id="y3S-Zv-QCB"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Account Settings">
+                                    <color key="baseBackgroundColor" red="0.85326849490000001" green="0.35849399230000001" blue="0.1541027146" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="settingsPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="YtS-2c-Ceb"/>
+                                    <segue destination="Qpr-Ay-BS9" kind="presentation" modalPresentationStyle="fullScreen" id="GKa-4I-OO2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSj-Gs-6IZ">
+                                <rect key="frame" x="158" y="762" width="77" height="56"/>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="x.circle.fill" catalog="system" title="">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="35"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="dismissPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="PL0-U4-y3E"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="STa-dw-ZY4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="TSj-Gs-6IZ" secondAttribute="bottom" id="858-Kz-Qt5"/>
+                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="100" id="AfG-id-iqI"/>
+                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="ur2-HX-3Wv" secondAttribute="bottom" constant="100" id="BIq-NV-QoT"/>
+                            <constraint firstItem="YrB-qg-Jth" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="LVt-1V-QC8"/>
+                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="wvx-eT-SC5" secondAttribute="bottom" constant="100" id="TM1-60-gbA"/>
+                            <constraint firstItem="ur2-HX-3Wv" firstAttribute="leading" secondItem="YrB-qg-Jth" secondAttribute="trailing" constant="25" id="Tm7-8a-nEu"/>
+                            <constraint firstItem="TSj-Gs-6IZ" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="gOH-s4-1AX"/>
+                            <constraint firstItem="YrB-qg-Jth" firstAttribute="leading" secondItem="wvx-eT-SC5" secondAttribute="trailing" constant="25" id="x2O-8f-hgq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dismissButton" destination="TSj-Gs-6IZ" id="Xgc-2s-cPP"/>
+                        <outlet property="settingsButton" destination="ur2-HX-3Wv" id="yI3-Cz-4Td"/>
+                        <outlet property="unlockedButton" destination="TSj-Gs-6IZ" id="ZIN-D2-QFs"/>
+                        <outlet property="userGuideButton" destination="YrB-qg-Jth" id="6P1-JG-G0t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GBu-aI-Ird" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1011" y="699"/>
+        </scene>
+        <!--UnlockedStoryboard-->
+        <scene sceneID="aor-68-ogH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UnlockedStoryboard" id="Hpq-RO-5NR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2fO-HM-Qbi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1357" y="1118"/>
+        </scene>
+        <!--SettingsStoryboard-->
+        <scene sceneID="7TS-iu-7Kh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SettingsStoryboard" id="Qpr-Ay-BS9" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QFh-Iv-GoT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-625" y="1146"/>
+        </scene>
+        <!--UserGuideStoryboard-->
+        <scene sceneID="DVy-if-f7w">
+            <objects>
+                <viewControllerPlaceholder storyboardName="UserGuideStoryboard" id="CJq-Ko-B4q" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nUV-Fa-x1A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1011" y="1146"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Image 11" width="58" height="58"/>
+        <image name="x.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

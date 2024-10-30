@@ -32,7 +32,7 @@ class ThirdRoundTowerViewController: UIViewController {
     }
     
     @IBAction func towerButtonPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
         let winnerVC = storyboard.instantiateViewController(withIdentifier: "WonGame") as? WonGameViewController
         
         let otherVC = delegate as! ScreenChanger

@@ -33,7 +33,7 @@ class SecondRoundTowerViewController: UIViewController {
     
 
     @IBAction func towerButtonPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
         let round3VC = storyboard.instantiateViewController(withIdentifier: "ThirdRoundTower") as? ThirdRoundTowerViewController
         
         round3VC?.delegate = delegate
