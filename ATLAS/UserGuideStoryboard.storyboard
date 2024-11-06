@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jmd-3E-UFb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jmd-3E-UFb">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,16 +15,111 @@
                     <view key="view" contentMode="scaleToFill" id="vG2-F5-cGC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image 17" translatesAutoresizingMaskIntoConstraints="NO" id="O12-G6-mpj">
+                                <rect key="frame" x="-2" y="-6" width="396" height="865"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIx-X2-bzZ">
+                                <rect key="frame" x="0.0" y="135" width="105" height="717"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="5ko-af-11A">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="717"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7n-uM-eN6">
+                                                <rect key="frame" x="0.0" y="0.0" width="105" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="l6w-QN-nB0"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Marker  Types">
+                                                    <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="Jmd-3E-UFb" eventType="touchUpInside" id="36v-6B-yUj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XG1-I4-N2u">
+                                                <rect key="frame" x="0.0" y="75" width="105" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="08i-Rm-6pj"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Map Discovery"/>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="Jmd-3E-UFb" eventType="touchUpInside" id="ytu-gb-mfu"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4p-s5-gls">
+                                                <rect key="frame" x="0.0" y="150" width="105" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="9rn-6M-wu7"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Mini Games"/>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="Jmd-3E-UFb" eventType="touchUpInside" id="qhS-hx-t4e"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVI-Sc-eDx">
+                                                <rect key="frame" x="0.0" y="225" width="105" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="hxr-tE-A7q"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="User Settings"/>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="Jmd-3E-UFb" eventType="touchUpInside" id="mU7-tT-U0W"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXQ-tn-X7V">
+                                                <rect key="frame" x="0.0" y="300" width="105" height="417"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Extra Button"/>
+                                                <connections>
+                                                    <action selector="buttonTapped:" destination="Jmd-3E-UFb" eventType="touchUpInside" id="xMH-Ir-H89"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="5ko-af-11A" firstAttribute="leading" secondItem="uIx-X2-bzZ" secondAttribute="leading" id="CY1-20-QXf"/>
+                                    <constraint firstItem="5ko-af-11A" firstAttribute="top" secondItem="uIx-X2-bzZ" secondAttribute="top" id="LNq-RE-6LP"/>
+                                    <constraint firstAttribute="bottom" secondItem="5ko-af-11A" secondAttribute="bottom" id="O0E-lm-y0W"/>
+                                    <constraint firstAttribute="width" constant="105" id="dIx-9j-yMX"/>
+                                    <constraint firstAttribute="trailing" secondItem="5ko-af-11A" secondAttribute="trailing" id="r2k-bK-lBq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Lcp-fv-cSj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uIx-X2-bzZ" firstAttribute="leading" secondItem="Lcp-fv-cSj" secondAttribute="leading" id="6Dg-Ih-JIo"/>
+                            <constraint firstItem="O12-G6-mpj" firstAttribute="leading" secondItem="vG2-F5-cGC" secondAttribute="leading" constant="-2" id="SJl-BN-RSN"/>
+                            <constraint firstItem="uIx-X2-bzZ" firstAttribute="top" secondItem="Lcp-fv-cSj" secondAttribute="top" constant="76" id="Wln-L0-OYl"/>
+                            <constraint firstAttribute="trailing" secondItem="O12-G6-mpj" secondAttribute="trailing" constant="-1" id="gio-rY-opP"/>
+                            <constraint firstAttribute="bottom" secondItem="uIx-X2-bzZ" secondAttribute="bottom" id="l6n-Os-e3v"/>
+                            <constraint firstItem="O12-G6-mpj" firstAttribute="top" secondItem="vG2-F5-cGC" secondAttribute="top" constant="-6" id="nQi-3b-Ms2"/>
+                            <constraint firstAttribute="bottom" secondItem="O12-G6-mpj" secondAttribute="bottom" constant="-7" id="vUj-ql-50v"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="extraButton" destination="bXQ-tn-X7V" id="2mB-C3-nHs"/>
+                        <outlet property="mapDiscoveryButton" destination="XG1-I4-N2u" id="YxF-up-Cc5"/>
+                        <outlet property="markerTypesButton" destination="z7n-uM-eN6" id="Ixl-Jf-xJM"/>
+                        <outlet property="miniGamesButton" destination="Z4p-s5-gls" id="xAs-cN-TZH"/>
+                        <outlet property="stackView" destination="5ko-af-11A" id="IX5-et-E48"/>
+                        <outlet property="userSettingsButton" destination="VVI-Sc-eDx" id="gCI-Pe-Uh4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6f-gB-JkC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-346" y="-57"/>
+            <point key="canvasLocation" x="-347.32824427480915" y="-57.04225352112676"/>
         </scene>
     </scenes>
     <resources>
+        <image name="image 17" width="428" height="926"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
