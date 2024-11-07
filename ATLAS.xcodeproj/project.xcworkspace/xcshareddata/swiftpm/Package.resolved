@@ -1,4 +1,5 @@
 {
+  "originHash" : "ddcb589f31c40db747a21d52f57382606b9932b8d3d34cf099d3fe8d00003f66",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -25,6 +26,24 @@
       "state" : {
         "revision" : "f909f901bfba9e27e4e9da83242a4915d6dd64bb",
         "version" : "11.3.0"
+      }
+    },
+    {
+      "identity" : "geos",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GEOSwift/geos.git",
+      "state" : {
+        "revision" : "4d8af495e7507f48f1ae9104102debdd2043917b",
+        "version" : "9.0.0"
+      }
+    },
+    {
+      "identity" : "geoswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GEOSwift/GEOSwift",
+      "state" : {
+        "revision" : "e42c062c2feb0df61373ae8cd6031a823a0dc981",
+        "version" : "11.0.0"
       }
     },
     {
@@ -118,5 +137,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

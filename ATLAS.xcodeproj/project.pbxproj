@@ -10,6 +10,7 @@
 		2E65EBD32CC78E6A00972C99 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E65EBD22CC78E6A00972C99 /* logo.png */; };
 		42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */; };
 		42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */; };
+		491E8DD12CDC298C005B7DA5 /* GEOSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 491E8DD02CDC298C005B7DA5 /* GEOSwift */; };
 		493358532CC7076900AD4797 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358522CC7076900AD4797 /* MapViewController.swift */; };
 		493358552CC71A1300AD4797 /* UserGuideStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */; };
 		493358572CC71F7800AD4797 /* UserGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358562CC71F7800AD4797 /* UserGuideViewController.swift */; };
@@ -110,6 +111,7 @@
 				D5BF14842CC17D1E00A0604C /* FirebaseVertexAI-Preview in Frameworks */,
 				D5BF146E2CC17D1E00A0604C /* FirebaseFirestoreCombine-Community in Frameworks */,
 				D5BF14702CC17D1E00A0604C /* FirebaseFunctions in Frameworks */,
+				491E8DD12CDC298C005B7DA5 /* GEOSwift in Frameworks */,
 				D5BF147C2CC17D1E00A0604C /* FirebasePerformance in Frameworks */,
 				D5BF14822CC17D1E00A0604C /* FirebaseStorageCombine-Community in Frameworks */,
 				D5BF147E2CC17D1E00A0604C /* FirebaseRemoteConfig in Frameworks */,
@@ -234,6 +236,7 @@
 				D5BF147F2CC17D1E00A0604C /* FirebaseStorage */,
 				D5BF14812CC17D1E00A0604C /* FirebaseStorageCombine-Community */,
 				D5BF14832CC17D1E00A0604C /* FirebaseVertexAI-Preview */,
+				491E8DD02CDC298C005B7DA5 /* GEOSwift */,
 			);
 			productName = ATLAS;
 			productReference = 49923ED72CB7A1C700D2CBA2 /* ATLAS.app */;
@@ -265,6 +268,7 @@
 			mainGroup = 49923ECE2CB7A1C700D2CBA2;
 			packageReferences = (
 				D5BF14542CC17D1E00A0604C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				491E8DCF2CDC298C005B7DA5 /* XCRemoteSwiftPackageReference "GEOSwift" */,
 			);
 			productRefGroup = 49923ED82CB7A1C700D2CBA2 /* Products */;
 			projectDirPath = "";
@@ -544,6 +548,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		491E8DCF2CDC298C005B7DA5 /* XCRemoteSwiftPackageReference "GEOSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GEOSwift/GEOSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
 		D5BF14542CC17D1E00A0604C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -555,6 +567,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		491E8DD02CDC298C005B7DA5 /* GEOSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 491E8DCF2CDC298C005B7DA5 /* XCRemoteSwiftPackageReference "GEOSwift" */;
+			productName = GEOSwift;
+		};
 		D5BF14552CC17D1E00A0604C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D5BF14542CC17D1E00A0604C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
