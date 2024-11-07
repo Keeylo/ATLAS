@@ -9,9 +9,12 @@ import UIKit
 
 class UserGuideViewController: UIViewController {
     
+    @IBOutlet weak var sectionTitleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     @IBOutlet weak var stackView: UIStackView!
-    
     @IBOutlet weak var markerTypesButton: UIButton!
     @IBOutlet weak var mapDiscoveryButton: UIButton!
     @IBOutlet weak var miniGamesButton: UIButton!
@@ -20,15 +23,30 @@ class UserGuideViewController: UIViewController {
     
     private var selectedButton: UIButton?
     
+    private let images: [UIImage] = [
+        UIImage(named: "image 14")!,
+        UIImage(named: "Image 10")!
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        markerTypesButton.setTitleColor(.systemBlue, for: .normal)
-        mapDiscoveryButton.setTitleColor(.systemBlue, for: .normal)
-        miniGamesButton.setTitleColor(.systemBlue, for: .normal)
-        userSettingsButton.setTitleColor(.systemBlue, for: .normal)
-        extraButton.setTitleColor(.systemBlue, for: .normal)
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.sizeToFit()
+        
+        pageControl.numberOfPages = images.count
+        pageControl.currentPage = 0
+        mainImageView.image = images[0]
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeLeft.direction = .left
+        mainImageView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeRight.direction = .right
+        mainImageView.addGestureRecognizer(swipeRight)
+        
+        mainImageView.isUserInteractionEnabled = true
         
         let buttons = stackView.arrangedSubviews.compactMap { $0 as? UIButton }
         
@@ -54,6 +72,7 @@ class UserGuideViewController: UIViewController {
         
         selectedButton = markerTypesButton
         highlightButton(markerTypesButton)
+        sectionTitleLabel.text = markerTypesButton.titleLabel?.text
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
@@ -61,14 +80,46 @@ class UserGuideViewController: UIViewController {
         highlightButton(sender)
     }
     
+    @IBAction func pageControlChanged(_ sender: UIPageControl) {
+        mainImageView.image = images[sender.currentPage]
+    }
+    
     private func highlightButton(_ button: UIButton) {
         print("Highlighting button")
-        selectedButton?.setTitleColor(.systemBlue, for: .normal)
         
-        button.setTitleColor(.systemRed, for: .normal) // highlighted text color
-
+        selectedButton?.backgroundColor = .clear
+                
+        // Highlight new button
+        button.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+        
+        // Update selected button
         selectedButton = button
+        
+        sectionTitleLabel.text = button.titleLabel?.text
     }
+    
+    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            // Move to the next page if possible
+            if pageControl.currentPage < images.count - 1 {
+                pageControl.currentPage += 1
+            }
+        } else if gesture.direction == .right {
+            // Move to the previous page if possible
+            if pageControl.currentPage > 0 {
+                pageControl.currentPage -= 1
+            }
+        }
+        
+        // Update the image based on the new page
+        mainImageView.image = images[pageControl.currentPage]
+    }
+    
+    /*
+    // MARK: - CODE NEEDED
+    // Need to connect the image carousel and description to the stackView menu selection
+    // Need dummy data to fill them and test
+    */
     
     /*
     // MARK: - Navigation
