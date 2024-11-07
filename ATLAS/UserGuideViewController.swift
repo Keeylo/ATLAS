@@ -22,10 +22,37 @@ class UserGuideViewController: UIViewController {
     @IBOutlet weak var extraButton: UIButton!
     
     private var selectedButton: UIButton?
+    private var images: [UIImage] = []
     
-    private let images: [UIImage] = [
-        UIImage(named: "image 14")!,
-        UIImage(named: "Image 10")!
+    enum Section: Int {
+        case markerTypes = 0
+        case mapDiscovery
+        case miniGames
+        case userSettings
+        case extra
+    }
+
+    private let sectionData: [Section: (images: [UIImage], description: String)] = [
+        .markerTypes: (
+            images: [UIImage(named: "image 14")!, UIImage(named: "Image 10")!],
+            description: "Description for Marker Types"
+        ),
+        .mapDiscovery: (
+            images: [UIImage(named: "Image 10")!, UIImage(named: "image 14")!],
+            description: "Description for Map Discovery"
+        ),
+        .miniGames: (
+            images: [UIImage(named: "image 14")!],
+            description: "Description for Mini Games"
+        ),
+        .userSettings: (
+            images: [UIImage(named: "Image 10")!],
+            description: "Description for User Settings"
+        ),
+        .extra: (
+            images: [UIImage(named: "image 14")!, UIImage(named: "Image 10")!],
+            description: "Description for Extra"
+        )
     ]
     
     override func viewDidLoad() {
@@ -33,10 +60,6 @@ class UserGuideViewController: UIViewController {
         
         descriptionLabel.numberOfLines = 0
         descriptionLabel.sizeToFit()
-        
-        pageControl.numberOfPages = images.count
-        pageControl.currentPage = 0
-        mainImageView.image = images[0]
         
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
         swipeLeft.direction = .left
@@ -70,9 +93,14 @@ class UserGuideViewController: UIViewController {
             }
         }
         
+        markerTypesButton.tag = Section.markerTypes.rawValue
+        mapDiscoveryButton.tag = Section.mapDiscovery.rawValue
+        miniGamesButton.tag = Section.miniGames.rawValue
+        userSettingsButton.tag = Section.userSettings.rawValue
+        extraButton.tag = Section.extra.rawValue
+        
         selectedButton = markerTypesButton
         highlightButton(markerTypesButton)
-        sectionTitleLabel.text = markerTypesButton.titleLabel?.text
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
@@ -84,9 +112,20 @@ class UserGuideViewController: UIViewController {
         mainImageView.image = images[sender.currentPage]
     }
     
+    private func updateContent(for section: Section) {
+        if let data = sectionData[section] {
+            self.images = data.images
+            self.descriptionLabel.text = data.description
+            
+            self.pageControl.numberOfPages = self.images.count
+            self.pageControl.currentPage = 0
+            self.mainImageView.image = self.images.first
+        }
+    }
+
+    
     private func highlightButton(_ button: UIButton) {
         print("Highlighting button")
-        
         selectedButton?.backgroundColor = .clear
                 
         // Highlight new button
@@ -94,31 +133,29 @@ class UserGuideViewController: UIViewController {
         
         // Update selected button
         selectedButton = button
-        
         sectionTitleLabel.text = button.titleLabel?.text
+        
+        if let section = Section(rawValue: button.tag) {
+            updateContent(for: section)
+        }
     }
     
     @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
         if gesture.direction == .left {
-            // Move to the next page if possible
             if pageControl.currentPage < images.count - 1 {
                 pageControl.currentPage += 1
             }
         } else if gesture.direction == .right {
-            // Move to the previous page if possible
             if pageControl.currentPage > 0 {
                 pageControl.currentPage -= 1
             }
         }
-        
-        // Update the image based on the new page
         mainImageView.image = images[pageControl.currentPage]
     }
     
     /*
-    // MARK: - CODE NEEDED
-    // Need to connect the image carousel and description to the stackView menu selection
-    // Need dummy data to fill them and test
+    // MARK: - TODO
+    // Get everything connected, select whether back to map uses segway or popViewController or IBAction
     */
     
     /*

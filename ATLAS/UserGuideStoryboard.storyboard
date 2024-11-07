@@ -123,18 +123,28 @@
                                     <constraint firstAttribute="width" constant="240" id="ui0-is-tae"/>
                                 </constraints>
                             </imageView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="nsC-J8-78d">
-                                <rect key="frame" x="191" y="363" width="116" height="25.666666666666686"/>
-                                <connections>
-                                    <action selector="pageControlChanged:" destination="Jmd-3E-UFb" eventType="valueChanged" id="Aqk-BN-WBG"/>
-                                </connections>
-                            </pageControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This will be the instructions for this particular section:                 -Possibly bullet points" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDe-cH-VoM">
                                 <rect key="frame" x="129" y="413" width="240" height="57.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="nsC-J8-78d">
+                                <rect key="frame" x="191" y="363" width="116" height="25.666666666666686"/>
+                                <connections>
+                                    <action selector="pageControlChanged:" destination="Jmd-3E-UFb" eventType="valueChanged" id="Aqk-BN-WBG"/>
+                                </connections>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYN-OO-H6R">
+                                <rect key="frame" x="87.666666666666686" y="749" width="218" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="57" id="iEY-NA-yeU"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Back to Map">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Lcp-fv-cSj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -147,6 +157,7 @@
                             <constraint firstItem="hJh-VK-gam" firstAttribute="top" secondItem="Lcp-fv-cSj" secondAttribute="top" id="8eJ-v8-ggV"/>
                             <constraint firstItem="CDe-cH-VoM" firstAttribute="top" secondItem="nsC-J8-78d" secondAttribute="bottom" constant="24.329999999999998" id="AZy-zn-nbL"/>
                             <constraint firstItem="gZB-3v-iem" firstAttribute="leading" secondItem="uIx-X2-bzZ" secondAttribute="trailing" id="FDC-NX-vzY"/>
+                            <constraint firstItem="Lcp-fv-cSj" firstAttribute="trailing" secondItem="oYN-OO-H6R" secondAttribute="trailing" constant="87.5" id="GuP-wa-HzF"/>
                             <constraint firstItem="hJh-VK-gam" firstAttribute="leading" secondItem="Lcp-fv-cSj" secondAttribute="leading" id="McG-yb-wCq"/>
                             <constraint firstItem="T6E-8s-513" firstAttribute="leading" secondItem="uIx-X2-bzZ" secondAttribute="trailing" constant="24" id="NoJ-Kt-Jgg"/>
                             <constraint firstItem="T6E-8s-513" firstAttribute="top" secondItem="gZB-3v-iem" secondAttribute="bottom" constant="7.3300000000000001" id="QR9-kA-QZJ"/>
@@ -157,6 +168,8 @@
                             <constraint firstItem="uIx-X2-bzZ" firstAttribute="top" secondItem="Lcp-fv-cSj" secondAttribute="top" constant="76" id="Wln-L0-OYl"/>
                             <constraint firstItem="CDe-cH-VoM" firstAttribute="leading" secondItem="uIx-X2-bzZ" secondAttribute="trailing" constant="24" id="Wwc-hy-vWO"/>
                             <constraint firstItem="Lcp-fv-cSj" firstAttribute="trailing" secondItem="CDe-cH-VoM" secondAttribute="trailing" constant="24" id="Z5d-R0-iKy"/>
+                            <constraint firstItem="Lcp-fv-cSj" firstAttribute="bottom" secondItem="oYN-OO-H6R" secondAttribute="bottom" constant="12" id="bJ8-BE-PNm"/>
+                            <constraint firstItem="oYN-OO-H6R" firstAttribute="leading" secondItem="Lcp-fv-cSj" secondAttribute="leading" constant="87.5" id="gYe-kw-46G"/>
                             <constraint firstAttribute="trailing" secondItem="O12-G6-mpj" secondAttribute="trailing" constant="-1" id="gio-rY-opP"/>
                             <constraint firstItem="Lcp-fv-cSj" firstAttribute="trailing" secondItem="gZB-3v-iem" secondAttribute="trailing" id="jhq-1H-Nb0"/>
                             <constraint firstAttribute="bottom" secondItem="uIx-X2-bzZ" secondAttribute="bottom" id="l6n-Os-e3v"/>
