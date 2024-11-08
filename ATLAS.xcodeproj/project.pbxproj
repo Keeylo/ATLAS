@@ -33,6 +33,7 @@
 		D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */; };
 		D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53967402CC9CD570090A39E /* UserSettingsViewController.swift */; };
 		D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */; };
+		D57D7B4C2CDA892B00963080 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57D7B4B2CDA892B00963080 /* LoginViewController.swift */; };
 		D596C2852CBF39F60047E563 /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596C2842CBF39F60047E563 /* MiniGameViewController.swift */; };
 		D5BF144D2CC0579700A0604C /* FirstRoundTowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */; };
 		D5BF144F2CC0727400A0604C /* SecondRoundTowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */; };
@@ -94,6 +95,7 @@
 		D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpViewController.swift; sourceTree = "<group>"; };
 		D53967402CC9CD570090A39E /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsViewController.swift; sourceTree = "<group>"; };
+		D57D7B4B2CDA892B00963080 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D596C2842CBF39F60047E563 /* MiniGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
 		D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRoundTowerViewController.swift; sourceTree = "<group>"; };
 		D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRoundTowerViewController.swift; sourceTree = "<group>"; };
@@ -169,7 +171,8 @@
 				493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */,
 				49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */,
 				49923EDA2CB7A1C700D2CBA2 /* AppDelegate.swift */,
-				D53967402CC9CD570090A39E /* UserSettingsViewController.swift */,
+				D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */,
+				D57D7B4B2CDA892B00963080 /* LoginViewController.swift */,
 				D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */,
 				D596C2842CBF39F60047E563 /* MiniGameViewController.swift */,
 				D5BF14522CC0C79C00A0604C /* WonGameViewController.swift */,
@@ -179,9 +182,9 @@
 				42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */,
 				D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */,
 				D5BF14502CC07C8A00A0604C /* ThirdRoundTowerViewController.swift */,
-				D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */,
 				493358522CC7076900AD4797 /* MapViewController.swift */,
 				D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */,
+				D53967402CC9CD570090A39E /* UserSettingsViewController.swift */,
 				493358562CC71F7800AD4797 /* UserGuideViewController.swift */,
 				493358582CC745B200AD4797 /* UnlockedAreasViewController.swift */,
 				D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */,
@@ -319,6 +322,7 @@
 				493358532CC7076900AD4797 /* MapViewController.swift in Sources */,
 				493358572CC71F7800AD4797 /* UserGuideViewController.swift in Sources */,
 				D5BF14532CC0C79C00A0604C /* WonGameViewController.swift in Sources */,
+				D57D7B4C2CDA892B00963080 /* LoginViewController.swift in Sources */,
 				D5BF144D2CC0579700A0604C /* FirstRoundTowerViewController.swift in Sources */,
 				49923EDD2CB7A1C700D2CBA2 /* SceneDelegate.swift in Sources */,
 				D5BF144F2CC0727400A0604C /* SecondRoundTowerViewController.swift in Sources */,
