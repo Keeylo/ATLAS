@@ -21,6 +21,8 @@
 		49923EE22CB7A1C700D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE12CB7A1C700D2CBA2 /* Base */; };
 		49923EE42CB7A1C900D2CBA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */; };
 		49923EE72CB7A1C900D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE62CB7A1C900D2CBA2 /* Base */; };
+		49A1839B2CDD9C1700539CDF /* gpxgenerator_path.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 49A1839A2CDD9C1700539CDF /* gpxgenerator_path.gpx */; };
+		49A1839D2CDD9CAE00539CDF /* gpxStudio_path.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 49A1839C2CDD9CAE00539CDF /* gpxStudio_path.gpx */; };
 		49A44DFD2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44DFC2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard */; };
 		49A44E012CD17F880005FD65 /* NewUserSetupStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E002CD17F880005FD65 /* NewUserSetupStoryboard.storyboard */; };
 		49A44E032CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E022CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard */; };
@@ -82,6 +84,8 @@
 		49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49923EE62CB7A1C900D2CBA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49923EE82CB7A1C900D2CBA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49A1839A2CDD9C1700539CDF /* gpxgenerator_path.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = gpxgenerator_path.gpx; sourceTree = "<group>"; };
+		49A1839C2CDD9CAE00539CDF /* gpxStudio_path.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = gpxStudio_path.gpx; sourceTree = "<group>"; };
 		49A44DFC2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginPageViewStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E002CD17F880005FD65 /* NewUserSetupStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewUserSetupStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E022CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "ForgotChangePasswordStoryboard .storyboard"; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 				49923EE52CB7A1C900D2CBA2 /* LaunchScreen.storyboard */,
 				49923EE82CB7A1C900D2CBA2 /* Info.plist */,
 				2E65EBD22CC78E6A00972C99 /* logo.png */,
+				49A1839C2CDD9CAE00539CDF /* gpxStudio_path.gpx */,
+				49A1839A2CDD9C1700539CDF /* gpxgenerator_path.gpx */,
 			);
 			path = ATLAS;
 			sourceTree = "<group>";
@@ -295,10 +301,12 @@
 				49A44E072CD17F8A0005FD65 /* MiniGameStoryboard.storyboard in Resources */,
 				49923EE72CB7A1C900D2CBA2 /* Base in Resources */,
 				2E65EBD32CC78E6A00972C99 /* logo.png in Resources */,
+				49A1839B2CDD9C1700539CDF /* gpxgenerator_path.gpx in Resources */,
 				49A44E152CD1E82C0005FD65 /* LoadingStoryboard.storyboard in Resources */,
 				49A44DFD2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard in Resources */,
 				49923EE22CB7A1C700D2CBA2 /* Base in Resources */,
 				49A44E032CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard in Resources */,
+				49A1839D2CDD9CAE00539CDF /* gpxStudio_path.gpx in Resources */,
 				49A44E052CD17F8A0005FD65 /* MapStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

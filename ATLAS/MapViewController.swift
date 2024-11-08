@@ -13,9 +13,17 @@ import GEOSwift
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var atlasMap: MKMapView!
+    
+    var testPathIndex = 0
+    var timer: Timer?
     var polyOverlay: MKPolygon? // for updating UTs overlay
     let manager = CLLocationManager() // start and stop location operations
+
+    var testPath: [CLLocation] = []
+    let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
     let utLoc = CLLocation(latitude: 30.2850, longitude: -97.7354)
+    
+    // might need to use a hashmap
     let utLocRegion = [
             CLLocationCoordinate2D(latitude: 30.29194, longitude: -97.74113),
             CLLocationCoordinate2D(latitude: 30.29166, longitude: -97.73657),
@@ -63,6 +71,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let buttonSize: CGFloat = 30
         menuButton.frame = CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 65, width: buttonSize, height: buttonSize)
+        
     }
     
     // this happens every time the view has appeared on the screen, it is reoccuring
@@ -106,8 +115,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     private func handleLocationUpdates(location: CLLocation) {
         let dist = location.distance(from: utLoc)
         
+        // more complicated than I thought
+        // need to have it where if we are outside the utLocRegion boundary not a mile
+        
         if dist > 1609.34 { // greater than a mile? Will change this to be based around the border of the campus or the average coordinate
-            giveDirections(from: location)
+            giveDirections(from: location) // check on this functionality later, for some reason it doesn't show up
         } else {
             updateOverlay(for: location)
         }
@@ -115,29 +127,81 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     private func updateOverlay(for location: CLLocation) {
         atlasMap.removeOverlay(polyOverlay!) // we need to remember the coordinates, all of them
-
-        let circle1 = createGEOSwiftCircle(center: location.coordinate, radius: 20)
-        let center2 = CLLocationCoordinate2D(latitude: 30.28825, longitude: -97.73763)
-        let circle2 = createGEOSwiftCircle(center: center2, radius: 20)
-
-        do {
-            // Step 2: Perform a union operation between the two circles
-            let union = try circle1.union(with: circle2) // Use 'try' since the method can throw
-            
-            print("Union of circles created successfully")
-            
-            // Step 3: Convert the resulting GEOSwift Polygon back to MKPolygon
-            let mkPolygon = convertGEOSwiftGeometryToMKPolygon(geoswiftGeometry: union)
-            
-            // Step 4: Add the unioned MKPolygon to the overlay
-            holes.append(mkPolygon!)
-            polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count, interiorPolygons: holes)
-            
-            atlasMap.addOverlay(polyOverlay!)
-            
-        } catch {
-            print("Error creating union of circles: \(error)") // Handle any errors
+        let circle = createGEOSwiftCircle(center: location.coordinate, radius: 20)
+        
+        // Find intersecting polygons from `holes`
+        let intersectingHoles = findIntersectingPolygons(for: circle)
+        
+        // Unionize intersecting polygons if found
+        if !intersectingHoles.isEmpty {
+            let unionizedPolygon = performUnion(for: circle, with: intersectingHoles)
+            // Replace intersecting holes with the new unionized polygon
+            holes.removeAll { intersectingHoles.contains($0) }
+            holes.append(unionizedPolygon)
+        } else {
+            // If no intersections, add as disjoint
+            let Mkcircle = convertGEOSwiftGeometryToMKPolygon(geoswiftGeometry: .polygon(circle))
+            holes.append(Mkcircle!)
         }
+        
+        // Recreate the overlay with updated `holes`
+        polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count, interiorPolygons: holes)
+        atlasMap.addOverlay(polyOverlay!)
+    }
+    
+    // Return MKPolygon list of intersections
+    private func findIntersectingPolygons(for polygon: Polygon) -> [MKPolygon] {
+        return holes.filter { hole in
+            // Convert MKPolygon to GEOSwift Polygon for intersection check
+            guard let geoswiftHole = convertToGEOSwiftPolygon(mkPolygon: hole) else { return false }
+            
+            do {
+                let intersection = try polygon.intersects(geoswiftHole)
+                return intersection
+            } catch {
+                print("Error finding intersection between Polygons: \(error)")
+                return false
+            }
+        }
+    }
+    
+    // In the future I need to optimize this so we stop making conversions all the time
+    // This helps with MKPolygon-to-Polygon creation
+    private func convertToGEOSwiftPolygon(mkPolygon: MKPolygon) -> Polygon? {
+        var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: mkPolygon.pointCount)
+        mkPolygon.getCoordinates(&coordinates, range: NSRange(location: 0, length: mkPolygon.pointCount))
+        // Convert MKPolygon CLLocationCoordinate2D to GEOSwift Points
+        let geoswiftCoordinates = coordinates.map { Point(x: $0.longitude, y: $0.latitude) }
+        
+        // Will try to create a Polygon using the geoswiftcoordinates
+        do {
+            let boundary = try Polygon.LinearRing(points: geoswiftCoordinates)
+            print("We successfully made the polygon")
+            return Polygon(exterior: boundary)
+        } catch {
+            print("Error creating GEOSwift Polygon: \(error)")
+            return nil
+        }
+    }
+
+    // This gotta be the worst method I ever made but we keep er' goin
+    private func performUnion(for polygon: Polygon, with intersectingHoles: [MKPolygon]) -> MKPolygon {
+        // store formed Geometry (any Point, Polygon, Multigon, etc)
+        var combinedPolygon: Geometry = .polygon(polygon)
+        
+        // for every hole we found that intersects Polygon, perform a union
+        for hole in intersectingHoles {
+            // conversion from MK to GEOSwift, absolutely disgusting
+            let polygon2 = convertToGEOSwiftPolygon(mkPolygon: hole)
+            
+            // perform the union, gives back geometry, update the combinedPolygon
+            if let union = try? combinedPolygon.union(with: polygon2!) {
+                combinedPolygon = union
+            }
+        }
+        
+        // turn this bad boy into an MKPolygon, again these conversions are disgusting I am sorry
+        return convertGEOSwiftGeometryToMKPolygon(geoswiftGeometry: combinedPolygon)!
     }
     
     func createGEOSwiftCircle(center: CLLocationCoordinate2D, radius: CLLocationDistance, numPoints: Int = 100) -> Polygon {
@@ -257,6 +321,5 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
 }
-
 
 // I wanna go to bed and dream about flying monkeys
