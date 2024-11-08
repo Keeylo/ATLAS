@@ -75,6 +75,15 @@ class ForgotChangePasswordViewController: UIViewController, UITextFieldDelegate 
         }
     }
     
+    // segues back to original screen, login or settings
+    @IBAction func backButtonPressed(_ sender: Any) {
+        print("in back")
+        if (prevScreen == "Login") {
+            performSegue(withIdentifier: "PasswordToLoginSegue", sender: self)
+        } else if (prevScreen == "Settings") {
+            performSegue(withIdentifier: "PasswordToSettingsSegue", sender: self)
+        }
+    }
     
     // adds shadow to a textfield
     func addBottomShadow(to textField: UITextField) {

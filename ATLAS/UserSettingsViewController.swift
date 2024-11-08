@@ -14,6 +14,7 @@ class UserSettingsViewController: UIViewController {
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var deleteAccountButton: UIButton!
     
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     
@@ -25,11 +26,15 @@ class UserSettingsViewController: UIViewController {
         newUsername = ""
         
         if let user = Auth.auth().currentUser {
+            emailLabel.text = user.email
             usernameLabel.text = user.displayName
-            print(user.displayName)
+            
+//            print(user.displayName)
         } else {
             print("...00" )
         }
+        
+        
         
         passwordLabel.text = String(repeating: "•", count: 10)
         
@@ -107,7 +112,7 @@ class UserSettingsViewController: UIViewController {
     @IBAction func changeUsernamePressed(_ sender: Any) {
         let controller = UIAlertController(
             title: "Change Username",
-            message: "Enter your new username and it must be an email.",
+            message: "Enter your new username.",
             preferredStyle: .alert)
         
         controller.addTextField() {
@@ -116,40 +121,48 @@ class UserSettingsViewController: UIViewController {
         
         controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
-        let okAction = UIAlertAction(
+        controller.addAction(UIAlertAction(
             title: "OK",
             style: .default) {
-            (action) in
-            
-            if let inputText = controller.textFields?.first?.text, self.checkEmail(email:inputText) {
-                self.changeUsername(newUsername: inputText)
-            }
-            
-        }
+                (action) in let enteredText = controller.textFields![0].text
+                self.changeUsername(newUsername: enteredText!)
+                print(enteredText!)
+            } )
         
-        okAction.isEnabled = false
-        
-        controller.textFields?.first?.addTarget(self, action: #selector(self.textFieldChanged(_:)), for: .editingChanged)
-        
-        controller.addAction(okAction)
+//        let okAction = UIAlertAction(
+//            title: "OK",
+//            style: .default) {
+//            (action) in
+//            
+//            if let inputText = controller.textFields?.first?.text, self.checkEmail(email:inputText) {
+//                self.changeUsername(newUsername: inputText)
+//            }
+//            
+//        }
+//        
+//        okAction.isEnabled = false
+//        
+//        controller.textFields?.first?.addTarget(self, action: #selector(self.textFieldChanged(_:)), for: .editingChanged)
+//        
+//        controller.addAction(okAction)
         
         present(controller,animated:true)
     }
     
-    @objc func textFieldChanged(_ textField: UITextField) {
-        if let alert = presentedViewController as? UIAlertController,
-           let okAction = alert.actions.first(where: { $0.title == "OK" }) {
-            okAction.isEnabled = checkEmail(email: textField.text ?? "")
-        }
-    }
+//    @objc func textFieldChanged(_ textField: UITextField) {
+//        if let alert = presentedViewController as? UIAlertController,
+//           let okAction = alert.actions.first(where: { $0.title == "OK" }) {
+//            okAction.isEnabled = checkEmail(email: textField.text ?? "")
+//        }
+//    }
     
-    func checkEmail(email: String) -> Bool {
-        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-            
-        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        return emailTest.evaluate(with: email)
-    }
+//    func checkEmail(email: String) -> Bool {
+//        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+//            
+//        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+//        
+//        return emailTest.evaluate(with: email)
+//    }
     
     @IBAction func changeProfilePicture(_ sender: Any) {
     }
@@ -178,7 +191,6 @@ class UserSettingsViewController: UIViewController {
         
         db.collection("users").whereField("username", isEqualTo: newUsername).getDocuments { (snapshot, error) in
             if let error = error {
-                // alert that username already exists
                 print("Error checking username availability: \(error.localizedDescription)")
                 return
             }
@@ -216,10 +228,24 @@ class UserSettingsViewController: UIViewController {
                     } else {
                         print("Username updated")
                         
-                        Auth.auth().currentUser?.reload(completion: { (error) in
+                        let user = Auth.auth().currentUser
+                        
+                        user?.reload(completion: { (error) in
                                 if let error = error {
                                     print("Error reloading user profile: \(error.localizedDescription)")
                                 } else {
+                                    
+//                                    user?.updateEmail(to: newUsername) { error in
+//                                        if let error = error {
+//                                            print("Error updating email: \(error.localizedDescription)")
+//                                        } else {
+//                                            print("email officially changed")
+//                                        }
+//                                        
+//                                        
+//                                    
+//                                    }
+                                    
                                     print("User profile reloaded, new displayName: \(Auth.auth().currentUser?.displayName ?? "")")
                                 }
                             })
@@ -230,6 +256,12 @@ class UserSettingsViewController: UIViewController {
             }
             
             
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToChangePasswordSegue", let nextVC = segue.destination as? ForgotChangePasswordViewController {
+            nextVC.prevScreen = "Settings"
         }
     }
     

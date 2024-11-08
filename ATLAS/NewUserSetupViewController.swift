@@ -10,7 +10,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
-
+    
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -32,6 +33,7 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
         
+        addBottomShadow(to: emailTextField)
         addBottomShadow(to: usernameTextField)
         addBottomShadow(to: passwordTextField)
         addBottomShadow(to: confirmPasswordTextField)
@@ -42,50 +44,69 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func createAccountPressed(_ sender: UIButton) {
-        if let username = usernameTextField.text,
+        if let email = emailTextField.text,
+           let username = usernameTextField.text,
            let password = passwordTextField.text,
            let confirmPassword = confirmPasswordTextField.text,
            password == confirmPassword {
-            // Proceed with Firebase Authentication
-            Auth.auth().createUser(withEmail: username, password: password) { authResult, error in
+            
+            let db = Firestore.firestore()
+            db.collection("users").whereField("username", isEqualTo: username).getDocuments { (snapshot, error) in
                 if let error = error {
-                    self.shouldLogin = false
-                    self.statusLabel.text = "\(error.localizedDescription)"
-                    print("Error creating user: \(error.localizedDescription)")
+                    print("Error checking username availability: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let snapshot = snapshot, !snapshot.isEmpty {
+                    // show alert that username is already taken
+                    self.statusLabel.text = "Username is already taken. Please try a different one."
+                    
                     return
                 } else {
-                    self.statusLabel.text = ""
-                }
-                
-                if let user = authResult?.user {
-                    let changeRequest = user.createProfileChangeRequest()
-                    changeRequest.displayName = username
-                    changeRequest.commitChanges { (error) in
+                    // Proceed with Firebase Authentication
+                    Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         if let error = error {
-                            print("Error setting display name: \(error.localizedDescription)")
+                            self.shouldLogin = false
+                            self.statusLabel.text = "\(error.localizedDescription)"
+                            print("Error creating user: \(error.localizedDescription)")
+                            return
                         } else {
-                            print("Display name set to: \(username)")
+                            self.statusLabel.text = ""
                         }
+                        
+                        if let user = authResult?.user {
+                            let changeRequest = user.createProfileChangeRequest()
+                            changeRequest.displayName = username
+                            changeRequest.commitChanges { (error) in
+                                if let error = error {
+                                    print("Error setting display name: \(error.localizedDescription)")
+                                } else {
+                                    print("Display name set to: \(username)")
+                                }
+                            }
+                        }
+                        
+                        // User was created successfully, now store the user details in Firestore
+                        if let userId = authResult?.user.uid {
+                            self.storeUserData(userId: userId, email: email, username: username)
+                        }
+                        
+                        self.shouldLogin = true
                     }
                 }
-                
-                // User was created successfully, now store the user details in Firestore
-                if let userId = authResult?.user.uid {
-                    self.storeUserData(userId: userId, username: username)
-                }
-                
-                self.shouldLogin = true
             }
+            
         } else {
             statusLabel.text = "Passwords do not match or fields are empty."
         }
     }
     
-    func storeUserData(userId: String, username: String) {
+    func storeUserData(userId: String, email: String, username: String) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)
         
         let userData: [String: Any] = [
+            "email": email,
             "username": username,
             "locations": []
         ]

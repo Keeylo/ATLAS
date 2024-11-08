@@ -22,7 +22,7 @@
                                     <constraint firstAttribute="width" constant="240" id="klh-E8-JgG"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oR2-jb-0jV">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oR2-jb-0jV">
                                 <rect key="frame" x="6.6666666666666572" y="288" width="380" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="QSE-0D-HkP"/>
@@ -82,7 +82,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Forgot Password?"/>
                                 <connections>
                                     <action selector="forgetPasswordPressed:" destination="8vY-bY-1Xa" eventType="touchUpInside" id="C8t-NA-k1J"/>
-                                    <segue destination="MWs-xw-HpQ" kind="presentation" modalPresentationStyle="fullScreen" id="2Yh-bT-QmH"/>
+                                    <segue destination="MWs-xw-HpQ" kind="presentation" identifier="ChangePasswordSegue" modalPresentationStyle="fullScreen" id="2Yh-bT-QmH"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -90,5 +90,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ChangePasswordSegue", let nextVC = segue.destination as? ForgotChangePasswordViewController {
+            nextVC.prevScreen = "Login"
+        }
+    }
+    
 
 }
