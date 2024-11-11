@@ -18,12 +18,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var timer: Timer?
     var polyOverlay: MKPolygon? // for updating UTs overlay
     let manager = CLLocationManager() // start and stop location operations
+    var pathFormed = false
+    private var routeOverlay: MKOverlay?
 
     var testPath: [CLLocation] = []
     let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
-    let utLoc = CLLocation(latitude: 30.2850, longitude: -97.7354)
+    let utLoc = CLLocation(latitude: 30.286236060447308, longitude: -97.739378471749)
     
     // might need to use a hashmap
+    var MKutLocRegion: MKPolygon?
     let utLocRegion = [
             CLLocationCoordinate2D(latitude: 30.29194, longitude: -97.74113),
             CLLocationCoordinate2D(latitude: 30.29166, longitude: -97.73657),
@@ -67,7 +70,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // make the entire fillIn only once
         polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count)
+        MKutLocRegion = polyOverlay // will be used to check boundaries later
         atlasMap.addOverlay(polyOverlay!)
+        
+        let nancyRubinsCoordinates = CLLocationCoordinate2D(latitude: 30.287462, longitude: -97.737132)
+        addMapMarker(at: nancyRubinsCoordinates, title: "", color: .orange)
         
         let buttonSize: CGFloat = 30
         menuButton.frame = CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 65, width: buttonSize, height: buttonSize)
@@ -83,10 +90,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let pOverlay = overlay as? MKPolygon {
             let rend = MKPolygonRenderer(polygon: pOverlay)
-            
-            rend.fillColor = UIColor.gray.withAlphaComponent(0.65)  // tranparentish gray, there isn't a way to change the apple maps color theme
-//            rend.strokeColor = UIColor.gray  // Gray color
+            rend.fillColor = UIColor.gray.withAlphaComponent(0.65)
             rend.lineWidth = 2.0  // setting width
+            return rend
+        }
+        
+        if let polyline = overlay as? MKPolyline {
+            let rend = MKPolylineRenderer(polyline: polyline)
+            rend.strokeColor = .blue
+            rend.lineWidth = 5.0
             return rend
         }
         return MKOverlayRenderer(overlay: overlay)  // In case of a different overlay
@@ -113,14 +125,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     private func handleLocationUpdates(location: CLLocation) {
-        let dist = location.distance(from: utLoc)
+        let polyRend = MKPolygonRenderer(polygon: MKutLocRegion!)
+        let point = MKMapPoint(location.coordinate)
+        let polyViewPoint = polyRend.point(for: point)
         
-        // more complicated than I thought
-        // need to have it where if we are outside the utLocRegion boundary not a mile
-        
-        if dist > 1609.34 { // greater than a mile? Will change this to be based around the border of the campus or the average coordinate
-            giveDirections(from: location) // check on this functionality later, for some reason it doesn't show up
+        if !polyRend.path.contains(polyViewPoint) {
+            if !pathFormed {
+                giveDirections(from: location) // check on this functionality later, for some reason it doesn't show up
+                pathFormed = true
+                print("Route to campus has been made")
+            }
         } else {
+            if pathFormed {
+                // seems a wee bit choppy but it works
+                removeRouteOverlay()
+                pathFormed = false
+                print("Route to campus has terminated")
+            }
             updateOverlay(for: location)
         }
     }
@@ -273,12 +294,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     private func giveDirections(from location: CLLocation) {
+        // If there's already an overlay, remove it before creating a new one
+        if let overlay = routeOverlay {
+            atlasMap.removeOverlay(overlay)
+            routeOverlay = nil
+        }
+        
         let directionReq = MKDirections.Request() // requesting directions to then provide directions back to the user
         let userMarker = MKPlacemark(coordinate: location.coordinate) // using user location coordinates (CLLocationCoordinate2d) and making marker object
         let destMarker = MKPlacemark(coordinate: utLoc.coordinate) // using UT location coordinates (CLLocationCoordinate2d) and making marker object
         directionReq.source = MKMapItem(placemark: userMarker) // setting request source to user marker object
         directionReq.destination = MKMapItem(placemark: destMarker) // setting request destination to destination marker object
-        directionReq.transportType = .automobile // Will show the path for drivers
+        directionReq.transportType = .walking // Will show the path for drivers
         
         let directions = MKDirections(request: directionReq)
         directions.calculate { (response, error) in
@@ -290,10 +317,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
             
             let route = response.routes[0] // choose the first path and call it a day
+            self.routeOverlay = route.polyline
             self.atlasMap.addOverlay(route.polyline, level: .aboveRoads) // shows the path on the map
             
             let mapRegion = route.polyline.boundingMapRect // fit entire route on the map
             self.atlasMap.setVisibleMapRect(mapRegion, animated: true) // finally show it visably
+        }
+    }
+    
+    private func removeRouteOverlay() {
+        if let overlay = routeOverlay {
+            atlasMap.removeOverlay(overlay)
+            routeOverlay = nil
         }
     }
     
@@ -302,6 +337,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let mapPoint = MKMapPoint(coordinate)
 
         return fillIn.boundingMapRect.contains(mapPoint)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "CustomMarker"
+
+        // Ensure we're dealing with MKPointAnnotation
+        guard annotation is MKPointAnnotation else { return nil }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+            annotationView?.markerTintColor = .orange // Set your desired color here
+            annotationView?.glyphImage = UIImage(systemName: "lock.fill")
+        } else {
+            annotationView?.annotation = annotation
+        }
+        return annotationView
+    }
+    
+    // Add this function in your MapViewController
+    private func addMapMarker(at coordinate: CLLocationCoordinate2D, title: String?, color: UIColor) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = title
+        
+        atlasMap.addAnnotation(annotation)
     }
     
     @IBAction func menuButtonPressed(_ sender: Any) {
@@ -318,7 +380,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         UIView.animate(withDuration: 0.3, animations: {
             popUpMenu!.view.frame.origin.y = self.view.frame.height - menuHeight
         })
-
     }
 }
 
