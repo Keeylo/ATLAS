@@ -10,6 +10,11 @@ import MapKit
 import CoreLocation
 import GEOSwift
 
+class CustomMarker: MKPointAnnotation {
+    var isVisible: Bool = false
+}
+
+
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var atlasMap: MKMapView!
@@ -24,6 +29,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var testPath: [CLLocation] = []
     let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
     let utLoc = CLLocation(latitude: 30.286236060447308, longitude: -97.739378471749)
+    
+    var annotations: [CustomMarker] {
+        return pointsOfInterest.map { point in
+            let annotation = CustomMarker()
+            annotation.coordinate = point.coordinate
+            annotation.title = point.title
+            annotation.isVisible = false
+            return annotation
+        }
+    }
     
     // might need to use a hashmap
     var MKutLocRegion: MKPolygon?
@@ -68,13 +83,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         atlasMap.userTrackingMode = .follow
         atlasMap.pointOfInterestFilter = .excludingAll // removes all default POIs (PointsOfInterest)
         
+        // Uncomment to see all Map Markers (our own POIs)
+//        for annotation in annotations {
+//            atlasMap.addAnnotation(annotation)
+//        }
+        
         // make the entire fillIn only once
         polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count)
         MKutLocRegion = polyOverlay // will be used to check boundaries later
         atlasMap.addOverlay(polyOverlay!)
-        
-        let nancyRubinsCoordinates = CLLocationCoordinate2D(latitude: 30.287462, longitude: -97.737132)
-        addMapMarker(at: nancyRubinsCoordinates, title: "", color: .orange)
         
         let buttonSize: CGFloat = 30
         menuButton.frame = CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 65, width: buttonSize, height: buttonSize)
@@ -131,23 +148,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         if !polyRend.path.contains(polyViewPoint) {
             if !pathFormed {
-                giveDirections(from: location) // check on this functionality later, for some reason it doesn't show up
+                giveDirections(from: location)
                 pathFormed = true
                 print("Route to campus has been made")
             }
         } else {
             if pathFormed {
-                // seems a wee bit choppy but it works
-                removeRouteOverlay()
+                // seems a wee bit choppy but it works, removes route once user arrives
+                atlasMap.removeOverlay(routeOverlay!)
+                routeOverlay = nil
                 pathFormed = false
                 print("Route to campus has terminated")
             }
             updateOverlay(for: location)
         }
+        
+        // might be inefficient, could maybe use a search
+        for marker in annotations {
+            let markerPoint = MKMapPoint(marker.coordinate)
+            if !marker.isVisible && point.distance(to: markerPoint) <= 20  { // 20 meters
+                atlasMap.addAnnotation(marker)
+                marker.isVisible = true
+                print("we added another marker")
+            }
+        }
     }
     
     private func updateOverlay(for location: CLLocation) {
-        atlasMap.removeOverlay(polyOverlay!) // we need to remember the coordinates, all of them
+        atlasMap.removeOverlay(polyOverlay!)
         let circle = createGEOSwiftCircle(center: location.coordinate, radius: 20)
         
         // Find intersecting polygons from `holes`
@@ -205,7 +233,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
-    // This gotta be the worst method I ever made but we keep er' goin
+    // This gotta be one of worst methods I ever made but we keep er' goin
     private func performUnion(for polygon: Polygon, with intersectingHoles: [MKPolygon]) -> MKPolygon {
         // store formed Geometry (any Point, Polygon, Multigon, etc)
         var combinedPolygon: Geometry = .polygon(polygon)
@@ -277,13 +305,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    // I need to track the users location, if they are near the campus, great! No need for rediraction to the place
-    // If they are far away from it, more than a mile from the boarder of the campus site (set by us), give some directions
+    // I need to track the users location, if they are near the campus, great! No need for rediraction to the place, otherwise give some directions
     private func setMapLocation(location: CLLocation) {
         // the combined lat and long, needed for MKCoordinateSpan as a CLLocationCoordinate2D parameter for center:
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        // we could instead just put location.coordinate for the center:
-        // But this was just to show newcomers
         
         // How much of a birds eye view do we want to show for the latitude and longitude
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
@@ -305,7 +330,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let destMarker = MKPlacemark(coordinate: utLoc.coordinate) // using UT location coordinates (CLLocationCoordinate2d) and making marker object
         directionReq.source = MKMapItem(placemark: userMarker) // setting request source to user marker object
         directionReq.destination = MKMapItem(placemark: destMarker) // setting request destination to destination marker object
-        directionReq.transportType = .walking // Will show the path for drivers
+        directionReq.transportType = .walking // Will show the path for walking
         
         let directions = MKDirections(request: directionReq)
         directions.calculate { (response, error) in
@@ -319,16 +344,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let route = response.routes[0] // choose the first path and call it a day
             self.routeOverlay = route.polyline
             self.atlasMap.addOverlay(route.polyline, level: .aboveRoads) // shows the path on the map
-            
             let mapRegion = route.polyline.boundingMapRect // fit entire route on the map
             self.atlasMap.setVisibleMapRect(mapRegion, animated: true) // finally show it visably
-        }
-    }
-    
-    private func removeRouteOverlay() {
-        if let overlay = routeOverlay {
-            atlasMap.removeOverlay(overlay)
-            routeOverlay = nil
         }
     }
     
@@ -343,27 +360,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let identifier = "CustomMarker"
 
         // Ensure we're dealing with MKPointAnnotation
-        guard annotation is MKPointAnnotation else { return nil }
+        guard let pointAnnotation = annotation as? MKPointAnnotation else { return nil }
 
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
         if annotationView == nil {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
-            annotationView?.markerTintColor = .orange // Set your desired color here
-            annotationView?.glyphImage = UIImage(systemName: "lock.fill")
-        } else {
-            annotationView?.annotation = annotation
+            
         }
+        annotationView?.glyphImage = UIImage(systemName: "lock.fill")
+
+        // Set the marker color dynamically based on the annotation
+        if let point = pointsOfInterest.first(where: { $0.title == pointAnnotation.title }) {
+            annotationView?.markerTintColor = point.color // Set marker color from pointsOfInterest
+        }
+
         return annotationView
-    }
-    
-    // Add this function in your MapViewController
-    private func addMapMarker(at coordinate: CLLocationCoordinate2D, title: String?, color: UIColor) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = title
-        
-        atlasMap.addAnnotation(annotation)
     }
     
     @IBAction func menuButtonPressed(_ sender: Any) {

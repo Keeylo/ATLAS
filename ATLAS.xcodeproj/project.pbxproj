@@ -33,6 +33,7 @@
 		49A44E0D2CD17F8C0005FD65 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E0C2CD17F8C0005FD65 /* SettingsStoryboard.storyboard */; };
 		49A44E152CD1E82C0005FD65 /* LoadingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */; };
 		49A44E202CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */; };
+		49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */; };
 		D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */; };
 		D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53967402CC9CD570090A39E /* UserSettingsViewController.swift */; };
 		D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */; };
@@ -96,6 +97,7 @@
 		49A44E0C2CD17F8C0005FD65 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnlockedStoryboard.storyboard; sourceTree = "<group>"; };
+		49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsOfInterest.swift; sourceTree = "<group>"; };
 		D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpViewController.swift; sourceTree = "<group>"; };
 		D53967402CC9CD570090A39E /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */,
 				493358562CC71F7800AD4797 /* UserGuideViewController.swift */,
 				493358582CC745B200AD4797 /* UnlockedAreasViewController.swift */,
+				49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */,
 				D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */,
 				49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */,
 				49923EE52CB7A1C900D2CBA2 /* LaunchScreen.storyboard */,
@@ -322,6 +325,7 @@
 				49923EDF2CB7A1C700D2CBA2 /* ViewController.swift in Sources */,
 				D5BF14512CC07C8A00A0604C /* ThirdRoundTowerViewController.swift in Sources */,
 				D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */,
+				49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */,
 				D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */,
 				D596C2852CBF39F60047E563 /* MiniGameViewController.swift in Sources */,
 				D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */,
