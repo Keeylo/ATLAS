@@ -10,6 +10,7 @@
 		2E65EBD32CC78E6A00972C99 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E65EBD22CC78E6A00972C99 /* logo.png */; };
 		42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */; };
 		42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */; };
+		491E8DD12CDC298C005B7DA5 /* GEOSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 491E8DD02CDC298C005B7DA5 /* GEOSwift */; };
 		493358532CC7076900AD4797 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358522CC7076900AD4797 /* MapViewController.swift */; };
 		493358552CC71A1300AD4797 /* UserGuideStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */; };
 		493358572CC71F7800AD4797 /* UserGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358562CC71F7800AD4797 /* UserGuideViewController.swift */; };
@@ -20,6 +21,8 @@
 		49923EE22CB7A1C700D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE12CB7A1C700D2CBA2 /* Base */; };
 		49923EE42CB7A1C900D2CBA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */; };
 		49923EE72CB7A1C900D2CBA2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 49923EE62CB7A1C900D2CBA2 /* Base */; };
+		49A1839B2CDD9C1700539CDF /* gpxgenerator_path.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 49A1839A2CDD9C1700539CDF /* gpxgenerator_path.gpx */; };
+		49A1839D2CDD9CAE00539CDF /* gpxStudio_path.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 49A1839C2CDD9CAE00539CDF /* gpxStudio_path.gpx */; };
 		49A44DFD2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44DFC2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard */; };
 		49A44E012CD17F880005FD65 /* NewUserSetupStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E002CD17F880005FD65 /* NewUserSetupStoryboard.storyboard */; };
 		49A44E032CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E022CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard */; };
@@ -30,6 +33,7 @@
 		49A44E0D2CD17F8C0005FD65 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E0C2CD17F8C0005FD65 /* SettingsStoryboard.storyboard */; };
 		49A44E152CD1E82C0005FD65 /* LoadingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */; };
 		49A44E202CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */; };
+		49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */; };
 		D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */; };
 		D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53967402CC9CD570090A39E /* UserSettingsViewController.swift */; };
 		D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */; };
@@ -82,6 +86,8 @@
 		49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49923EE62CB7A1C900D2CBA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49923EE82CB7A1C900D2CBA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49A1839A2CDD9C1700539CDF /* gpxgenerator_path.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = gpxgenerator_path.gpx; sourceTree = "<group>"; };
+		49A1839C2CDD9CAE00539CDF /* gpxStudio_path.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = gpxStudio_path.gpx; sourceTree = "<group>"; };
 		49A44DFC2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginPageViewStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E002CD17F880005FD65 /* NewUserSetupStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewUserSetupStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E022CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "ForgotChangePasswordStoryboard .storyboard"; sourceTree = "<group>"; };
@@ -92,6 +98,7 @@
 		49A44E0C2CD17F8C0005FD65 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnlockedStoryboard.storyboard; sourceTree = "<group>"; };
+		49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsOfInterest.swift; sourceTree = "<group>"; };
 		D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpViewController.swift; sourceTree = "<group>"; };
 		D53967402CC9CD570090A39E /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +119,7 @@
 				D5BF14842CC17D1E00A0604C /* FirebaseVertexAI-Preview in Frameworks */,
 				D5BF146E2CC17D1E00A0604C /* FirebaseFirestoreCombine-Community in Frameworks */,
 				D5BF14702CC17D1E00A0604C /* FirebaseFunctions in Frameworks */,
+				491E8DD12CDC298C005B7DA5 /* GEOSwift in Frameworks */,
 				D5BF147C2CC17D1E00A0604C /* FirebasePerformance in Frameworks */,
 				D5BF14822CC17D1E00A0604C /* FirebaseStorageCombine-Community in Frameworks */,
 				D5BF147E2CC17D1E00A0604C /* FirebaseRemoteConfig in Frameworks */,
@@ -187,11 +195,14 @@
 				D53967402CC9CD570090A39E /* UserSettingsViewController.swift */,
 				493358562CC71F7800AD4797 /* UserGuideViewController.swift */,
 				493358582CC745B200AD4797 /* UnlockedAreasViewController.swift */,
+				49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */,
 				D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */,
 				49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */,
 				49923EE52CB7A1C900D2CBA2 /* LaunchScreen.storyboard */,
 				49923EE82CB7A1C900D2CBA2 /* Info.plist */,
 				2E65EBD22CC78E6A00972C99 /* logo.png */,
+				49A1839C2CDD9CAE00539CDF /* gpxStudio_path.gpx */,
+				49A1839A2CDD9C1700539CDF /* gpxgenerator_path.gpx */,
 			);
 			path = ATLAS;
 			sourceTree = "<group>";
@@ -237,6 +248,7 @@
 				D5BF147F2CC17D1E00A0604C /* FirebaseStorage */,
 				D5BF14812CC17D1E00A0604C /* FirebaseStorageCombine-Community */,
 				D5BF14832CC17D1E00A0604C /* FirebaseVertexAI-Preview */,
+				491E8DD02CDC298C005B7DA5 /* GEOSwift */,
 			);
 			productName = ATLAS;
 			productReference = 49923ED72CB7A1C700D2CBA2 /* ATLAS.app */;
@@ -268,6 +280,7 @@
 			mainGroup = 49923ECE2CB7A1C700D2CBA2;
 			packageReferences = (
 				D5BF14542CC17D1E00A0604C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				491E8DCF2CDC298C005B7DA5 /* XCRemoteSwiftPackageReference "GEOSwift" */,
 			);
 			productRefGroup = 49923ED82CB7A1C700D2CBA2 /* Products */;
 			projectDirPath = "";
@@ -294,10 +307,12 @@
 				49A44E072CD17F8A0005FD65 /* MiniGameStoryboard.storyboard in Resources */,
 				49923EE72CB7A1C900D2CBA2 /* Base in Resources */,
 				2E65EBD32CC78E6A00972C99 /* logo.png in Resources */,
+				49A1839B2CDD9C1700539CDF /* gpxgenerator_path.gpx in Resources */,
 				49A44E152CD1E82C0005FD65 /* LoadingStoryboard.storyboard in Resources */,
 				49A44DFD2CD17F6F0005FD65 /* LoginPageViewStoryboard.storyboard in Resources */,
 				49923EE22CB7A1C700D2CBA2 /* Base in Resources */,
 				49A44E032CD17F890005FD65 /* ForgotChangePasswordStoryboard .storyboard in Resources */,
+				49A1839D2CDD9CAE00539CDF /* gpxStudio_path.gpx in Resources */,
 				49A44E052CD17F8A0005FD65 /* MapStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +328,7 @@
 				49923EDF2CB7A1C700D2CBA2 /* ViewController.swift in Sources */,
 				D5BF14512CC07C8A00A0604C /* ThirdRoundTowerViewController.swift in Sources */,
 				D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */,
+				49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */,
 				D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */,
 				D596C2852CBF39F60047E563 /* MiniGameViewController.swift in Sources */,
 				D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */,
@@ -548,6 +564,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		491E8DCF2CDC298C005B7DA5 /* XCRemoteSwiftPackageReference "GEOSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/GEOSwift/GEOSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
 		D5BF14542CC17D1E00A0604C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -559,6 +583,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		491E8DD02CDC298C005B7DA5 /* GEOSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 491E8DCF2CDC298C005B7DA5 /* XCRemoteSwiftPackageReference "GEOSwift" */;
+			productName = GEOSwift;
+		};
 		D5BF14552CC17D1E00A0604C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D5BF14542CC17D1E00A0604C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
