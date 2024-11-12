@@ -204,7 +204,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let storyboard = UIStoryboard(name: "HamburgerMenuStoryboard", bundle: nil)
         let popUpMenu = storyboard.instantiateViewController(withIdentifier: "MenuPopUp") as? MenuPopUpViewController
         
-        let menuHeight = self.view.frame.height / 4.5
+        let menuHeight = self.view.frame.height / 3.7
         popUpMenu!.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: menuHeight)
         
         addChild(popUpMenu!)

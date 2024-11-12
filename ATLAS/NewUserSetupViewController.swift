@@ -18,8 +18,6 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var statusLabel: UILabel!
     
-    var shouldLogin = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,7 +64,6 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
                     // Proceed with Firebase Authentication
                     Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                         if let error = error {
-                            self.shouldLogin = false
                             self.statusLabel.text = "\(error.localizedDescription)"
                             print("Error creating user: \(error.localizedDescription)")
                             return
@@ -91,7 +88,8 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
                             self.storeUserData(userId: userId, email: email, username: username)
                         }
                         
-                        self.shouldLogin = true
+                        self.performSegue(withIdentifier: "CreateAccountSegue", sender: nil)
+                        
                     }
                 }
             }
@@ -108,7 +106,8 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
         let userData: [String: Any] = [
             "email": email,
             "username": username,
-            "locations": []
+            "locations": [],
+            "friends": []
         ]
         
         userRef.setData(userData) { error in
@@ -127,16 +126,6 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
         textField.layer.shadowOffset = CGSize(width: 0, height: 2)
         textField.layer.shadowRadius = 2
         textField.layer.masksToBounds = false
-    }
-    
-    // checks if segue can be performed
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
-        if identifier == "CreateAccountSegue" {
-            return shouldLogin
-        }
-        
-        return true
     }
     
     // Called when 'return' key pressed

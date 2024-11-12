@@ -59,7 +59,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Create Account"/>
                                 <connections>
                                     <action selector="createAccountPressed:" destination="qHF-De-Ksz" eventType="touchUpInside" id="Fny-q7-40i"/>
-                                    <segue destination="Xi6-hB-T76" kind="presentation" identifier="CreateAccountSegue" modalPresentationStyle="fullScreen" id="YnN-YR-N0n"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kp1-Oo-5lh">
@@ -122,6 +121,7 @@
                         <outlet property="passwordTextField" destination="wh3-ZJ-ofM" id="ps3-Rf-G5Z"/>
                         <outlet property="statusLabel" destination="kp1-Oo-5lh" id="ZMb-m5-9BD"/>
                         <outlet property="usernameTextField" destination="Zk7-PF-RL2" id="9RU-D8-aHN"/>
+                        <segue destination="Xi6-hB-T76" kind="presentation" identifier="CreateAccountSegue" modalPresentationStyle="fullScreen" id="C1E-jr-4aE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BxI-by-D5c" sceneMemberID="firstResponder"/>

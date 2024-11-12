@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class MenuPopUpViewController: UIViewController {
     
@@ -39,5 +41,6 @@ class MenuPopUpViewController: UIViewController {
             self.removeFromParent()
         }
     }
+
     
 }
