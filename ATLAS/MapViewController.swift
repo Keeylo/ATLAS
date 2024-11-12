@@ -14,7 +14,6 @@ class CustomMarker: MKPointAnnotation {
     var isVisible: Bool = false
 }
 
-
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var atlasMap: MKMapView!
@@ -65,7 +64,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             CLLocationCoordinate2D(latitude: 30.27964, longitude: -97.73106),
             CLLocationCoordinate2D(latitude: 30.27910, longitude: -97.73250),
             CLLocationCoordinate2D(latitude: 30.28173, longitude: -97.74191),
-            CLLocationCoordinate2D(latitude: 30.28235, longitude: -97.74199)
+            CLLocationCoordinate2D(latitude: 30.28235, longitude: -97.74199),
+            CLLocationCoordinate2D(latitude: 30.29194, longitude: -97.74113)
             // More as we go just the general area for now
         ]
     
@@ -176,7 +176,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     private func updateOverlay(for location: CLLocation) {
         atlasMap.removeOverlay(polyOverlay!)
-        let circle = createGEOSwiftCircle(center: location.coordinate, radius: 20)
+        var circle = createGEOSwiftCircle(center: location.coordinate, radius: 20)
+        
+        // MKutLocRegion needs to form a complete polygon, remember that, it needs to end with the same starting coordinate
+        // That was the issue before, so I needed to add it in for MKutLocRegion, which has no affect on MKPolygon creation
+        // But without it would error for GEOSwift Polygon because it won't be a closed polygon.
+        if polyOverlay != nil, let geometry = try? circle.intersection(with: convertToGEOSwiftPolygon(mkPolygon: polyOverlay!)!) {
+            switch geometry {
+            case .polygon(let polygon):
+                circle = polygon
+            default: break
+            }
+        }
         
         // Find intersecting polygons from `holes`
         let intersectingHoles = findIntersectingPolygons(for: circle)
