@@ -10,7 +10,7 @@ import UIKit
 // MARK: - Area Model
 struct Area {
     let name: String
-    let image: String // Image name/path
+    let image: String
 }
 
 // MARK: - Custom Layout
@@ -132,25 +132,21 @@ class AreaCell: UICollectionViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            // Container view constraints
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            // Image view constraints
             imageView.topAnchor.constraint(equalTo: containerView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.7),
             
-            // Name label constraints - now properly left aligned
             nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
             nameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
-        
-        // Change text alignment to left
+
         nameLabel.textAlignment = .left
     }
     
@@ -194,12 +190,11 @@ class UnlockedAreasViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let rotationAngle = CGFloat(-15) * CGFloat(Double.pi) / 180  // 45 degrees in radians
+        let rotationAngle = CGFloat(-15) * CGFloat(Double.pi) / 180
         sunnySideUp.transform = CGAffineTransform(rotationAngle: rotationAngle)
         setupViews()
         setupGestures()
         loadAreas()
-        // Do any additional setup after loading the view.
     }
     
     private func setupViews() {
@@ -213,15 +208,14 @@ class UnlockedAreasViewController: UIViewController {
         
         collectionView.register(AreaCell.self, forCellWithReuseIdentifier: AreaCell.identifier)
         
-        // Get safe area insets
         let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             // Collection view should start below "Unlocked Areas" title and end above "Go Back" button
-            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 60), // Adjust this value to start below title
+            collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 60),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -70), // Adjust this value to end above button
+            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -70),
             
             // Center the arrows within the collection view bounds
             upArrow.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -240,7 +234,6 @@ class UnlockedAreasViewController: UIViewController {
     }
     
     private func loadAreas() {
-        // Add your areas here
         areas = [
             Area(name: "Gregory Gymnasium", image: "gregGym"),
             Area(name: "Norman Hackerman", image: "normanHackerman"),
@@ -250,14 +243,21 @@ class UnlockedAreasViewController: UIViewController {
             Area(name: "Orange Line", image: "orangeLine"),
             Area(name: "Flower Things", image: "flowerThings"),
             Area(name: "Red Thing", image: "redThing")
-            // Add more areas...
+            // Add more areas if needed
         ]
         
         collectionView.reloadData()
         
-        // Scroll to middle item
         let middleIndex = areas.count / 2
-        collectionView.scrollToItem(at: IndexPath(item: middleIndex, section: 0), at: .centeredVertically, animated: false)
+        currentIndex = middleIndex
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.collectionView.scrollToItem(
+                at: IndexPath(item: middleIndex, section: 0),
+                at: .centeredVertically,
+                animated: false
+            )
+        }
     }
     
     @objc private func handleUpArrowTap() {
