@@ -8,15 +8,39 @@
 import UIKit
 import MapKit
 import CoreLocation
+import GEOSwift
+
+class CustomMarker: MKPointAnnotation {
+    var isVisible: Bool = false
+}
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-    
     @IBOutlet weak var menuButton: UIButton!
-    
     @IBOutlet weak var atlasMap: MKMapView!
+    
+    var testPathIndex = 0
+    var timer: Timer?
     var polyOverlay: MKPolygon? // for updating UTs overlay
     let manager = CLLocationManager() // start and stop location operations
-    let utLoc = CLLocation(latitude: 30.2850, longitude: -97.7354)
+    var pathFormed = false
+    private var routeOverlay: MKOverlay?
+
+    var testPath: [CLLocation] = []
+    let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
+    let utLoc = CLLocation(latitude: 30.286236060447308, longitude: -97.739378471749)
+    
+    var annotations: [CustomMarker] {
+        return pointsOfInterest.map { point in
+            let annotation = CustomMarker()
+            annotation.coordinate = point.coordinate
+            annotation.title = point.title
+            annotation.isVisible = false
+            return annotation
+        }
+    }
+    
+    // might need to use a hashmap
+    var MKutLocRegion: MKPolygon?
     let utLocRegion = [
             CLLocationCoordinate2D(latitude: 30.29194, longitude: -97.74113),
             CLLocationCoordinate2D(latitude: 30.29166, longitude: -97.73657),
@@ -40,7 +64,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             CLLocationCoordinate2D(latitude: 30.27964, longitude: -97.73106),
             CLLocationCoordinate2D(latitude: 30.27910, longitude: -97.73250),
             CLLocationCoordinate2D(latitude: 30.28173, longitude: -97.74191),
-            CLLocationCoordinate2D(latitude: 30.28235, longitude: -97.74199)
+            CLLocationCoordinate2D(latitude: 30.28235, longitude: -97.74199),
+            CLLocationCoordinate2D(latitude: 30.29194, longitude: -97.74113)
             // More as we go just the general area for now
         ]
     
@@ -58,14 +83,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         atlasMap.userTrackingMode = .follow
         atlasMap.pointOfInterestFilter = .excludingAll // removes all default POIs (PointsOfInterest)
         
+        // Uncomment to see all Map Markers (our own POIs)
+//        for annotation in annotations {
+//            atlasMap.addAnnotation(annotation)
+//        }
+        
         // make the entire fillIn only once
-        polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count) // great but I want a circle damnit
+        polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count)
+        MKutLocRegion = polyOverlay // will be used to check boundaries later
         atlasMap.addOverlay(polyOverlay!)
         
         let buttonSize: CGFloat = 30
         menuButton.frame = CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 65, width: buttonSize, height: buttonSize)
-
-
+        
     }
     
     // this happens every time the view has appeared on the screen, it is reoccuring
@@ -77,10 +107,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let pOverlay = overlay as? MKPolygon {
             let rend = MKPolygonRenderer(polygon: pOverlay)
-            
-            rend.fillColor = UIColor.gray.withAlphaComponent(0.65)  // tranparentish gray, there isn't a way to change the apple maps color theme
-//            rend.strokeColor = UIColor.gray  // Gray color
+            rend.fillColor = UIColor.gray.withAlphaComponent(0.65)
             rend.lineWidth = 2.0  // setting width
+            return rend
+        }
+        
+        if let polyline = overlay as? MKPolyline {
+            let rend = MKPolylineRenderer(polyline: polyline)
+            rend.strokeColor = .blue
+            rend.lineWidth = 5.0
             return rend
         }
         return MKOverlayRenderer(overlay: overlay)  // In case of a different overlay
@@ -107,57 +142,184 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     private func handleLocationUpdates(location: CLLocation) {
-        let dist = location.distance(from: utLoc)
+        let polyRend = MKPolygonRenderer(polygon: MKutLocRegion!)
+        let point = MKMapPoint(location.coordinate)
+        let polyViewPoint = polyRend.point(for: point)
         
-        if dist > 1609.34 { // greater than a mile? Will change this to be based around the border of the campus or the average coordinate
-            giveDirections(from: location)
+        if !polyRend.path.contains(polyViewPoint) {
+            if !pathFormed {
+                giveDirections(from: location)
+                pathFormed = true
+                print("Route to campus has been made")
+            }
         } else {
+            if pathFormed {
+                // seems a wee bit choppy but it works, removes route once user arrives
+                atlasMap.removeOverlay(routeOverlay!)
+                routeOverlay = nil
+                pathFormed = false
+                print("Route to campus has terminated")
+            }
             updateOverlay(for: location)
+        }
+        
+        // might be inefficient, could maybe use a search
+        for marker in annotations {
+            let markerPoint = MKMapPoint(marker.coordinate)
+            if !marker.isVisible && point.distance(to: markerPoint) <= 20  { // 20 meters
+                atlasMap.addAnnotation(marker)
+                marker.isVisible = true
+                print("we added another marker")
+            }
         }
     }
     
     private func updateOverlay(for location: CLLocation) {
-        atlasMap.removeOverlay(polyOverlay!) // we need to remember the coordinates, all of them
-        let circCoordinates = createTheCircleCoordinates(center: location.coordinate, radius: 20) // list of points for a circle
-        let cutOut = MKPolygon(coordinates: circCoordinates, count: circCoordinates.count) // praying this works for the hole cutout
-        holes.append(cutOut) // add the polygon, but this means we have to do a ton of managing, stress testing all that jive
+        atlasMap.removeOverlay(polyOverlay!)
+        var circle = createGEOSwiftCircle(center: location.coordinate, radius: 20)
         
-        // I need to be able to extract the intersection points and modify the circleCoordinates
-        let coor = CLLocationCoordinate2D(latitude: 30.28825, longitude: -97.73763)
-        let circCoordinates2 = createTheCircleCoordinates(center: coor, radius: 20) // list of points for a circle
-        let cutOut2 = MKPolygon(coordinates: circCoordinates2, count: circCoordinates2.count) // praying this works for the hole cutout
-        holes.append(cutOut2)
+        // MKutLocRegion needs to form a complete polygon, remember that, it needs to end with the same starting coordinate
+        // That was the issue before, so I needed to add it in for MKutLocRegion, which has no affect on MKPolygon creation
+        // But without it would error for GEOSwift Polygon because it won't be a closed polygon.
+        if polyOverlay != nil, let geometry = try? circle.intersection(with: convertToGEOSwiftPolygon(mkPolygon: polyOverlay!)!) {
+            switch geometry {
+            case .polygon(let polygon):
+                circle = polygon
+            default: break
+            }
+        }
         
-        polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count, interiorPolygons: holes) // Exclude interior
+        // Find intersecting polygons from `holes`
+        let intersectingHoles = findIntersectingPolygons(for: circle)
+        
+        // Unionize intersecting polygons if found
+        if !intersectingHoles.isEmpty {
+            let unionizedPolygon = performUnion(for: circle, with: intersectingHoles)
+            // Replace intersecting holes with the new unionized polygon
+            holes.removeAll { intersectingHoles.contains($0) }
+            holes.append(unionizedPolygon)
+        } else {
+            // If no intersections, add as disjoint
+            let Mkcircle = convertGEOSwiftGeometryToMKPolygon(geoswiftGeometry: .polygon(circle))
+            holes.append(Mkcircle!)
+        }
+        
+        // Recreate the overlay with updated `holes`
+        polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count, interiorPolygons: holes)
         atlasMap.addOverlay(polyOverlay!)
     }
     
-    // function to convert circle to coordinates, this will be for the hole
-    func createTheCircleCoordinates(center: CLLocationCoordinate2D, radius: CLLocationDistance, numPoints: Int = 100) -> [CLLocationCoordinate2D] {
-        var coordinates: [CLLocationCoordinate2D] = []
-        let eRad = 6371000.0
+    // Return MKPolygon list of intersections
+    private func findIntersectingPolygons(for polygon: Polygon) -> [MKPolygon] {
+        return holes.filter { hole in
+            // Convert MKPolygon to GEOSwift Polygon for intersection check
+            guard let geoswiftHole = convertToGEOSwiftPolygon(mkPolygon: hole) else { return false }
+            
+            do {
+                let intersection = try polygon.intersects(geoswiftHole)
+                return intersection
+            } catch {
+                print("Error finding intersection between Polygons: \(error)")
+                return false
+            }
+        }
+    }
+    
+    // In the future I need to optimize this so we stop making conversions all the time
+    // This helps with MKPolygon-to-Polygon creation
+    private func convertToGEOSwiftPolygon(mkPolygon: MKPolygon) -> Polygon? {
+        var coordinates = [CLLocationCoordinate2D](repeating: kCLLocationCoordinate2DInvalid, count: mkPolygon.pointCount)
+        mkPolygon.getCoordinates(&coordinates, range: NSRange(location: 0, length: mkPolygon.pointCount))
+        // Convert MKPolygon CLLocationCoordinate2D to GEOSwift Points
+        let geoswiftCoordinates = coordinates.map { Point(x: $0.longitude, y: $0.latitude) }
+        
+        // Will try to create a Polygon using the geoswiftcoordinates
+        do {
+            let boundary = try Polygon.LinearRing(points: geoswiftCoordinates)
+            print("We successfully made the polygon")
+            return Polygon(exterior: boundary)
+        } catch {
+            print("Error creating GEOSwift Polygon: \(error)")
+            return nil
+        }
+    }
+
+    // This gotta be one of worst methods I ever made but we keep er' goin
+    private func performUnion(for polygon: Polygon, with intersectingHoles: [MKPolygon]) -> MKPolygon {
+        // store formed Geometry (any Point, Polygon, Multigon, etc)
+        var combinedPolygon: Geometry = .polygon(polygon)
+        
+        // for every hole we found that intersects Polygon, perform a union
+        for hole in intersectingHoles {
+            // conversion from MK to GEOSwift, absolutely disgusting
+            let polygon2 = convertToGEOSwiftPolygon(mkPolygon: hole)
+            
+            // perform the union, gives back geometry, update the combinedPolygon
+            if let union = try? combinedPolygon.union(with: polygon2!) {
+                combinedPolygon = union
+            }
+        }
+        
+        // turn this bad boy into an MKPolygon, again these conversions are disgusting I am sorry
+        return convertGEOSwiftGeometryToMKPolygon(geoswiftGeometry: combinedPolygon)!
+    }
+    
+    func createGEOSwiftCircle(center: CLLocationCoordinate2D, radius: CLLocationDistance, numPoints: Int = 100) -> Polygon {
+        var points: [Point] = []
+        
+        let eRad = 6371000.0  // Earth radius in meters
         
         for i in 0..<numPoints {
             let angle = (Double(i) / Double(numPoints)) * 2 * Double.pi  // Angle in radians
             let latOffset = (radius / eRad) * cos(angle) * (180.0 / .pi)
             let lonOffset = (radius / eRad) * sin(angle) * (180.0 / .pi) / cos(center.latitude * .pi / 180.0)
-
-            let point = CLLocationCoordinate2D(
-                latitude: center.latitude + latOffset,
-                longitude: center.longitude + lonOffset
-            )
-            coordinates.append(point)
+            
+            let point = Point(x: center.longitude + lonOffset, y: center.latitude + latOffset)
+            points.append(point)
         }
-        return coordinates
+        
+        points.append(points[0])
+        
+        // Return a GEOSwift Polygon from the points
+        do {
+            let linearRing = try Polygon.LinearRing(points: points)
+            let geoswiftCircle = Polygon(exterior: linearRing)
+            return geoswiftCircle
+        } catch {
+            fatalError("Error creating GEOSwift Polygon: \(error)")
+        }
     }
     
-    // I need to track the users location, if they are near the campus, great! No need for rediraction to the place
-    // If they are far away from it, more than a mile from the boarder of the campus site (set by us), give some directions
+    func convertGEOSwiftGeometryToMKPolygon(geoswiftGeometry: Geometry) -> MKPolygon? {
+        switch geoswiftGeometry {
+        case .polygon(let polygon):
+            // If it's a single Polygon, convert it to MKPolygon
+            let coordinates = polygon.exterior.points.map { point in
+                CLLocationCoordinate2D(latitude: point.y, longitude: point.x)
+            }
+            return MKPolygon(coordinates: coordinates, count: coordinates.count)
+            
+        case .multiPolygon(let multiPolygon):
+            // If it's a MultiPolygon, handle each polygon individually
+            var allCoordinates: [CLLocationCoordinate2D] = []
+            for geoPolygon in multiPolygon.polygons {
+                let coordinates = geoPolygon.exterior.points.map { point in
+                    CLLocationCoordinate2D(latitude: point.y, longitude: point.x)
+                }
+                allCoordinates.append(contentsOf: coordinates)
+            }
+            return MKPolygon(coordinates: allCoordinates, count: allCoordinates.count)
+            
+        default:
+            // If it's not a polygon or multiPolygon, return nil
+            return nil
+        }
+    }
+    
+    // I need to track the users location, if they are near the campus, great! No need for rediraction to the place, otherwise give some directions
     private func setMapLocation(location: CLLocation) {
         // the combined lat and long, needed for MKCoordinateSpan as a CLLocationCoordinate2D parameter for center:
         let coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        // we could instead just put location.coordinate for the center:
-        // But this was just to show newcomers
         
         // How much of a birds eye view do we want to show for the latitude and longitude
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
@@ -168,12 +330,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     private func giveDirections(from location: CLLocation) {
+        // If there's already an overlay, remove it before creating a new one
+        if let overlay = routeOverlay {
+            atlasMap.removeOverlay(overlay)
+            routeOverlay = nil
+        }
+        
         let directionReq = MKDirections.Request() // requesting directions to then provide directions back to the user
         let userMarker = MKPlacemark(coordinate: location.coordinate) // using user location coordinates (CLLocationCoordinate2d) and making marker object
         let destMarker = MKPlacemark(coordinate: utLoc.coordinate) // using UT location coordinates (CLLocationCoordinate2d) and making marker object
         directionReq.source = MKMapItem(placemark: userMarker) // setting request source to user marker object
         directionReq.destination = MKMapItem(placemark: destMarker) // setting request destination to destination marker object
-        directionReq.transportType = .automobile // Will show the path for drivers
+        directionReq.transportType = .walking // Will show the path for walking
         
         let directions = MKDirections(request: directionReq)
         directions.calculate { (response, error) in
@@ -185,8 +353,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
             
             let route = response.routes[0] // choose the first path and call it a day
+            self.routeOverlay = route.polyline
             self.atlasMap.addOverlay(route.polyline, level: .aboveRoads) // shows the path on the map
-            
             let mapRegion = route.polyline.boundingMapRect // fit entire route on the map
             self.atlasMap.setVisibleMapRect(mapRegion, animated: true) // finally show it visably
         }
@@ -199,6 +367,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return fillIn.boundingMapRect.contains(mapPoint)
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "CustomMarker"
+
+        // Ensure we're dealing with MKPointAnnotation
+        guard let pointAnnotation = annotation as? MKPointAnnotation else { return nil }
+
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+            
+        }
+        annotationView?.glyphImage = UIImage(systemName: "lock.fill")
+
+        // Set the marker color dynamically based on the annotation
+        if let point = pointsOfInterest.first(where: { $0.title == pointAnnotation.title }) {
+            annotationView?.markerTintColor = point.color // Set marker color from pointsOfInterest
+        }
+
+        return annotationView
+    }
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "HamburgerMenuStoryboard", bundle: nil)
@@ -214,9 +403,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         UIView.animate(withDuration: 0.3, animations: {
             popUpMenu!.view.frame.origin.y = self.view.frame.height - menuHeight
         })
-
     }
 }
 
-
-// I wanna go to bed
+// I wanna go to bed and dream about flying monkeys
