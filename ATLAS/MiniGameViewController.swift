@@ -128,7 +128,13 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
     // if the quit button is pressed, then user is taken back
     // to the map screen
     @IBAction func quitButtonPressed(_ sender: Any) {
-        // need to add alert asking user if they're sure they'd like to quit
+        let alert = UIAlertController(title: "You are attempting to leave this mini game", message: "Are you sure you want to quit now?", preferredStyle: .alert)
+            
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            self.dismiss(animated: true)
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     // pauses/plays game

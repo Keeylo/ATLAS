@@ -9,6 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--MiniGameStoryboard-->
+        <scene sceneID="RE7-al-5It">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MiniGameStoryboard" storyboardName="MiniGameStoryboard" id="vrK-a8-MbW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="A34-1r-MaR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HjD-zF-YXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1808" y="1160"/>
+        </scene>
         <!--Map View Controller-->
         <scene sceneID="kxb-MX-A4s">
             <objects>
@@ -41,6 +51,7 @@
                     <connections>
                         <outlet property="atlasMap" destination="aAe-7d-6UU" id="FYC-Ig-LYy"/>
                         <outlet property="menuButton" destination="Rh1-7f-xnW" id="isK-BG-Hlm"/>
+                        <segue destination="vrK-a8-MbW" kind="presentation" identifier="ShowMiniGame" modalPresentationStyle="fullScreen" id="7ZM-fO-ndy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dn0-ah-AWR" sceneMemberID="firstResponder"/>
