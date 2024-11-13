@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Htg-Qg-bz7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Htg-Qg-bz7">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Sv3-mo-MMW">
-                                <rect key="frame" x="105" y="134" width="183" height="181.66666666666669"/>
+                                <rect key="frame" x="105" y="133.66666666666669" width="183" height="181.66666666666669"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="183" id="QMk-4y-RGA"/>
@@ -229,9 +229,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="exK-Rk-Vq6"/>
                     <connections>
-                        <outlet property="deleteAccountButton" destination="bvo-r6-ldi" id="m9X-w1-LvO"/>
+                        <outlet property="deleteAccountButton" destination="bvo-r6-ldi" id="H7y-6q-XNq"/>
                         <outlet property="emailLabel" destination="9wZ-R9-qsU" id="knN-Si-8FZ"/>
-                        <outlet property="logOutButton" destination="a8q-1L-vtG" id="bcH-v5-GfO"/>
+                        <outlet property="logOutButton" destination="a8q-1L-vtG" id="8yH-bo-tLi"/>
                         <outlet property="passwordLabel" destination="Ga3-ta-Y9e" id="TI7-H4-5bf"/>
                         <outlet property="usernameLabel" destination="aYP-mI-km2" id="y8C-a6-9s0"/>
                         <segue destination="ODo-bN-LRw" kind="presentation" identifier="LoginScreenSegue" modalPresentationStyle="fullScreen" id="G6e-Xm-F3g"/>
@@ -272,7 +272,7 @@
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

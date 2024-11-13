@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E65EBD32CC78E6A00972C99 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E65EBD22CC78E6A00972C99 /* logo.png */; };
+		2E8E02002CE4476900FEBA64 /* LocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8E01FF2CE4476900FEBA64 /* LocationInfoViewController.swift */; };
 		42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */; };
 		42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */; };
 		493358532CC7076900AD4797 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358522CC7076900AD4797 /* MapViewController.swift */; };
@@ -76,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		2E65EBD22CC78E6A00972C99 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		2E8E01FF2CE4476900FEBA64 /* LocationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoViewController.swift; sourceTree = "<group>"; };
 		42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserSetupViewController.swift; sourceTree = "<group>"; };
 		42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotChangePasswordViewController.swift; sourceTree = "<group>"; };
 		493358522CC7076900AD4797 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				D5AE62B32CE2853600ADE034 /* FriendsListTableViewCell.swift */,
 				42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */,
 				D57D7B4B2CDA892B00963080 /* LoginViewController.swift */,
+				2E8E01FF2CE4476900FEBA64 /* LocationInfoViewController.swift */,
 				D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */,
 				493358522CC7076900AD4797 /* MapViewController.swift */,
 				D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */,
@@ -339,6 +342,7 @@
 			files = (
 				42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */,
 				49923EDF2CB7A1C700D2CBA2 /* ViewController.swift in Sources */,
+				2E8E02002CE4476900FEBA64 /* LocationInfoViewController.swift in Sources */,
 				D5BF14512CC07C8A00A0604C /* ThirdRoundTowerViewController.swift in Sources */,
 				D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */,
 				D5AE62B22CE1DF4B00ADE034 /* FriendsListViewController.swift in Sources */,
