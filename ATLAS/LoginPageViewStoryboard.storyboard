@@ -41,7 +41,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Login"/>
                                 <connections>
                                     <action selector="loginPressed:" destination="8vY-bY-1Xa" eventType="touchUpInside" id="O64-Ai-FQp"/>
-                                    <segue destination="f7z-Lm-rRS" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" id="g7n-Sw-21y"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hnI-zw-XqT">
@@ -114,6 +113,7 @@
                         <outlet property="passwordTextField" destination="hnI-zw-XqT" id="UBI-Bu-XXe"/>
                         <outlet property="statusLabel" destination="gMc-5K-Bbk" id="7tE-3x-h1S"/>
                         <outlet property="usernameTextField" destination="oR2-jb-0jV" id="poP-nr-rmP"/>
+                        <segue destination="f7z-Lm-rRS" kind="presentation" identifier="LoginSegue" modalPresentationStyle="fullScreen" id="m7I-Jj-QIx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bwH-0M-npJ" sceneMemberID="firstResponder"/>

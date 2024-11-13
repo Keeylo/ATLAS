@@ -15,8 +15,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var newAccountButton: UIButton!
     @IBOutlet weak var statusLabel: UILabel!
     
-    var shouldLogin = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,20 +44,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         button.layer.masksToBounds = true  // Ensures content inside button is clipped to the corner radius
     }
     
-    @IBAction func loginPressed(_ sender: Any) {
+    @IBAction func loginPressed(_ sender: UIButton) {
+        sender.isEnabled = false
+        
         let username = usernameTextField.text
         let password = passwordTextField.text
         
         Auth.auth().signIn(withEmail: username!, password: password!) {
             (authResult, error) in
             if let error = error as NSError? {
-                self.shouldLogin = false
                 self.statusLabel.text = "\(error.localizedDescription)"
             } else {
                 self.statusLabel.text = ""
-                self.shouldLogin = true
+                
+                self.performSegue(withIdentifier: "LoginSegue", sender: nil)
             }
+            
         }
+        
+        sender.isEnabled = true
     }
     
     @IBAction func forgetPasswordPressed(_ sender: Any) {
@@ -69,15 +72,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // checks if segue can be performed
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        
-        if identifier == "LoginSegue" {
-            print("in segue")
-            return shouldLogin
-        }
-        
-        return true
-    }
+//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+//        
+//        if identifier == "LoginSegue" {
+//            return shouldLogin
+//        }
+//        
+//        return true
+//    }
     
     // Called when 'return' key pressed
     func textFieldShouldReturn(_ textField:UITextField) -> Bool {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bmR-2d-xPo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bmR-2d-xPo">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -67,7 +67,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-qg-Jth">
-                                <rect key="frame" x="146.66666666666666" y="668" width="100" height="50"/>
+                                <rect key="frame" x="146.66666666666666" y="618" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="OVP-uB-YTH"/>
                                     <constraint firstAttribute="height" constant="50" id="pTa-2c-Grm"/>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvx-eT-SC5">
-                                <rect key="frame" x="21.666666666666671" y="668" width="100" height="50"/>
+                                <rect key="frame" x="21.666666666666671" y="618" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2Wf-1x-uLe"/>
                                     <constraint firstAttribute="width" constant="100" id="Tpu-qc-Kyg"/>
@@ -97,7 +97,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ur2-HX-3Wv">
-                                <rect key="frame" x="271.66666666666669" y="668" width="100" height="50"/>
+                                <rect key="frame" x="271.66666666666669" y="618" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Flh-pc-4uy"/>
                                     <constraint firstAttribute="height" constant="50" id="y3S-Zv-QCB"/>
@@ -122,16 +122,32 @@
                                     <action selector="dismissPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="PL0-U4-y3E"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22j-Ir-EKA">
+                                <rect key="frame" x="146.66666666666666" y="693" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="p1Q-UD-tR6"/>
+                                    <constraint firstAttribute="height" constant="50" id="sn9-gA-jzK"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Friends List">
+                                    <color key="baseBackgroundColor" red="0.85326849490000001" green="0.35849399230000001" blue="0.1541027146" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="hva-FO-0gU" kind="presentation" identifier="FriendsListSegue" modalPresentationStyle="fullScreen" id="UJE-4k-FF6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="STa-dw-ZY4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="TSj-Gs-6IZ" secondAttribute="bottom" id="858-Kz-Qt5"/>
-                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="100" id="AfG-id-iqI"/>
-                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="ur2-HX-3Wv" secondAttribute="bottom" constant="100" id="BIq-NV-QoT"/>
+                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="150" id="AfG-id-iqI"/>
+                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="ur2-HX-3Wv" secondAttribute="bottom" constant="150" id="BIq-NV-QoT"/>
                             <constraint firstItem="YrB-qg-Jth" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="LVt-1V-QC8"/>
-                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="wvx-eT-SC5" secondAttribute="bottom" constant="100" id="TM1-60-gbA"/>
+                            <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="wvx-eT-SC5" secondAttribute="bottom" constant="150" id="TM1-60-gbA"/>
                             <constraint firstItem="ur2-HX-3Wv" firstAttribute="leading" secondItem="YrB-qg-Jth" secondAttribute="trailing" constant="25" id="Tm7-8a-nEu"/>
+                            <constraint firstItem="22j-Ir-EKA" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="Xbd-JY-Xdj"/>
+                            <constraint firstItem="22j-Ir-EKA" firstAttribute="top" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="25" id="Yae-FS-tcs"/>
                             <constraint firstItem="TSj-Gs-6IZ" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="gOH-s4-1AX"/>
                             <constraint firstItem="YrB-qg-Jth" firstAttribute="leading" secondItem="wvx-eT-SC5" secondAttribute="trailing" constant="25" id="x2O-8f-hgq"/>
                         </constraints>
@@ -154,6 +170,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fO-HM-Qbi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1357" y="1118"/>
+        </scene>
+        <!--FriendsListStoryboard-->
+        <scene sceneID="yjz-uO-gOM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="FriendsListStoryboard" id="hva-FO-0gU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5li-hX-Bz7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-477" y="1060"/>
         </scene>
         <!--SettingsStoryboard-->
         <scene sceneID="7TS-iu-7Kh">
