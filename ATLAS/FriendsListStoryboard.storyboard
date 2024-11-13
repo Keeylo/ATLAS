@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vkr-nX-Sca">
-                                <rect key="frame" x="0.0" y="91" width="393" height="727"/>
+                                <rect key="frame" x="0.0" y="104" width="393" height="749"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendCell" rowHeight="65" id="UZQ-0w-o45" customClass="FriendsListTableViewCell" customModule="ATLAS" customModuleProvider="target">
@@ -75,21 +75,31 @@
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Mj-WB-DEZ">
-                                <rect key="frame" x="0.0" y="47" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" systemColor="systemBackgroundColor"/>
+                                <color key="barTintColor" red="0.57292959502865015" green="0.67432030167926982" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
                                 <items>
-                                    <navigationItem title="Friends List" id="dac-Ib-9BW"/>
+                                    <navigationItem title="Friends List" id="dac-Ib-9BW">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" image="chevron.backward" catalog="system" id="4su-t8-lxU">
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <segue destination="m2n-yi-ijH" kind="presentation" modalPresentationStyle="fullScreen" id="OKF-Fi-daa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.60784316059999999" green="0.69411766529999996" blue="0.96862745289999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vkr-nX-Sca" secondAttribute="trailing" id="IzJ-3U-eNG"/>
-                            <constraint firstItem="vkr-nX-Sca" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="32" id="PM6-Ws-aNd"/>
+                            <constraint firstItem="vkr-nX-Sca" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="45" id="PM6-Ws-aNd"/>
                             <constraint firstItem="qg9-y0-Y4z" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="15" id="QbU-Iy-ZS0"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="vkr-nX-Sca" secondAttribute="bottom" id="p5a-Fv-599"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="vkr-nX-Sca" secondAttribute="bottom" constant="-35" id="p5a-Fv-599"/>
                             <constraint firstItem="vkr-nX-Sca" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="svd-6m-fYr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qg9-y0-Y4z" secondAttribute="trailing" constant="15" id="yAb-t3-I0G"/>
                         </constraints>
@@ -102,15 +112,24 @@
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="3.5211267605633805"/>
         </scene>
+        <!--MapStoryboard-->
+        <scene sceneID="CUo-Va-lv8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MapStoryboard" id="m2n-yi-ijH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kpn-pA-NPx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="980" y="-10"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill.badge.plus" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
