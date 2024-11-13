@@ -78,7 +78,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="userGuidePressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="yTL-9J-ggQ"/>
-                                    <segue destination="CJq-Ko-B4q" kind="presentation" modalPresentationStyle="fullScreen" id="tkj-PV-Gce"/>
+                                    <segue destination="CJq-Ko-B4q" kind="presentation" identifier="UserGuideSegue" modalPresentationStyle="fullScreen" id="tkj-PV-Gce"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvx-eT-SC5">
@@ -93,7 +93,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="unlockedPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="0vU-Gx-h3m"/>
-                                    <segue destination="Hpq-RO-5NR" kind="presentation" modalPresentationStyle="fullScreen" id="4kB-Lc-Z0M"/>
+                                    <segue destination="Hpq-RO-5NR" kind="presentation" identifier="UnlockedAreasSegue" modalPresentationStyle="fullScreen" id="4kB-Lc-Z0M"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ur2-HX-3Wv">
@@ -108,7 +108,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="settingsPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="YtS-2c-Ceb"/>
-                                    <segue destination="Qpr-Ay-BS9" kind="presentation" modalPresentationStyle="fullScreen" id="GKa-4I-OO2"/>
+                                    <segue destination="Qpr-Ay-BS9" kind="presentation" identifier="SettingsSegue" modalPresentationStyle="fullScreen" id="GKa-4I-OO2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSj-Gs-6IZ">

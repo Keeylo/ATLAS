@@ -27,6 +27,7 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Quit Mini Game?"/>
                                 <connections>
                                     <action selector="quitButtonPressed:" destination="PoF-Ug-IBf" eventType="touchUpInside" id="NrR-Za-0ul"/>
+                                    <segue destination="dQ2-1c-PLJ" kind="presentation" identifier="ShowLocationInfo" modalPresentationStyle="fullScreen" id="SJj-KV-PR8"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQR-aa-oQc">
@@ -138,6 +139,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aV-Qi-5b7" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-555" y="699"/>
+        </scene>
+        <!--LocationInfoStoryboard-->
+        <scene sceneID="sP6-Kc-ZF8">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="LocationInfoStoryboard" storyboardName="LocationInfoStoryboard" id="dQ2-1c-PLJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mc5-go-vn1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EjG-Pt-fTm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-355" y="1092"/>
         </scene>
         <!--First Round Tower View Controller-->
         <scene sceneID="19d-jL-woY">

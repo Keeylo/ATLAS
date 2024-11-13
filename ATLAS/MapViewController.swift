@@ -12,6 +12,7 @@ import GEOSwift
 
 class CustomMarker: MKPointAnnotation {
     var isVisible: Bool = false
+    var isUnlocked: Bool = false
 }
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -23,7 +24,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var polyOverlay: MKPolygon? // for updating UTs overlay
     let manager = CLLocationManager() // start and stop location operations
     var pathFormed = false
-    private var routeOverlay: MKOverlay?
+    var routeOverlay: MKOverlay?
+    var markerRefVisual: MKMarkerAnnotationView? // too many references to try and update the same map marker
+    var markerRef: CustomMarker? // I only wanted to update the .glyphImage and .isUnlocked so I can quickly determine if I need to change .glyphTimage based on the result of .isUnlocked, however they are different types, There has to be a better solution man
 
     var testPath: [CLLocation] = []
     let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
@@ -34,7 +37,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let annotation = CustomMarker()
             annotation.coordinate = point.coordinate
             annotation.title = point.title
-            annotation.isVisible = false
             return annotation
         }
     }
@@ -84,9 +86,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         atlasMap.pointOfInterestFilter = .excludingAll // removes all default POIs (PointsOfInterest)
         
         // Uncomment to see all Map Markers (our own POIs)
-        for annotation in annotations {
-            atlasMap.addAnnotation(annotation)
-        }
+//        for annotation in annotations {
+//            atlasMap.addAnnotation(annotation)
+//        }
         
         // make the entire fillIn only once
         polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count)
@@ -164,21 +166,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         // might be inefficient, could maybe use a search
-//        for marker in annotations {
-//            let markerPoint = MKMapPoint(marker.coordinate)
-//            if !marker.isVisible && point.distance(to: markerPoint) <= 20  { // 20 meters
-//                atlasMap.addAnnotation(marker)
-//                marker.isVisible = true
-//                print("we added another marker")
-//            }
-//        }
+        for marker in annotations {
+            let markerPoint = MKMapPoint(marker.coordinate)
+            if !marker.isVisible && point.distance(to: markerPoint) <= 20  { // 20 meters
+                atlasMap.addAnnotation(marker)
+                marker.isVisible = true
+                print("we added another marker")
+            }
+        }
     }
     
     
     // In the future I want this to look more unique, custom alert with design
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 //        , marker.isVisible
-        guard let marker = view.annotation as? CustomMarker else { return }
+        guard let markerView = view as? MKMarkerAnnotationView, let marker = view.annotation as? CustomMarker, marker.isVisible else { return }
+        markerRefVisual = markerView
         
         let alert = UIAlertController(
             title: "Unknown Location Found!",
@@ -392,14 +395,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let identifier = "CustomMarker"
 
         // Ensure we're dealing with MKPointAnnotation
-        guard let pointAnnotation = annotation as? MKPointAnnotation else { return nil }
-
+        guard let pointAnnotation = annotation as? CustomMarker else { return nil }
+        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
         if annotationView == nil {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
             
         }
+        
         annotationView?.glyphImage = UIImage(systemName: "lock.fill")
 
         // Set the marker color dynamically based on the annotation
@@ -424,6 +428,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         UIView.animate(withDuration: 0.3, animations: {
             popUpMenu!.view.frame.origin.y = self.view.frame.height - menuHeight
         })
+    }
+    
+    // Unwind back to this instance of the map
+    @IBAction func unwindToMapViewController(segue: UIStoryboardSegue) {
+        markerRefVisual?.glyphImage = nil
     }
 }
 
