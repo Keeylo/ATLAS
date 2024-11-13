@@ -27,7 +27,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Quit Mini Game?"/>
                                 <connections>
                                     <action selector="quitButtonPressed:" destination="PoF-Ug-IBf" eventType="touchUpInside" id="NrR-Za-0ul"/>
-                                    <segue destination="dQ2-1c-PLJ" kind="presentation" identifier="ShowLocationInfo" modalPresentationStyle="fullScreen" id="SJj-KV-PR8"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQR-aa-oQc">
@@ -134,6 +133,7 @@
                         <outlet property="pausePlayButton" destination="fMH-jm-Omf" id="38f-KN-cAD"/>
                         <outlet property="quitButton" destination="X0c-0h-Jn1" id="lqW-Wl-Vg8"/>
                         <outlet property="timerLabel" destination="3cU-no-h31" id="K5V-1T-Pwd"/>
+                        <segue destination="dQ2-1c-PLJ" kind="presentation" identifier="ShowLocationInfo" modalPresentationStyle="fullScreen" id="nuI-gk-saP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aV-Qi-5b7" sceneMemberID="firstResponder"/>

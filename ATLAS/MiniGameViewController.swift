@@ -138,7 +138,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-            if self.wonGame {
+            if self.wonGame == true {
                 self.performSegue(withIdentifier: "ShowLocationInfo", sender: self)
             } else {
                 self.dismiss(animated: true)
