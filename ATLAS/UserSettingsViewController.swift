@@ -28,188 +28,235 @@ class UserSettingsViewController: UIViewController {
         if let user = Auth.auth().currentUser {
             emailLabel.text = user.email
             usernameLabel.text = user.displayName
+            
+//            print(user.displayName)
         } else {
-            print("Error: No current user.")
+            print("...00" )
         }
         
-        // Display dummy password (hidden for security)
+        
+        
         passwordLabel.text = String(repeating: "•", count: 10)
+        
+        
     }
     
-    // Log Out functionality
-    @IBAction func logOutPressed(_ sender: Any) {
-        let controller = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
-        
-        controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-            self.signOut()
-        }))
-        
-        present(controller, animated: true)
-    }
-
-    func signOut() {
-        do {
-            try Auth.auth().signOut()
-            performSegue(withIdentifier: "LoginScreenSegue", sender: self)
-        } catch {
-            let errorAlert = UIAlertController(title: "Error", message: "Sign out failed. Try again.", preferredStyle: .alert)
-            errorAlert.addAction(UIAlertAction(title: "Okay", style: .default))
-            present(errorAlert, animated: true)
-        }
+    // adds shadow to a textfield
+    func addBottomShadow(to textField: UITextField) {
+        textField.layer.shadowColor = UIColor.black.cgColor
+        textField.layer.shadowOpacity = 0.3
+        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
+        textField.layer.shadowRadius = 2
+        textField.layer.masksToBounds = false
     }
     
-    // Delete Account functionality
+    // shows alert that asks users if they are sure they want
+    // to delete their account. If they select yes, account and
+    // its data is deleted and a segue is done to the login screen
     @IBAction func deleteAccountPressed(_ sender: Any) {
         let controller = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account? All progress will be lost.", preferredStyle: .alert)
         
         controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        controller.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { _ in
-            self.deleteAccount()
-        }))
+        controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: deleteAccount(alert:)))
         
         present(controller, animated: true)
     }
-
-    func deleteAccount() {
-        Auth.auth().currentUser?.delete { error in
+    
+    // deletes the users account from database and segues back to
+    // the login screen
+    func deleteAccount(alert: UIAlertAction) {
+        let user = Auth.auth().currentUser
+    
+        user!.delete { error in
             if let error = error {
                 print("Error deleting user: \(error.localizedDescription)")
-                let errorAlert = UIAlertController(title: "Error", message: "Account deletion failed. Try again.", preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Okay", style: .default))
-                self.present(errorAlert, animated: true)
             } else {
                 print("User deleted")
-                self.performSegue(withIdentifier: "LoginScreenSegue", sender: self)
             }
         }
+    
+        performSegue(withIdentifier: "LoginScreenSegue", sender: self) // add segue in storyboard
     }
     
-    // Change Username functionality
+    // alert asks user if they want to sign out. If yes, they are 
+    // taken to the login screen
+    @IBAction func logOutPressed(_ sender: Any) {
+        let controller = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
+        
+        controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: signOut(alert:)))
+        
+        present(controller, animated: true)
+
+    }
+    
+    
+    // if sign out fails, alert is shown that prompts the user to try again.
+    // else if sign out is successful, then user is taken to login screen
+    func signOut(alert: UIAlertAction) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            let controller = UIAlertController(title: "Error", message: "Account deletion failed. Try again.", preferredStyle: .alert)
+    
+            controller.addAction(UIAlertAction(title: "Okay", style: .cancel))
+        }
+    
+        performSegue(withIdentifier: "LoginScreenSegue", sender: self) // add segue in storyboard
+    }
+    
+    @IBAction func changePasswordPressed(_ sender: Any) {
+        
+    }
+    
     @IBAction func changeUsernamePressed(_ sender: Any) {
         let controller = UIAlertController(
             title: "Change Username",
             message: "Enter your new username.",
             preferredStyle: .alert)
         
-        controller.addTextField { textField in
-            textField.placeholder = "New Username"
+        controller.addTextField() {
+            (textField) in textField.placeholder = "New Username"
         }
         
         controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        controller.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            if let enteredText = controller.textFields?.first?.text, !enteredText.isEmpty {
-                self.changeUsername(newUsername: enteredText)
-            }
-        }))
         
-        present(controller, animated: true)
+        controller.addAction(UIAlertAction(
+            title: "OK",
+            style: .default) {
+                (action) in let enteredText = controller.textFields![0].text
+                self.changeUsername(newUsername: enteredText!)
+                print(enteredText!)
+            } )
+        
+//        let okAction = UIAlertAction(
+//            title: "OK",
+//            style: .default) {
+//            (action) in
+//            
+//            if let inputText = controller.textFields?.first?.text, self.checkEmail(email:inputText) {
+//                self.changeUsername(newUsername: inputText)
+//            }
+//            
+//        }
+//        
+//        okAction.isEnabled = false
+//        
+//        controller.textFields?.first?.addTarget(self, action: #selector(self.textFieldChanged(_:)), for: .editingChanged)
+//        
+//        controller.addAction(okAction)
+        
+        present(controller,animated:true)
     }
-
+    
+//    @objc func textFieldChanged(_ textField: UITextField) {
+//        if let alert = presentedViewController as? UIAlertController,
+//           let okAction = alert.actions.first(where: { $0.title == "OK" }) {
+//            okAction.isEnabled = checkEmail(email: textField.text ?? "")
+//        }
+//    }
+    
+//    func checkEmail(email: String) -> Bool {
+//        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+//            
+//        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+//        
+//        return emailTest.evaluate(with: email)
+//    }
+    
+    @IBAction func changeProfilePicture(_ sender: Any) {
+    }
+    
+//    func changePassword(currentPassword: String, newPassword: String) {
+//        
+//        let db = Firestore.firestore()
+//        
+//        let userRef = db.collection("users").document(currentPassword)
+//        
+//        userRef.updateData(["password": newPassword]) { error in
+//            if let error = error {
+//                print("Error updating password: \(error.localizedDescription)")
+//            } else {
+//                print("Password updated")
+//            }
+//        }
+//    }
+    
     func changeUsername(newUsername: String) {
         let db = Firestore.firestore()
         guard let user = Auth.auth().currentUser else {
-            print("Error: No current user.")
+            print("current user error")
             return
         }
         
-        // Check if the username is already taken
-        db.collection("users").whereField("username", isEqualTo: newUsername).getDocuments { snapshot, error in
+        db.collection("users").whereField("username", isEqualTo: newUsername).getDocuments { (snapshot, error) in
             if let error = error {
                 print("Error checking username availability: \(error.localizedDescription)")
                 return
             }
             
             if let snapshot = snapshot, !snapshot.isEmpty {
-                let errorAlert = UIAlertController(
+                // show alert that username is already taken
+                let controller = UIAlertController(
                     title: "Error",
                     message: "That username is already taken. Please choose a different username.",
                     preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(errorAlert, animated: true)
-            } else {
-                // Update username in Firebase Auth and Firestore
-                let changeRequest = user.createProfileChangeRequest()
-                changeRequest.displayName = newUsername
-                changeRequest.commitChanges { error in
+                
+                controller.addAction(UIAlertAction(title: "OK", style: .cancel))
+                
+                self.present(controller,animated:true)
+                
+                return
+            }
+            
+            
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = newUsername
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("Error updating username: \(error.localizedDescription)")
+                    return
+                    // You can show an alert if you need
+                }
+                
+                print("Username updated successfully")
+                
+                let userRef = db.collection("users").document(user.uid)
+                userRef.updateData(["username": newUsername]) { error in
                     if let error = error {
                         print("Error updating username: \(error.localizedDescription)")
                     } else {
-                        print("Username updated successfully")
+                        print("Username updated")
+                        
+                        let user = Auth.auth().currentUser
+                        
+                        user?.reload(completion: { (error) in
+                                if let error = error {
+                                    print("Error reloading user profile: \(error.localizedDescription)")
+                                } else {
+                                    
+//                                    user?.updateEmail(to: newUsername) { error in
+//                                        if let error = error {
+//                                            print("Error updating email: \(error.localizedDescription)")
+//                                        } else {
+//                                            print("email officially changed")
+//                                        }
+//                                        
+//                                        
+//                                    
+//                                    }
+                                    
+                                    print("User profile reloaded, new displayName: \(Auth.auth().currentUser?.displayName ?? "")")
+                                }
+                            })
+                        
                         self.usernameLabel.text = newUsername
-                        db.collection("users").document(user.uid).updateData(["username": newUsername])
                     }
                 }
             }
+            
+            
         }
-    }
-
-    // Change Password functionality
-    @IBAction func changePasswordPressed(_ sender: Any) {
-        let controller = UIAlertController(
-                title: "Change Password",
-                message: "Enter your new password and confirm it.",
-                preferredStyle: .alert)
-            
-            // Add a text field for the new password
-            controller.addTextField { textField in
-                textField.placeholder = "New Password"
-                textField.isSecureTextEntry = true // Hide password input
-            }
-            
-            // Add a text field for confirming the new password
-            controller.addTextField { textField in
-                textField.placeholder = "Confirm New Password"
-                textField.isSecureTextEntry = true // Hide password input
-            }
-            
-            // Cancel action
-            controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            
-            // OK action to validate and update the password
-            controller.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                let newPassword = controller.textFields?[0].text
-                let confirmPassword = controller.textFields?[1].text
-                
-                if newPassword == confirmPassword, let newPassword = newPassword, !newPassword.isEmpty {
-                    self.updatePassword(newPassword: newPassword)
-                } else {
-                    // Show error if passwords don’t match or if fields are empty
-                    let errorAlert = UIAlertController(title: "Error", message: "Passwords do not match or are empty. Please try again.", preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(errorAlert, animated: true)
-                }
-            }))
-            
-            present(controller, animated: true)
-    }
-    
-    func updatePassword(newPassword: String) {
-        // Ensure there’s a logged-in user
-        guard let user = Auth.auth().currentUser else {
-            print("Error: No current user.")
-            return
-        }
-        
-        // Update the password in Firebase
-        user.updatePassword(to: newPassword) { error in
-            if let error = error {
-                print("Error updating password: \(error.localizedDescription)")
-                let errorAlert = UIAlertController(title: "Error", message: "Password update failed. Please try again.", preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(errorAlert, animated: true)
-            } else {
-                print("Password updated successfully")
-                let successAlert = UIAlertController(title: "Success", message: "Your password has been updated.", preferredStyle: .alert)
-                successAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(successAlert, animated: true)
-            }
-        }
-    }
-    
-    // Change Profile Picture functionality (currently empty)
-    @IBAction func changeProfilePicture(_ sender: Any) {
-        // Add code to handle profile picture change if needed
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -217,4 +264,5 @@ class UserSettingsViewController: UIViewController {
             nextVC.prevScreen = "Settings"
         }
     }
+    
 }
