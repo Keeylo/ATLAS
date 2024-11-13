@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PoF-Ug-IBf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PoF-Ug-IBf">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -27,7 +27,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Quit Mini Game?"/>
                                 <connections>
                                     <action selector="quitButtonPressed:" destination="PoF-Ug-IBf" eventType="touchUpInside" id="NrR-Za-0ul"/>
-                                    <segue destination="E9V-Zs-fVv" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="GGq-Vq-U4T"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQR-aa-oQc">
@@ -134,11 +133,22 @@
                         <outlet property="pausePlayButton" destination="fMH-jm-Omf" id="38f-KN-cAD"/>
                         <outlet property="quitButton" destination="X0c-0h-Jn1" id="lqW-Wl-Vg8"/>
                         <outlet property="timerLabel" destination="3cU-no-h31" id="K5V-1T-Pwd"/>
+                        <segue destination="dQ2-1c-PLJ" kind="presentation" identifier="ShowLocationInfo" modalPresentationStyle="fullScreen" id="nuI-gk-saP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8aV-Qi-5b7" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-555" y="699"/>
+        </scene>
+        <!--LocationInfoStoryboard-->
+        <scene sceneID="sP6-Kc-ZF8">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="LocationInfoStoryboard" storyboardName="LocationInfoStoryboard" id="dQ2-1c-PLJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mc5-go-vn1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EjG-Pt-fTm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-355" y="1092"/>
         </scene>
         <!--First Round Tower View Controller-->
         <scene sceneID="19d-jL-woY">
@@ -264,14 +274,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uht-2a-N8p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1079" y="1382"/>
-        </scene>
-        <!--MapStoryboard-->
-        <scene sceneID="dgu-wn-Aw3">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MapStoryboard" id="E9V-Zs-fVv" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9vQ-Tu-eQX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-349" y="1158"/>
         </scene>
         <!--Game Instructions View Controller-->
         <scene sceneID="Ttc-XL-HlM">
@@ -26834,15 +26836,15 @@ GB2RABgdmQAYHZsAGB2dABgdnwAYHaEAGC9BABgvRgAYL1MAGC9WABgvYwAYL2gAGC9wABgvcwAYL3gA
 GC+AAAAAAAAABAEAAAAAAAAAaAAAAAAAAAAAAAAAAAAYL4M
 </mutableData>
         </image>
-        <image name="play.fill" catalog="system" width="117" height="128"/>
+        <image name="play.fill" catalog="system" width="120" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

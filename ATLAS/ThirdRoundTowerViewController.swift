@@ -40,6 +40,9 @@ class ThirdRoundTowerViewController: UIViewController {
         
         let otherVC2 = delegate as! TimerStops
         otherVC2.stopsTimer()
+        
+        let otherVC3 = delegate as! GameWon
+        otherVC3.didWinGame()
     }
     
     /*

@@ -9,6 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--MiniGameStoryboard-->
+        <scene sceneID="RE7-al-5It">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MiniGameStoryboard" storyboardName="MiniGameStoryboard" id="vrK-a8-MbW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="A34-1r-MaR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HjD-zF-YXT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1808" y="1160"/>
+        </scene>
         <!--Map View Controller-->
         <scene sceneID="kxb-MX-A4s">
             <objects>
@@ -41,6 +51,7 @@
                     <connections>
                         <outlet property="atlasMap" destination="aAe-7d-6UU" id="FYC-Ig-LYy"/>
                         <outlet property="menuButton" destination="Rh1-7f-xnW" id="isK-BG-Hlm"/>
+                        <segue destination="vrK-a8-MbW" kind="presentation" identifier="ShowMiniGame" modalPresentationStyle="fullScreen" id="7ZM-fO-ndy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dn0-ah-AWR" sceneMemberID="firstResponder"/>
@@ -67,7 +78,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="userGuidePressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="yTL-9J-ggQ"/>
-                                    <segue destination="CJq-Ko-B4q" kind="presentation" modalPresentationStyle="fullScreen" id="tkj-PV-Gce"/>
+                                    <segue destination="CJq-Ko-B4q" kind="presentation" identifier="UserGuideSegue" modalPresentationStyle="fullScreen" id="tkj-PV-Gce"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wvx-eT-SC5">
@@ -82,7 +93,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="unlockedPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="0vU-Gx-h3m"/>
-                                    <segue destination="Hpq-RO-5NR" kind="presentation" modalPresentationStyle="fullScreen" id="4kB-Lc-Z0M"/>
+                                    <segue destination="Hpq-RO-5NR" kind="presentation" identifier="UnlockedAreasSegue" modalPresentationStyle="fullScreen" id="4kB-Lc-Z0M"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ur2-HX-3Wv">
@@ -97,7 +108,7 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="settingsPressed:" destination="z3R-fg-Akn" eventType="touchUpInside" id="YtS-2c-Ceb"/>
-                                    <segue destination="Qpr-Ay-BS9" kind="presentation" modalPresentationStyle="fullScreen" id="GKa-4I-OO2"/>
+                                    <segue destination="Qpr-Ay-BS9" kind="presentation" identifier="SettingsSegue" modalPresentationStyle="fullScreen" id="GKa-4I-OO2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSj-Gs-6IZ">

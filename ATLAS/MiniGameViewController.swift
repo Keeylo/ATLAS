@@ -19,7 +19,12 @@ protocol TimerStops {
     func stopsTimer()
 }
 
-class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
+// protocol that changes the 'wonGame' variable
+protocol GameWon {
+    func didWinGame()
+}
+
+class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameWon {
     
     @IBOutlet weak var controllerView: UIView!
     
@@ -30,12 +35,12 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
     @IBOutlet weak var hintsButton: UIButton!
     @IBOutlet weak var outOfHintsLabel: UILabel!
     @IBOutlet weak var anotherHintButton: UIButton!
-    
     @IBOutlet weak var quitButton: UIButton!
     
     var currentChildViewController: UIViewController?
     var instructionsVC: UIViewController?
     var miniGameChildVC: UIViewController?
+    var wonGame = false
     
 //    var hints1: String = "hint 1" // need to prep b4 segue
 //    var hints2: String = "hint 2" // need to prep b4 segue
@@ -51,7 +56,6 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
     
     var gameLocation: String = "Tower" // need to prep b4 segue
     var gameStarted = false
-    
     var gameInstructions = "You will have 60 seconds to complete 3 rounds of finding the hidden UT Tower amongst similar objects. Press the play button to begin!" // need to prep b4 segue
     
     override func viewDidLoad() {
@@ -128,7 +132,20 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
     // if the quit button is pressed, then user is taken back
     // to the map screen
     @IBAction func quitButtonPressed(_ sender: Any) {
-        // need to add alert asking user if they're sure they'd like to quit
+        let title = wonGame ? "Congratulations!" : "You are attempting to leave this mini game"
+        let message = wonGame ? "Let's see what you found" : "Are you sure you want to quit now?"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            if self.wonGame == true {
+                self.performSegue(withIdentifier: "ShowLocationInfo", sender: self)
+            } else {
+                self.dismiss(animated: true)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     // pauses/plays game
@@ -271,6 +288,11 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops {
         pauseTimer()
     }
     
+    // The user is victorious
+    func didWinGame() {
+        wonGame = true
+        quitButton.setTitle("You Won!", for: .normal)
+    }
 
 }
 
