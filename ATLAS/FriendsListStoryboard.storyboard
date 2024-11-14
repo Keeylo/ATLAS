@@ -86,7 +86,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="Back" image="chevron.backward" catalog="system" id="4su-t8-lxU">
                                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
-                                                <segue destination="m2n-yi-ijH" kind="presentation" modalPresentationStyle="fullScreen" id="OKF-Fi-daa"/>
+                                                <action selector="backToMap:" destination="Y6W-OH-hqX" id="ia1-0k-XsS"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -111,14 +111,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139.69465648854961" y="3.5211267605633805"/>
-        </scene>
-        <!--HamburgerMenuStoryboard-->
-        <scene sceneID="CUo-Va-lv8">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HamburgerMenuStoryboard" id="m2n-yi-ijH" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kpn-pA-NPx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="980" y="-10"/>
         </scene>
     </scenes>
     <resources>

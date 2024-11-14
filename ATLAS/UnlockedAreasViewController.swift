@@ -197,6 +197,11 @@ class UnlockedAreasViewController: UIViewController {
         loadAreas()
     }
     
+    
+    @IBAction func backToMap(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     private func setupViews() {
         view.addSubview(collectionView)
         view.addSubview(upArrow)

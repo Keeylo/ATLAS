@@ -65,6 +65,11 @@ class FriendsListViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
 
+    
+    @IBAction func backToMap(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     @IBAction func addFriendPressed(_ sender: Any) {
         let controller = UIAlertController(
             title: "Add a Friend",
