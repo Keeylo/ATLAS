@@ -16,9 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Image 8" translatesAutoresizingMaskIntoConstraints="NO" id="fD7-ux-fKe">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image 8" translatesAutoresizingMaskIntoConstraints="NO" id="fD7-ux-fKe">
                                 <rect key="frame" x="-481" y="-196" width="1447" height="1138"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unlocked Areas" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWg-CF-VGp">
                                 <rect key="frame" x="67" y="67" width="262" height="58"/>
@@ -39,7 +38,7 @@
                                             <color key="baseForegroundColor" systemColor="secondarySystemBackgroundColor"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <segue destination="5Bs-vP-hm5" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="7l4-yG-6VY"/>
+                                            <action selector="backToMap:" destination="RT1-oF-tUp" eventType="touchUpInside" id="9D2-js-Wyq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -52,6 +51,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Plg-0s-FCZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fD7-ux-fKe" firstAttribute="top" secondItem="5v1-vk-Gex" secondAttribute="top" constant="-196" id="FD0-Oh-Hpw"/>
+                            <constraint firstAttribute="bottom" secondItem="fD7-ux-fKe" secondAttribute="bottom" constant="-90" id="VkV-EW-8xw"/>
+                            <constraint firstAttribute="trailing" secondItem="fD7-ux-fKe" secondAttribute="trailing" constant="-573" id="YlL-pQ-3uT"/>
+                            <constraint firstItem="fD7-ux-fKe" firstAttribute="leading" secondItem="5v1-vk-Gex" secondAttribute="leading" constant="-481" id="cuo-SL-qgC"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="sunnySideUp" destination="Rpe-im-XS3" id="tRD-GX-SH9"/>
@@ -60,14 +65,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pcm-bC-HBB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-582.44274809160299" y="-56.338028169014088"/>
-        </scene>
-        <!--HamburgerMenuStoryboard-->
-        <scene sceneID="bte-cU-g63">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HamburgerMenuStoryboard" id="5Bs-vP-hm5" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2mv-SK-nhu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-571" y="389"/>
         </scene>
     </scenes>
     <resources>

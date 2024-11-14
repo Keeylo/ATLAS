@@ -41,6 +41,11 @@ class UserSettingsViewController: UIViewController {
         
     }
     
+    
+    @IBAction func backToMap(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     // adds shadow to a textfield
     func addBottomShadow(to textField: UITextField) {
         textField.layer.shadowColor = UIColor.black.cgColor

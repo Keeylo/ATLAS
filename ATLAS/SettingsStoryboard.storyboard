@@ -109,7 +109,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="17" scale="medium" weight="regular"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="aT3-xX-4J9" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="4ZQ-Rp-ii6"/>
+                                    <action selector="backToMap:" destination="Htg-Qg-bz7" eventType="touchUpInside" id="25g-SC-cJe"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYP-mI-km2">
@@ -240,16 +240,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hvf-iO-8fu" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2667.93893129771" y="1430.9859154929579"/>
-        </scene>
-        <!--HamburgerMenuStoryboard-->
-        <scene sceneID="rvi-Y1-PmZ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HamburgerMenuStoryboard" id="aT3-xX-4J9" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="ozZ-a5-d4G"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PnK-R5-zRh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3476" y="1296"/>
         </scene>
         <!--ForgotChangePasswordStoryboard -->
         <scene sceneID="E0f-66-n0O">

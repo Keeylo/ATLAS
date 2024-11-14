@@ -112,6 +112,10 @@ class UserGuideViewController: UIViewController {
         mainImageView.image = images[sender.currentPage]
     }
     
+    @IBAction func backToMap(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     private func updateContent(for section: Section) {
         if let data = sectionData[section] {
             self.images = data.images
@@ -152,6 +156,8 @@ class UserGuideViewController: UIViewController {
         }
         mainImageView.image = images[pageControl.currentPage]
     }
+    
+    
     
     /*
     // MARK: - TODO

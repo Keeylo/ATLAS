@@ -34,10 +34,10 @@
             </objects>
             <point key="canvasLocation" x="-932" y="-56"/>
         </scene>
-        <!--HamburgerMenuStoryboard-->
+        <!--UnlockedStoryboard-->
         <scene sceneID="Jz6-ps-YOX">
             <objects>
-                <viewControllerPlaceholder storyboardName="HamburgerMenuStoryboard" id="5Ad-Im-REy" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="UnlockedStoryboard" id="5Ad-Im-REy" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ID3-zM-ab6"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o5n-fw-K1B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

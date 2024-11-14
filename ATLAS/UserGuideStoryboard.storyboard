@@ -145,7 +145,7 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="VLa-cd-Xbr" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="5z7-76-7hK"/>
+                                    <action selector="backToMap:" destination="Jmd-3E-UFb" eventType="touchUpInside" id="zbT-dN-gyz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -202,14 +202,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6f-gB-JkC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-347.32824427480915" y="-57.04225352112676"/>
-        </scene>
-        <!--HamburgerMenuStoryboard-->
-        <scene sceneID="N3j-op-qfM">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HamburgerMenuStoryboard" id="VLa-cd-Xbr" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Rf-cg-MsP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-359" y="396"/>
         </scene>
     </scenes>
     <resources>
