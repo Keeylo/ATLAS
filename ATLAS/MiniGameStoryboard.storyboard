@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PoF-Ug-IBf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PoF-Ug-IBf">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -210,9 +210,12 @@
                                     <constraint firstAttribute="width" constant="361" id="10O-jR-CvL"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rry-Vg-8Yd">
-                                <rect key="frame" x="218" y="310" width="40" height="112"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rry-Vg-8Yd">
+                                <rect key="frame" x="268" y="521" width="40" height="112"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="FVn-Tw-7mW"/>
+                                    <constraint firstAttribute="height" constant="112" id="YKQ-hf-OAW"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Image 3" title=""/>
                                 <connections>
@@ -224,6 +227,8 @@
                         <color key="backgroundColor" red="1" green="0.94562772819999996" blue="0.71469996199999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="Xah-z4-wPF" firstAttribute="centerY" secondItem="TZM-10-mq5" secondAttribute="centerY" id="VXe-yL-epD"/>
+                            <constraint firstItem="rry-Vg-8Yd" firstAttribute="leading" secondItem="Xah-z4-wPF" secondAttribute="trailing" constant="-109" id="Wfe-ek-9J8"/>
+                            <constraint firstItem="rry-Vg-8Yd" firstAttribute="top" secondItem="Xah-z4-wPF" secondAttribute="bottom" constant="-112" id="ZpW-32-gcR"/>
                             <constraint firstItem="Xah-z4-wPF" firstAttribute="centerX" secondItem="TZM-10-mq5" secondAttribute="centerX" id="nAz-jZ-NbN"/>
                         </constraints>
                     </view>
@@ -26836,7 +26841,7 @@ GB2RABgdmQAYHZsAGB2dABgdnwAYHaEAGC9BABgvRgAYL1MAGC9WABgvYwAYL2gAGC9wABgvcwAYL3gA
 GC+AAAAAAAAABAEAAAAAAAAAaAAAAAAAAAAAAAAAAAAYL4M
 </mutableData>
         </image>
-        <image name="play.fill" catalog="system" width="120" height="128"/>
+        <image name="play.fill" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

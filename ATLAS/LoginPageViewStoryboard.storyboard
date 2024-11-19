@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8vY-bY-1Xa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8vY-bY-1Xa">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -75,35 +75,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2uY-9n-esS">
-                                <rect key="frame" x="13" y="563" width="160" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Forgot Password?"/>
-                                <connections>
-                                    <action selector="forgetPasswordPressed:" destination="8vY-bY-1Xa" eventType="touchUpInside" id="C8t-NA-k1J"/>
-                                    <segue destination="MWs-xw-HpQ" kind="presentation" identifier="ChangePasswordSegue" modalPresentationStyle="fullScreen" id="2Yh-bT-QmH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YyJ-w1-uPH"/>
                         <color key="backgroundColor" red="0.90980386729999996" green="0.89803922179999995" blue="0.89803922179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="oR2-jb-0jV" firstAttribute="centerX" secondItem="9tM-hJ-Pkq" secondAttribute="centerX" id="27i-V5-2T9"/>
                             <constraint firstItem="fUx-K7-Go5" firstAttribute="centerX" secondItem="9tM-hJ-Pkq" secondAttribute="centerX" id="AVM-Ie-yb3"/>
+                            <constraint firstItem="i6x-fn-Jgr" firstAttribute="top" secondItem="fUx-K7-Go5" secondAttribute="bottom" constant="70" id="BrM-BO-uZ5"/>
                             <constraint firstItem="oR2-jb-0jV" firstAttribute="top" secondItem="YyJ-w1-uPH" secondAttribute="top" constant="229" id="Dfw-3l-Zcj"/>
                             <constraint firstItem="i6x-fn-Jgr" firstAttribute="leading" secondItem="YyJ-w1-uPH" secondAttribute="leading" constant="21.666666666666657" id="Fvn-Oj-eEa"/>
                             <constraint firstItem="hnI-zw-XqT" firstAttribute="centerX" secondItem="9tM-hJ-Pkq" secondAttribute="centerX" id="Gq5-VJ-fCP"/>
-                            <constraint firstItem="i6x-fn-Jgr" firstAttribute="top" secondItem="2uY-9n-esS" secondAttribute="bottom" constant="30" id="K7W-xV-Yd1"/>
                             <constraint firstItem="49K-yT-dw2" firstAttribute="leading" secondItem="YyJ-w1-uPH" secondAttribute="leading" constant="76.666666666666686" id="NhP-sK-8s6"/>
                             <constraint firstItem="49K-yT-dw2" firstAttribute="top" secondItem="YyJ-w1-uPH" secondAttribute="top" constant="48" id="SVZ-qM-j1V"/>
                             <constraint firstItem="fUx-K7-Go5" firstAttribute="top" secondItem="hnI-zw-XqT" secondAttribute="bottom" constant="100" id="WT8-kg-Ujx"/>
                             <constraint firstItem="49K-yT-dw2" firstAttribute="centerX" secondItem="9tM-hJ-Pkq" secondAttribute="centerX" id="duh-vZ-h5U"/>
                             <constraint firstItem="gMc-5K-Bbk" firstAttribute="centerX" secondItem="9tM-hJ-Pkq" secondAttribute="centerX" id="i2R-Hr-8Ff"/>
-                            <constraint firstItem="2uY-9n-esS" firstAttribute="leading" secondItem="YyJ-w1-uPH" secondAttribute="leading" constant="13" id="ke8-ns-e6V"/>
                             <constraint firstItem="i6x-fn-Jgr" firstAttribute="centerX" secondItem="9tM-hJ-Pkq" secondAttribute="centerX" id="leN-kw-m76"/>
                             <constraint firstItem="hnI-zw-XqT" firstAttribute="top" secondItem="oR2-jb-0jV" secondAttribute="bottom" constant="50" id="mew-ya-O2O"/>
                             <constraint firstItem="gMc-5K-Bbk" firstAttribute="top" secondItem="i6x-fn-Jgr" secondAttribute="bottom" constant="63" id="rIe-oc-iXk"/>
-                            <constraint firstItem="2uY-9n-esS" firstAttribute="top" secondItem="fUx-K7-Go5" secondAttribute="bottom" constant="5" id="s61-Ec-UOj"/>
                             <constraint firstItem="49K-yT-dw2" firstAttribute="centerX" secondItem="9tM-hJ-Pkq" secondAttribute="centerX" id="uc2-KK-L0n"/>
                         </constraints>
                     </view>
@@ -127,16 +116,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSu-BL-ZCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1930" y="-87"/>
-        </scene>
-        <!--ForgotChangePasswordStoryboard -->
-        <scene sceneID="oTW-xI-mvX">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ForgotChangePasswordStoryboard " id="MWs-xw-HpQ" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="VSs-Fr-x7r"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w18-1F-8xu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1987" y="48"/>
         </scene>
         <!--NewUserSetupStoryboard-->
         <scene sceneID="NOk-ff-4ur">

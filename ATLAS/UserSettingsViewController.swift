@@ -8,8 +8,13 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
-class UserSettingsViewController: UIViewController {
+protocol ContainerHidder {
+    func hideContainerView(profilePic: String)
+}
+
+class UserSettingsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContainerHidder {
 
     @IBOutlet weak var logOutButton: UIButton!
     @IBOutlet weak var deleteAccountButton: UIButton!
@@ -18,10 +23,33 @@ class UserSettingsViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     
+    @IBOutlet weak var profilePicture: UIImageView!
+    
+    @IBOutlet weak var profilePicView: UIView!
+    
+    
+    let picker = UIImagePickerController()
+    
     var newUsername = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profilePicView.layer.cornerRadius = 10
+        profilePicView.layer.borderWidth = 2
+        profilePicView.layer.borderColor = UIColor.darkGray.cgColor
+        profilePicView.layer.shadowColor = UIColor.black.cgColor
+        profilePicView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        profilePicView.layer.shadowRadius = 4
+        profilePicView.layer.shadowOpacity = 0.5
+        profilePicView.clipsToBounds = true
+        profilePicView.isHidden = true
+        
+        if let profilePicVC = children.first as? PickProfilePictureViewController {
+            profilePicVC.delegate = self
+        }
+        
+        picker.delegate = self
 
         newUsername = ""
         
@@ -29,15 +57,67 @@ class UserSettingsViewController: UIViewController {
             emailLabel.text = user.email
             usernameLabel.text = user.displayName
             
-//            print(user.displayName)
+            var userID = user.uid
+            
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(userID)
+            
+            // Get the user's profile image URL from Firestore
+            userRef.getDocument { (document, error) in
+                if let error = error {
+                    print("Error getting user document: \(error.localizedDescription)")
+                    return
+                }
+                
+                let data = document!.data()
+                print("User data: \(data ?? [:])")
+                
+                if let document = document, document.exists {
+                    // Get the image URL from the document
+                    if let profilePic = document.data()?["profilePic"] as? String {
+                        
+//                        let storageRef = Storage.storage().reference(forURL: profileImageUrl)
+//                        
+//                        // Download the image
+//                        storageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+//                            if let error = error {
+//                                print("Error downloading image: \(error.localizedDescription)")
+//                                return
+//                            }
+//                            
+//                            if let data = data {
+//                                // Set the image in the UIImageView
+//                                if let image = UIImage(data: data) {
+//                                    self.profilePicture.image = image
+//                                }
+//                            }
+//                        }
+                        if (profilePic == "person.circle.fill") {
+                            self.profilePicture.image = UIImage(systemName: "person.circle.fill")
+                        } else {
+                            self.profilePicture.image = UIImage(named: profilePic)
+                        }
+                        
+                    } else {
+                        print("No profile image URL found")
+                    }
+                } else {
+                    print("User document does not exist - 0")
+                }
+            }
+            
         } else {
-            print("...00" )
+            print("Current user could not be authenticated")
         }
         
         
         
         passwordLabel.text = String(repeating: "•", count: 10)
         
+        profilePicture.frame = CGRect(x: 105, y: 134, width: 170, height: 170)
+        
+        profilePicture.layer.cornerRadius = profilePicture.frame.size.width / 2
+        profilePicture.clipsToBounds = true
         
     }
     
@@ -154,39 +234,83 @@ class UserSettingsViewController: UIViewController {
         present(controller,animated:true)
     }
     
-//    @objc func textFieldChanged(_ textField: UITextField) {
-//        if let alert = presentedViewController as? UIAlertController,
-//           let okAction = alert.actions.first(where: { $0.title == "OK" }) {
-//            okAction.isEnabled = checkEmail(email: textField.text ?? "")
-//        }
-//    }
-    
-//    func checkEmail(email: String) -> Bool {
-//        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-//            
-//        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-//        
-//        return emailTest.evaluate(with: email)
-//    }
-    
+    // allows user to change their profile picture
     @IBAction func changeProfilePicture(_ sender: Any) {
+        
+//        picker.sourceType = .photoLibrary
+//        picker.allowsEditing = false
+//        present(picker, animated: true)
+        
+        profilePicView.isHidden = false
     }
     
-//    func changePassword(currentPassword: String, newPassword: String) {
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 //        
-//        let db = Firestore.firestore()
+//        let chosenImage = info[.originalImage] as! UIImage
 //        
-//        let userRef = db.collection("users").document(currentPassword)
+//        profilePicture.contentMode = .scaleAspectFill
 //        
-//        userRef.updateData(["password": newPassword]) { error in
-//            if let error = error {
-//                print("Error updating password: \(error.localizedDescription)")
-//            } else {
-//                print("Password updated")
+//        profilePicture.image = chosenImage
+//        
+//        dismiss(animated: true)
+//        
+//        storeImage(image: chosenImage)
+//    }
+//    
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        print("User cancelled selecting profile picture")
+//        dismiss(animated: true)
+//    }
+//    
+//    func storeImage(image: UIImage) {
+//        let imageName = UUID().uuidString
+//        let storageRef = Storage.storage().reference().child("/profile_images").child("\(imageName).jpg")
+//        
+//        // convert image
+//        guard let imageData = image.jpegData(compressionQuality: 0.75) else {
+//                print("Error converting image to data")
+//                return
 //            }
-//        }
+//        
+//        storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+//                if let error = error {
+//                    print("Error uploading image: \(error.localizedDescription)")
+//                    return
+//                }
+//                
+//                // Once the upload is complete, get the download URL
+//                storageRef.downloadURL { (url, error) in
+//                    if let error = error {
+//                        print("Error getting download URL: \(error.localizedDescription)")
+//                        return
+//                    }
+//                    
+//                    // If successful, save the image URL in Firestore
+//                    if let downloadURL = url {
+//                        guard let userID = Auth.auth().currentUser?.uid else {
+//                            print("User is not logged in.")
+//                            return
+//                        }
+//                        
+//                        let db = Firestore.firestore()
+//                        let userRef = db.collection("users").document(userID)
+//                        
+//                        // Update the user's profile with the new image URL
+//                        userRef.updateData([
+//                            "profilePicURL": downloadURL.absoluteString
+//                        ]) { error in
+//                            if let error = error {
+//                                print("Error saving URL to Firestore: \(error.localizedDescription)")
+//                            } else {
+//                                print("Image URL saved successfully to Firestore.")
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 //    }
     
+    // changes the username visually and in firebase
     func changeUsername(newUsername: String) {
         let db = Firestore.firestore()
         guard let user = Auth.auth().currentUser else {
@@ -268,6 +392,11 @@ class UserSettingsViewController: UIViewController {
         if segue.identifier == "ToChangePasswordSegue", let nextVC = segue.destination as? ForgotChangePasswordViewController {
             nextVC.prevScreen = "Settings"
         }
+    }
+    
+    func hideContainerView(profilePic: String) {
+        profilePicture.image = UIImage(named: profilePic)
+        profilePicView.isHidden = true
     }
     
 }

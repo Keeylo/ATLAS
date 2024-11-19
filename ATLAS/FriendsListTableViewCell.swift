@@ -13,10 +13,14 @@ class FriendsListTableViewCell: UITableViewCell {
     @IBOutlet weak var friendsUsernameLabel: UILabel!
     
     // set the image and label data
-    func configureCell(withText text: String, image: UIImage?) {
+    func configureCell(withText text: String, image: String) {
         friendsUsernameLabel.text = text
-        profilePicture.image = UIImage(systemName: "person.circle.fill")
-        profilePicture.tintColor = .darkGray
+        if (image == "person.circle.fill") {
+            profilePicture.image = UIImage(systemName: "person.circle.fill")
+            profilePicture.tintColor = .darkGray
+        } else {
+            profilePicture.image = UIImage(named: image)
+        }
     }
     
 //    override func awakeFromNib() {
