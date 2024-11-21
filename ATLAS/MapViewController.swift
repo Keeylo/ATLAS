@@ -32,6 +32,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
     let utLoc = CLLocation(latitude: 30.286236060447308, longitude: -97.739378471749)
     
+    private var lastLocation: CLLocation? // for simulation purposes, can be deleted later
+    
     var annotations: [CustomMarker] {
         return pointsOfInterest.map { point in
             let annotation = CustomMarker()
@@ -147,6 +149,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let polyRend = MKPolygonRenderer(polygon: MKutLocRegion!)
         let point = MKMapPoint(location.coordinate)
         let polyViewPoint = polyRend.point(for: point)
+        
+        // ************** For Demo purposes only can be deleted later **************
+        if let lastLocation = lastLocation {
+            let distance = lastLocation.distance(from: location)
+            if distance > 500 { // Threshold for detecting a major change (500 meters)
+                print("Significant location change detected. Resetting route.")
+                atlasMap.removeOverlay(routeOverlay ?? MKPolyline())
+                routeOverlay = nil
+                pathFormed = false // Allow new route generation
+            }
+        }
+        lastLocation = location
+        // *************************************************************************
         
         if !polyRend.path.contains(polyViewPoint) {
             if !pathFormed {
@@ -370,19 +385,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let directions = MKDirections(request: directionReq)
         directions.calculate { (response, error) in
-            guard let response = response else {
-                if let error = error {
-                    print("Issue with making the directions: \(error.localizedDescription)")
+            if let error = error {
+                print("Walking directions failed: \(error.localizedDescription)")
+                directionReq.transportType = .automobile
+                let fallbackDirections = MKDirections(request: directionReq)
+                fallbackDirections.calculate { (fallbackResponse, fallbackError) in
+                    guard let fallbackResponse = fallbackResponse else {
+                        if let fallbackError = fallbackError {
+                            print("Automobile directions also failed: \(fallbackError.localizedDescription)")
+                        }
+                        return
+                    }
+                    
+                    self.displayRoute(response: fallbackResponse)
                 }
                 return
             }
-            
-            let route = response.routes[0] // choose the first path and call it a day
-            self.routeOverlay = route.polyline
-            self.atlasMap.addOverlay(route.polyline, level: .aboveRoads) // shows the path on the map
-            let mapRegion = route.polyline.boundingMapRect // fit entire route on the map
-            self.atlasMap.setVisibleMapRect(mapRegion, animated: true) // finally show it visably
+            self.displayRoute(response: response!)
         }
+    }
+    
+    private func displayRoute(response: MKDirections.Response) {
+        let route = response.routes[0] // Choose the first path
+        self.routeOverlay = route.polyline
+        self.atlasMap.addOverlay(route.polyline, level: .aboveRoads) // Add path to the map
+        let mapRegion = route.polyline.boundingMapRect // Fit the route in the map view
+        self.atlasMap.setVisibleMapRect(mapRegion, animated: true) // Show the route visually
     }
     
     private func isCoordinateInsideCampus(_ coordinate: CLLocationCoordinate2D) -> Bool {
@@ -433,7 +461,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     // Unwind back to this instance of the map
     @IBAction func unwindToMapViewController(segue: UIStoryboardSegue) {
-        if !(markerRef!.isUnlocked) {
+        if let marker = markerRef, !marker.isUnlocked {
             markerRefVisual?.glyphImage = nil
         }
     }
