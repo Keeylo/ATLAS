@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rVl-Ew-Ktd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rVl-Ew-Ktd">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -57,11 +57,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="HiS-30-KeP">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="HiS-30-KeP">
                                 <rect key="frame" x="38" y="606" width="322" height="34"/>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAM-rR-5hz">
                                 <rect key="frame" x="138" y="731.66666666666663" width="119" height="34.333333333333371"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="119" id="LRv-0N-ZjV"/>
+                                    <constraint firstAttribute="height" constant="34.329999999999998" id="rei-tR-11R"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Back to Map"/>
                                 <connections>
@@ -107,7 +111,6 @@
                             <constraint firstItem="ZAM-rR-5hz" firstAttribute="leading" secondItem="6gp-qE-0PG" secondAttribute="leading" constant="138" id="bMh-Bt-Vk1"/>
                             <constraint firstItem="6gp-qE-0PG" firstAttribute="trailing" secondItem="EpF-r2-fVU" secondAttribute="trailing" constant="33" id="ckt-uQ-SP4"/>
                             <constraint firstItem="n4n-wU-szV" firstAttribute="top" secondItem="e7O-RE-U7D" secondAttribute="bottom" constant="55.666666666666671" id="dgT-Ct-tRC"/>
-                            <constraint firstItem="ZAM-rR-5hz" firstAttribute="top" secondItem="HiS-30-KeP" secondAttribute="bottom" constant="91.666666666666515" id="eU0-eY-gvZ"/>
                             <constraint firstItem="HiS-30-KeP" firstAttribute="top" secondItem="Mng-5f-dfg" secondAttribute="bottom" constant="17.000000000000114" id="g7R-LF-EgV"/>
                             <constraint firstItem="EpF-r2-fVU" firstAttribute="top" secondItem="sU2-vp-nIt" secondAttribute="bottom" constant="7.0000000000000568" id="hkl-fs-2Wo"/>
                             <constraint firstItem="sU2-vp-nIt" firstAttribute="top" secondItem="n4n-wU-szV" secondAttribute="bottom" constant="45" id="i1Y-cU-IVj"/>

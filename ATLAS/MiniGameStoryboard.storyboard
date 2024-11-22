@@ -255,9 +255,8 @@
                                     <constraint firstAttribute="height" constant="414" id="iaW-Kl-SFO"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tN4-zz-2lw">
-                                <rect key="frame" x="174" y="0.0" width="40" height="73"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tN4-zz-2lw">
+                                <rect key="frame" x="176" y="219" width="40" height="73"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Image 4" title=""/>
                                 <connections>
@@ -268,6 +267,8 @@
                         <viewLayoutGuide key="safeArea" id="lrH-5x-bIL"/>
                         <color key="backgroundColor" red="1" green="0.94562772819999996" blue="0.71469996199999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="6L4-eS-Uuh" firstAttribute="top" secondItem="tN4-zz-2lw" secondAttribute="bottom" constant="-67" id="QZ4-0q-efV"/>
+                            <constraint firstItem="6L4-eS-Uuh" firstAttribute="leading" secondItem="tN4-zz-2lw" secondAttribute="trailing" constant="-217" id="bA2-mI-PrH"/>
                             <constraint firstItem="6L4-eS-Uuh" firstAttribute="centerX" secondItem="ajO-92-SRo" secondAttribute="centerX" id="fNY-Dp-cnf"/>
                             <constraint firstItem="6L4-eS-Uuh" firstAttribute="centerY" secondItem="ajO-92-SRo" secondAttribute="centerY" id="sBK-Ui-evr"/>
                         </constraints>
