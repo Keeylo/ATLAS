@@ -10,6 +10,7 @@
 		2E65EBD32CC78E6A00972C99 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E65EBD22CC78E6A00972C99 /* logo.png */; };
 		42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */; };
 		42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */; };
+		42BE6B022CF081B6007C020F /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BE6B012CF081B6007C020F /* GameState.swift */; };
 		493358532CC7076900AD4797 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358522CC7076900AD4797 /* MapViewController.swift */; };
 		493358552CC71A1300AD4797 /* UserGuideStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */; };
 		493358572CC71F7800AD4797 /* UserGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493358562CC71F7800AD4797 /* UserGuideViewController.swift */; };
@@ -79,6 +80,7 @@
 		2E65EBD22CC78E6A00972C99 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserSetupViewController.swift; sourceTree = "<group>"; };
 		42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotChangePasswordViewController.swift; sourceTree = "<group>"; };
+		42BE6B012CF081B6007C020F /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		493358522CC7076900AD4797 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		493358542CC71A1300AD4797 /* UserGuideStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserGuideStoryboard.storyboard; sourceTree = "<group>"; };
 		493358562CC71F7800AD4797 /* UserGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				D5BC7D172CEC1B42000D28AB /* PickProfilePictureViewController.swift */,
 				493358562CC71F7800AD4797 /* UserGuideViewController.swift */,
 				493358582CC745B200AD4797 /* UnlockedAreasViewController.swift */,
+				42BE6B012CF081B6007C020F /* GameState.swift */,
 				D5BF14522CC0C79C00A0604C /* WonGameViewController.swift */,
 				49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */,
 				49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */,
@@ -361,6 +364,7 @@
 				D5AE62B42CE2853600ADE034 /* FriendsListTableViewCell.swift in Sources */,
 				49923EDD2CB7A1C700D2CBA2 /* SceneDelegate.swift in Sources */,
 				D5BF144F2CC0727400A0604C /* SecondRoundTowerViewController.swift in Sources */,
+				42BE6B022CF081B6007C020F /* GameState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
