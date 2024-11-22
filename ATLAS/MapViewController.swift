@@ -27,7 +27,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var routeOverlay: MKOverlay?
     var markerRefVisual: MKMarkerAnnotationView? // too many references to try and update the same map marker
     var markerRef: CustomMarker? // I only wanted to update the .glyphImage and .isUnlocked so I can quickly determine if I need to change .glyphTimage based on the result of .isUnlocked, however they are different types, There has to be a better solution man
-
+    var selectedLocation: CustomMarker? // To hold the currently selected marker for locationinfoViewController
     var testPath: [CLLocation] = []
     let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
     let utLoc = CLLocation(latitude: 30.286236060447308, longitude: -97.739378471749)
@@ -198,7 +198,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         guard let markerView = view as? MKMarkerAnnotationView, let marker = view.annotation as? CustomMarker else { return }
         markerRefVisual = markerView
         markerRef = marker
-        
+        selectedLocation = marker
         let alert = UIAlertController(
             title: "Unknown Location Found!",
             message: "Play a mini game to unlock this map marker? :)",
@@ -213,6 +213,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         present(alert, animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMiniGame",
+           let destinationVC = segue.destination as? MiniGameViewController,
+           let selectedLocation = selectedLocation {
+            destinationVC.locationTitle = selectedLocation.title ?? "Unknown"
+            destinationVC.locationCoordinates = selectedLocation.coordinate
+        }
+    }
+
     
     private func updateOverlay(for location: CLLocation) {
         atlasMap.removeOverlay(polyOverlay!)
