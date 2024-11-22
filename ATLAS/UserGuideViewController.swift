@@ -34,24 +34,24 @@ class UserGuideViewController: UIViewController {
 
     private let sectionData: [Section: (images: [UIImage], description: String)] = [
         .markerTypes: (
-            images: [UIImage(named: "image 14")!, UIImage(named: "Image 10")!],
-            description: "Description for Marker Types"
+            images: [UIImage(named: "Buildings")!, UIImage(named: "HistoricalLandmarks")!, UIImage(named: "StudyArea")!, UIImage(named: "Recreational")!],
+            description: "Orange: Buildings\nBlue: Historical Landmarks\nGreen: Food\nRed: Study Areas\nCyan: Recreational"
         ),
         .mapDiscovery: (
-            images: [UIImage(named: "Image 10")!, UIImage(named: "image 14")!],
-            description: "Description for Map Discovery"
+            images: [UIImage(named: "photoMapDiscovery")!],
+            description: "As you explore your surroundings you will unlock new POIs on the map. In order to unlock the POI fully you need to beat the mini game to add it to your unlocked areas."
         ),
         .miniGames: (
-            images: [UIImage(named: "image 14")!],
-            description: "Description for Mini Games"
+            images: [UIImage(named: "wonMiniGame")!],
+            description: "From successfully beating a mini game you unlock that area. Go to your unlocked areas to view all of the locations where you have visited and beat the mini game."
         ),
         .userSettings: (
-            images: [UIImage(named: "Image 10")!],
-            description: "Description for User Settings"
+            images: [UIImage(named: "fitUserSettings")!],
+            description: "You can change your profile picture, email, username, or password on this page. You can also log out or delete your account."
         ),
         .extra: (
-            images: [UIImage(named: "image 14")!, UIImage(named: "Image 10")!],
-            description: "Description for Extra"
+            images: [UIImage(named: "image 14")!],
+            description: "Bikini Bottom..."
         )
     ]
     

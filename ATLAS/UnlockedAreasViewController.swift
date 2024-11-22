@@ -11,6 +11,14 @@ import UIKit
 struct Area {
     let name: String
     let image: String
+    var isUnlocked: Bool {
+        get {
+            return GameState.shared.unlockedAreas[name] ?? false
+        }
+        set {
+            GameState.shared.unlockedAreas[name] = newValue
+        }
+    }
 }
 
 // MARK: - Custom Layout
@@ -100,6 +108,12 @@ class AreaCell: UICollectionViewCell {
         return iv
     }()
     
+    private let overlayView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        return view
+    }()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -148,12 +162,36 @@ class AreaCell: UICollectionViewCell {
         ])
 
         nameLabel.textAlignment = .left
+        
+//        imageView.addSubview(overlayView)
+//        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.addSubview(blurEffectView)
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+//            overlayView.topAnchor.constraint(equalTo: imageView.topAnchor),
+//            overlayView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+//            overlayView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+//            overlayView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            
+            blurEffectView.topAnchor.constraint(equalTo: imageView.topAnchor),
+            blurEffectView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
+        ])
     }
     
     func configure(with area: Area) {
         imageView.image = UIImage(named: area.image)
         nameLabel.text = area.name
+        overlayView.isHidden = area.isUnlocked
+        blurEffectView.isHidden = area.isUnlocked
     }
+    
+    private let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        return blurView
+    }()
 }
 
 class UnlockedAreasViewController: UIViewController {
@@ -195,11 +233,42 @@ class UnlockedAreasViewController: UIViewController {
         setupViews()
         setupGestures()
         loadAreas()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(areaUnlockedNotification(_:)),
+            name: NSNotification.Name("AreaUnlocked"),
+            object: nil
+        )
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("AreaUnlocked"), object: nil)
+    }
+
+    
+    @objc func areaUnlockedNotification(_ notification: Notification) {
+        if let areaName = notification.userInfo?["areaName"] as? String {
+            if let index = areas.firstIndex(where: { $0.name == areaName }) {
+                areas[index].isUnlocked = true
+                collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+            }
+        }
+    }
+    
+    func unlockArea(at index: Int) {
+        guard index >= 0 && index < areas.count else { return }
+        areas[index].isUnlocked = true
+        collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+    }
     
     @IBAction func backToMap(_ sender: Any) {
         self.dismiss(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadAreas()
+        collectionView.reloadData()
     }
     
     private func setupViews() {
@@ -240,15 +309,14 @@ class UnlockedAreasViewController: UIViewController {
     
     private func loadAreas() {
         areas = [
-            Area(name: "Gregory Gymnasium", image: "gregGym"),
-            Area(name: "Norman Hackerman", image: "normanHackerman"),
-            Area(name: "Tower", image: "towerNight"),
-            Area(name: "Horse Statue", image: "horseStatue"),
-            Area(name: "White Building", image: "whiteBuilding"),
-            Area(name: "Orange Line", image: "orangeLine"),
-            Area(name: "Flower Things", image: "flowerThings"),
-            Area(name: "Red Thing", image: "redThing")
-            // Add more areas if needed
+            Area(name: "Gregory Gymnasium", image: "gregGood"),
+            Area(name: "Norman Hackerman", image: "normanGood"),
+            Area(name: "Tower", image: "uttowerGooder"),
+            Area(name: "Fountain", image: "fountainGooder"),
+            Area(name: "Union", image: "unionGood"),
+            Area(name: "Engineering Building", image: "eerGood"),
+            Area(name: "Blanton Museum", image: "blantonGood"),
+            Area(name: "Clock Knot", image: "clockknotGood")
         ]
         
         collectionView.reloadData()
