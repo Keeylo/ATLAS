@@ -88,9 +88,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         atlasMap.pointOfInterestFilter = .excludingAll // removes all default POIs (PointsOfInterest)
         
         // Uncomment to see all Map Markers (our own POIs)
-        for annotation in annotations {
-            atlasMap.addAnnotation(annotation)
-        }
+//        for annotation in annotations {
+//            atlasMap.addAnnotation(annotation)
+//        }
         
         // make the entire fillIn only once
         polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count)
@@ -181,21 +181,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         // might be inefficient, could maybe use a search
-//        for marker in annotations {
-//            let markerPoint = MKMapPoint(marker.coordinate)
-//            if !marker.isVisible && point.distance(to: markerPoint) <= 20  { // 20 meters
-//                atlasMap.addAnnotation(marker)
-//                marker.isVisible = true
-//                print("we added another marker")
-//            }
-//        }
+        for marker in annotations {
+            let markerPoint = MKMapPoint(marker.coordinate)
+            if !atlasMap.annotations.contains(where: { $0.title == marker.title }) && !marker.isVisible && !marker.isUnlocked && point.distance(to: markerPoint) <= 20  { // 20 meters
+                atlasMap.addAnnotation(marker)
+                marker.isVisible = true
+                print("we added another marker")
+            }
+        }
     }
     
     
     // In the future I want this to look more unique, custom alert with design
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 //        , marker.isVisible
-        guard let markerView = view as? MKMarkerAnnotationView, let marker = view.annotation as? CustomMarker else { return }
+//        view.annotation?.title
+        guard let annotationTitle = view.annotation?.title else { return }
+        guard let markerView = view as? MKMarkerAnnotationView, let marker = annotations.first(where: { $0.title == annotationTitle }) else { return }
+        
         markerRefVisual = markerView
         markerRef = marker
         selectedLocation = marker
@@ -432,9 +435,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "CustomMarker"
-
+        
+        guard let annotationTitle = annotation.title else { return nil }
         // Ensure we're dealing with MKPointAnnotation
-        guard let pointAnnotation = annotation as? CustomMarker else { return nil }
+        guard let pointAnnotation = annotations.first(where: { $0.title == annotationTitle }) else {
+            return nil // If no matching CustomMarker is found, return nil
+        }
+        
+        if pointAnnotation.isUnlocked {
+            return nil
+        }
         
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
         if annotationView == nil {
@@ -473,6 +483,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBAction func unwindToMapViewController(segue: UIStoryboardSegue) {
         if let marker = markerRef, !marker.isUnlocked {
             markerRefVisual?.glyphImage = nil
+            marker.isUnlocked = true
         }
     }
 }
