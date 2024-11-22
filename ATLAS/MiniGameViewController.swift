@@ -45,7 +45,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
 //    var hints1: String = "hint 1" // need to prep b4 segue
 //    var hints2: String = "hint 2" // need to prep b4 segue
 //    var hints3: String = "hint 3" // need to prep b4 segue
-    var hints:[String] = ["hint 1", "hint 2", "hint 3"] // need to prep b4 segue
+    var hints:[String] = ["Round 1: Look for the disco ball.", "Round 2: Look for the horse.", "Round 3: Look around the baby doll head."] // need to prep b4 segue
     var totalHints = 3 // need to be prep b4 segue (might have less than 3, but max 3)
     var hintCount = 3
     var hintsIndex = 0
