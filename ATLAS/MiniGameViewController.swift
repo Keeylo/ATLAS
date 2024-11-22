@@ -7,6 +7,8 @@
 
 import UIKit
 import FirebaseAuth
+import CoreLocation
+
 
 
 // protocol that changes this VC's textLabel.text
@@ -41,6 +43,9 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     var instructionsVC: UIViewController?
     var miniGameChildVC: UIViewController?
     var wonGame = false
+    var locationTitle: String = "Unknown"
+    var locationCoordinates: CLLocationCoordinate2D?
+
     
 //    var hints1: String = "hint 1" // need to prep b4 segue
 //    var hints2: String = "hint 2" // need to prep b4 segue
@@ -293,6 +298,21 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
         wonGame = true
         quitButton.setTitle("You Won!", for: .normal)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowLocationInfo",
+           let destinationVC = segue.destination as? LocationInfoViewController {
+            if let locationCoordinates = locationCoordinates {
+                destinationVC.coordinates = Coordinate(locationCoordinates)
+                print("Passing coordinates: \(locationCoordinates)")
+            } else {
+                print("locationCoordinates is nil")
+            }
+            destinationVC.locationTitle = locationTitle
+            print("Passing locationTitle: \(locationTitle)")
+        }
+    }
+
 
 }
 
