@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 // MARK: - Area Model
 struct Area {
     let name: String
     let image: String
+    let coordinate: Coordinate
     var isUnlocked: Bool {
         get {
             return GameState.shared.unlockedAreas[name] ?? false
@@ -309,15 +311,20 @@ class UnlockedAreasViewController: UIViewController {
     
     private func loadAreas() {
         areas = [
-            Area(name: "Gregory Gymnasium", image: "gregGood"),
-            Area(name: "Norman Hackerman", image: "normanGood"),
-            Area(name: "Tower", image: "uttowerGooder"),
-            Area(name: "Fountain", image: "fountainGooder"),
-            Area(name: "Union", image: "unionGood"),
-            Area(name: "Engineering Building", image: "eerGood"),
-            Area(name: "Blanton Museum", image: "blantonGood"),
-            Area(name: "Clock Knot", image: "clockknotGood")
+            Area(name: "Gregory Gymnasium", image: "gregGood", coordinate: Coordinate(latitude: 30.28447, longitude: -97.73676)),
+            Area(name: "Norman Hackerman", image: "normanGood", coordinate: Coordinate(latitude: 30.28765, longitude: -97.73801)),
+            Area(name: "UT Tower", image: "uttowerGooder", coordinate: Coordinate(latitude: 30.28593, longitude: -97.73941)),
+            Area(name: "Fountain", image: "fountainGooder", coordinate: Coordinate(latitude: 30.28396, longitude: -97.73957)),
+            Area(name: "Union", image: "unionGood", coordinate: Coordinate(latitude: 30.28674373328207,longitude: -97.74099681516714)),
+            Area(name: "Engineering Building", image: "eerGood", coordinate: Coordinate(latitude: 30.28817, longitude: -97.73553)),
+            Area(name: "Blanton Museum", image: "blantonGood", coordinate: Coordinate(latitude: 30.28096, longitude: -97.73774)),
+            Area(name: "Clock Knot", image: "clockknotGood", coordinate: Coordinate(latitude: 30.28974, longitude: -97.73606))
         ]
+        
+        // for testing without pins/minigames
+//        for index in areas.indices {
+//            areas[index].isUnlocked = true
+//        }
         
         collectionView.reloadData()
         
@@ -368,6 +375,25 @@ extension UnlockedAreasViewController: UICollectionViewDataSource, UICollectionV
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let area = areas[indexPath.item]
+        if area.isUnlocked {
+            // Instantiate the LocationInfoViewController
+            let storyboard = UIStoryboard(name: "LocationInfoStoryboard", bundle: nil) // Replace "Main" with your storyboard name
+            if let locationInfoVC = storyboard.instantiateViewController(withIdentifier: "LocationInfoViewController") as? LocationInfoViewController {
+                // Set the locationName
+                locationInfoVC.locationName = area.name
+                // Present the view controller
+                self.present(locationInfoVC, animated: true, completion: nil)
+            }
+        } else {
+            // Area is locked, show an alert or handle accordingly
+            let alert = UIAlertController(title: "Locked", message: "This area is locked.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let layout = collectionView.collectionViewLayout as! WheelLayout
         let cellHeight = layout.itemSize.height + layout.minimumLineSpacing
@@ -377,5 +403,33 @@ extension UnlockedAreasViewController: UICollectionViewDataSource, UICollectionV
         targetContentOffset.pointee = CGPoint(x: 0, y: index * cellHeight)
         
         currentIndex = Int(index) % areas.count
+    }
+}
+
+struct Coordinate: Hashable {
+    let latitude: Double
+    let longitude: Double
+    
+    init(_ coordinate: CLLocationCoordinate2D) {
+        self.latitude = coordinate.latitude
+        self.longitude = coordinate.longitude
+    }
+    
+    init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+    
+    var clCoordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(latitude)
+        hasher.combine(longitude)
+    }
+    
+    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
 }

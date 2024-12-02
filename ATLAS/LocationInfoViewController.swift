@@ -7,74 +7,58 @@
 
 import Foundation
 import UIKit
-import CoreLocation
 import GEOSwift
 import FirebaseAuth
 import FirebaseFirestore
 
-class LocationInfoViewController: UIViewController, CLLocationManagerDelegate {
+class LocationInfoViewController: UIViewController{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var descriptionBodyLabel: UILabel!
     @IBOutlet weak var tagsStackView: UIStackView!
 
-    var locationManager = CLLocationManager()
     var images: [UIImage] = []
     var currentImageIndex = 0
     var coordinates: Coordinate?
     var locationTitle: String = "Unknown"
+    var locationName: String?
     
-    var delegate: UIViewController!
-
-    // defining current dummy data
-    let locationData: [Coordinate: (name: String, description: String, tags: [String], images: [String])] = [
-            Coordinate(latitude: 30.28593, longitude: -97.73941): (
-                name: "UT Tower",
+    let locationData: [String: (description: String, tags: [String], images: [String])] = [
+            "UT Tower": (
                 description: "The UT Tower is a symbol of the University of Texas, known for its stunning architecture and panoramic views.",
                 tags: ["Study Rooms", "Event Spaces"],
                 images: ["ut_tower_image", "ut_tower_image2"]
             ),
-            Coordinate(latitude: 30.286235, longitude: -97.737111): (
-                name: "Circle with Towers",
+            "Circle with Towers": (
                 description: "This minimalist sculpture features eight rectangular towers in a rhythmic circular formation, emphasizing geometry and simplicity.",
                 tags: ["Minimalism", "Geometry", "Art"],
                 images: ["circle_with_towers_image1", "circle_with_towers_image2"]
             ),
-            Coordinate(latitude: 30.285636, longitude: -97.738276): (
-                name: "The West",
+            "The West": (
                 description: "Two large buoys covered in corroded pennies explore themes of capitalism, exploration, and industrial history.",
                 tags: ["Sculpture", "Conceptual Art"],
                 images: ["the_west_image1", "the_west_image2", "the_west_image3"]
             ),
-            Coordinate(latitude: 30.28749, longitude: -97.73708): (
-                name: "Monochrome for Austin",
+            "Monochrome for Austin": (
                 description: "This sculpture features 70 canoes balanced precariously, symbolizing motion, rhythm, and solitude.",
                 tags: ["Large-Scale Art", "Sculpture"],
                 images: ["monochrome_for_austin_image1", "monochrome_for_austin_image2"]
             )
-        ]
+    ]
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
         
-        // Debugging
-        print("LocationInfoViewController loaded")
-        print("Coordinates: \(coordinates ?? Coordinate(latitude: 0, longitude: 0))")
-        print("Title: \(locationTitle)")
-        
-        // Load location info if coordinates are provided
-        if let coordinates = coordinates {
-            if let data = locationData[coordinates] {
-                setupLocationInfo(name: data.name, description: data.description, tags: data.tags, images: data.images)
+        if let locationName = locationName {
+            if let data = locationData[locationName] {
+                setupLocationInfo(name: locationName, description: data.description, tags: data.tags, images: data.images)
             } else {
-                print("Error: No location data found for these coordinates.")
+                print("Error: No location data found for this location name.")
             }
         } else {
-            print("Error: Coordinates not provided.")
+            print("Error: Location name not provided.")
         }
         
         unlockLocation()
