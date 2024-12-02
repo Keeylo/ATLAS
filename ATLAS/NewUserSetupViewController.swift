@@ -116,7 +116,8 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
             "username": username,
             "locations": [],
             "friends": [],
-            "profilePic": "person.circle.fill"
+            "profilePic": "person.circle.fill",
+            "score": 0
         ]
         
         userRef.setData(userData) { error in

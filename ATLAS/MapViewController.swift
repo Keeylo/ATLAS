@@ -9,13 +9,20 @@ import UIKit
 import MapKit
 import CoreLocation
 import GEOSwift
+import FirebaseAuth
+import FirebaseFirestore
+
+protocol LocationUnlocker {
+    func unlockLocation(locationName: String)
+}
 
 class CustomMarker: MKPointAnnotation {
     var isVisible: Bool = false
     var isUnlocked: Bool = false
 }
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, LocationUnlocker {
+    
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var atlasMap: MKMapView!
     
@@ -42,6 +49,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             return annotation
         }
     }
+    
+    var userUnlockedLocations: [String] = []
     
     // might need to use a hashmap
     var MKutLocRegion: MKPolygon?
@@ -78,6 +87,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // remember happens only once before the view loads in
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let user = Auth.auth().currentUser {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(user.uid)
+            
+            // Update the username field (or any other field you want)
+            userRef.getDocument { (document, error) in
+                if let error = error {
+                    print("Error fetching document: \(error)")
+                } else {
+                    if let document = document, document.exists {
+                        // Get the array from the document
+                        if let locationsList = document.get("locations") as? [String] {
+                            // Loop through the array
+                            print("Locations: \(locationsList)")
+                            self.userUnlockedLocations = locationsList
+                            print("actual array: \(self.userUnlockedLocations)")
+                        } else {
+                            print("No array found in the document.")
+                        }
+                    } else {
+                        print("Document does not exist.")
+                    }
+                }
+            }
+        }
         
         manager.desiredAccuracy = kCLLocationAccuracyBest // Battery
         manager.delegate = self
@@ -196,34 +231,129 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 //        , marker.isVisible
 //        view.annotation?.title
+            
+        
         guard let annotationTitle = view.annotation?.title else { return }
         guard let markerView = view as? MKMarkerAnnotationView, let marker = annotations.first(where: { $0.title == annotationTitle }) else { return }
         
-        markerRefVisual = markerView
-        markerRef = marker
+//        if let user = Auth.auth().currentUser {
+//            let db = Firestore.firestore()
+//            let userRef = db.collection("users").document(user.uid)
+//            
+//            // Update the username field (or any other field you want)
+//            userRef.getDocument { (document, error) in
+//                if let error = error {
+//                    print("Error fetching document: \(error)")
+//                } else {
+//                    if let document = document, document.exists {
+//                        // Get the array from the document
+//                        if let locationsList = document.get("locations") as? [String] {
+//                            // Loop through the array
+//                            for location in locationsList {
+//                                if (location == annotationTitle) {
+//                                    marker.isUnlocked = true
+//                                    print("Location: \(location)")
+//                                    break
+//                                }
+//                            }
+//                        } else {
+//                            print("No array found in the document.")
+//                        }
+//                    } else {
+//                        print("Document does not exist.")
+//                    }
+//                }
+//                
+//                if (marker.isUnlocked) {
+//                    print("PerformSegue")
+//                    self.performSegue(withIdentifier: "LocationInfoSegue", sender: self)
+//                } else {
+//                    
+//                    self.markerRefVisual = markerView
+//                    self.markerRef = marker
+//                    self.selectedLocation = marker
+//                    let alert = UIAlertController(
+//                        title: "Unknown Location Found!",
+//                        message: "Play a mini game to unlock this map marker? :)",
+//                        preferredStyle: .alert
+//                    )
+//                    
+//                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+//                        self.performSegue(withIdentifier: "ShowMiniGame", sender: self)
+//                    }))
+//                    
+//                    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+//                    
+//                    self.present(alert, animated: true, completion: nil)
+//                    
+//                }
+//            }
+//        } else {
+//            print("couldn't authenticate user")
+//        }
+        
+        for location in userUnlockedLocations {
+            if location == annotationTitle {
+                marker.isUnlocked = true
+            }
+        }
+        
         selectedLocation = marker
-        let alert = UIAlertController(
-            title: "Unknown Location Found!",
-            message: "Play a mini game to unlock this map marker? :)",
-            preferredStyle: .alert
-        )
         
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-            self.performSegue(withIdentifier: "ShowMiniGame", sender: self)
-        }))
+        if (marker.isUnlocked) {
+            print("PerformSegue")
+            performSegue(withIdentifier: "LocationInfoSegue", sender: self)
+        } else {
+            
+            markerRefVisual = markerView
+            markerRef = marker
+            selectedLocation = marker
+            let alert = UIAlertController(
+                title: "Unknown Location Found!",
+                message: "Play a mini game to unlock this map marker? :)",
+                preferredStyle: .alert
+            )
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                self.performSegue(withIdentifier: "ShowMiniGame", sender: self)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+            
+        }
         
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-        
-        present(alert, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowMiniGame",
            let destinationVC = segue.destination as? MiniGameViewController,
            let selectedLocation = selectedLocation {
+            destinationVC.delegate = self
             destinationVC.locationTitle = selectedLocation.title ?? "Unknown"
             destinationVC.locationCoordinates = selectedLocation.coordinate
+        } else if segue.identifier == "LocationInfoSegue",
+          let destinationVC = segue.destination as? LocationInfoViewController {
+                    //, let selectedLocation = selectedLocation {
+            
+            // ADD PREP FOR SEGUE
+            
+//            if let locationCoordinates = locationCoordinates {
+//                destinationVC.coordinates = Coordinate(locationCoordinates)
+//                print("Passing coordinates: \(locationCoordinates)")
+//            } else {
+//                print("locationCoordinates is nil")
+//            }
+            print("preparing info segue")
+            destinationVC.delegate = self
+            destinationVC.coordinates = Coordinate(self.selectedLocation!.coordinate)
+            
+            destinationVC.locationTitle = self.selectedLocation!.title ?? "Unknown"
+//            destinationVC.locationCoordinates = selectedLocation.coordinate
+//            print("Passing locationTitle: \(locationTitle)")
         }
+        
     }
 
     
@@ -289,7 +419,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Will try to create a Polygon using the geoswiftcoordinates
         do {
             let boundary = try Polygon.LinearRing(points: geoswiftCoordinates)
-            print("We successfully made the polygon")
+//            print("We successfully made the polygon")
             return Polygon(exterior: boundary)
         } catch {
             print("Error creating GEOSwift Polygon: \(error)")
@@ -442,9 +572,82 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             return nil // If no matching CustomMarker is found, return nil
         }
         
-        if pointAnnotation.isUnlocked {
-            return nil
+//        if let user = Auth.auth().currentUser {
+//            let db = Firestore.firestore()
+//            let userRef = db.collection("users").document(user.uid)
+//            
+//            // Update the username field (or any other field you want)
+//            userRef.getDocument { (document, error) in
+//                if let error = error {
+//                    print("Error fetching document: \(error)")
+//                } else {
+//                    if let document = document, document.exists {
+//                        // Get the array from the document
+//                        if let locationsList = document.get("locations") as? [String] {
+//                            // Loop through the array
+//                            for location in locationsList {
+//                                if (location == annotationTitle) {
+//                                    pointAnnotation.isUnlocked = true
+//                                    print("Location: \(location)")
+//                                    break
+//                                }
+//                            }
+//                        } else {
+//                            print("No array found in the document.")
+//                        }
+//                    } else {
+//                        print("Document does not exist.")
+//                    }
+//                }
+//
+//                
+//                print("point annotation unlocked: \(pointAnnotation.isUnlocked)")
+//                
+//                if pointAnnotation.isUnlocked {
+//                    print("marker nil")
+//                    return
+//                }
+//                
+//                var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+//                if annotationView == nil {
+//                    annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+//                    annotationView?.canShowCallout = true
+//                    
+//                }
+//                
+//                annotationView?.glyphImage = UIImage(systemName: "lock.fill")
+//
+//                // Set the marker color dynamically based on the annotation
+//                if let point = pointsOfInterest.first(where: { $0.title == pointAnnotation.title }) {
+//                    annotationView?.markerTintColor = point.color // Set marker color from pointsOfInterest
+//                }
+//                
+//            }
+//            
+////            fetchUserLocations(userRef: userRef, locationName: annotationTitle!) { isUnlocked in
+////                
+////                locationUnlocked = isUnlocked
+////                
+////            }
+//        } else {
+//            print("couldn't authenticate user")
+//        }
+        
+//        pointAnnotation.isUnlocked = locationUnlocked
+//        
+//        print("point annotation unlocked: \(pointAnnotation.isUnlocked)")
+//        
+        
+        for location in userUnlockedLocations {
+            if location == annotationTitle {
+                pointAnnotation.isUnlocked = true
+            }
         }
+        
+//        if pointAnnotation.isUnlocked {
+//            print("marker nil")
+//            return nil
+//        }
         
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
         if annotationView == nil {
@@ -453,7 +656,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
         }
         
-        annotationView?.glyphImage = UIImage(systemName: "lock.fill")
+        if !pointAnnotation.isUnlocked {
+            annotationView?.glyphImage = UIImage(systemName: "lock.fill")
+        }
 
         // Set the marker color dynamically based on the annotation
         if let point = pointsOfInterest.first(where: { $0.title == pointAnnotation.title }) {
@@ -463,11 +668,41 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return annotationView
     }
     
+    func fetchUserLocations(userRef: DocumentReference, locationName: String, completion: @escaping (Bool) -> Void) {
+        userRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching document: \(error)")
+                completion(false) // Handle error case
+            } else {
+                if let document = document, document.exists {
+                    // Get the array from the document
+                    if let locationsList = document.get("locations") as? [String] {
+                        // Check if the annotation title exists in the array
+                        for location in locationsList {
+                            if location == locationName {
+                                print("true returned")
+                                completion(true)  // Marker unlocked, return true
+                                return
+                            }
+                        }
+                        completion(false)  // Marker not unlocked
+                    } else {
+                        print("No array found in the document.")
+                        completion(false)  // No locations found, return false
+                    }
+                } else {
+                    print("Document does not exist.")
+                    completion(false)  // Document not found
+                }
+            }
+        }
+    }
+    
     @IBAction func menuButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "HamburgerMenuStoryboard", bundle: nil)
         let popUpMenu = storyboard.instantiateViewController(withIdentifier: "MenuPopUp") as? MenuPopUpViewController
         
-        let menuHeight = self.view.frame.height / 3.7
+        let menuHeight = CGFloat(252) //self.view.frame.height / 3.7
         popUpMenu!.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: menuHeight)
         
         addChild(popUpMenu!)
@@ -486,6 +721,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             marker.isUnlocked = true
         }
     }
+    
+    func unlockLocation(locationName: String) {
+        if !userUnlockedLocations.contains(locationName) {
+            userUnlockedLocations.append(locationName)
+            
+            if let user = Auth.auth().currentUser {
+                let db = Firestore.firestore()
+                let userRef = db.collection("users").document(user.uid)
+                
+                // Update the username field (or any other field you want)
+                userRef.updateData([
+                    "score": FieldValue.increment(Int64(1))
+                ]) { error in
+                    if let error = error {
+                        print("Error updating user data: \(error.localizedDescription)")
+                    } else {
+                        print("Score incremented by 1")
+                    }
+                }
+            } else {
+                print("couldn't authenticate user")
+            }
+        }
+    }
+    
 }
 
 // I wanna go to bed and dream about flying monkeys

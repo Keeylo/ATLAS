@@ -9,6 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--LocationInfoStoryboard-->
+        <scene sceneID="5rW-66-QsB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LocationInfoStoryboard" id="Ri7-iV-K7Y" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JGM-1h-fjm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2232" y="1068"/>
+        </scene>
         <!--MiniGameStoryboard-->
         <scene sceneID="RE7-al-5It">
             <objects>
@@ -52,6 +60,7 @@
                         <outlet property="atlasMap" destination="aAe-7d-6UU" id="FYC-Ig-LYy"/>
                         <outlet property="menuButton" destination="Rh1-7f-xnW" id="isK-BG-Hlm"/>
                         <segue destination="vrK-a8-MbW" kind="presentation" identifier="ShowMiniGame" modalPresentationStyle="fullScreen" id="7ZM-fO-ndy"/>
+                        <segue destination="Ri7-iV-K7Y" kind="presentation" identifier="LocationInfoSegue" modalPresentationStyle="fullScreen" id="irF-Go-iyv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dn0-ah-AWR" sceneMemberID="firstResponder"/>
@@ -123,7 +132,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22j-Ir-EKA">
-                                <rect key="frame" x="146.66666666666666" y="693" width="100" height="50"/>
+                                <rect key="frame" x="84" y="693" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="p1Q-UD-tR6"/>
                                     <constraint firstAttribute="height" constant="50" id="sn9-gA-jzK"/>
@@ -136,6 +145,21 @@
                                     <segue destination="hva-FO-0gU" kind="presentation" identifier="FriendsListSegue" modalPresentationStyle="fullScreen" id="UJE-4k-FF6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnC-G3-Qyh">
+                                <rect key="frame" x="209" y="693" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="32P-WR-Akb"/>
+                                    <constraint firstAttribute="height" constant="50" id="tyX-Pn-yzz"/>
+                                </constraints>
+                                <color key="tintColor" red="0.85490196939999996" green="0.35686278339999999" blue="0.15686275059999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Leader board">
+                                    <color key="baseBackgroundColor" red="0.85490196939999996" green="0.35686278339999999" blue="0.15686275059999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="6N5-yj-8el" kind="presentation" identifier="LeaderboardSegue" modalPresentationStyle="fullScreen" id="vh9-QH-reX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="STa-dw-ZY4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -143,12 +167,14 @@
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="TSj-Gs-6IZ" secondAttribute="bottom" id="858-Kz-Qt5"/>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="150" id="AfG-id-iqI"/>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="ur2-HX-3Wv" secondAttribute="bottom" constant="150" id="BIq-NV-QoT"/>
+                            <constraint firstItem="hnC-G3-Qyh" firstAttribute="top" secondItem="ur2-HX-3Wv" secondAttribute="bottom" constant="25" id="G3J-5n-RBY"/>
                             <constraint firstItem="YrB-qg-Jth" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="LVt-1V-QC8"/>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="wvx-eT-SC5" secondAttribute="bottom" constant="150" id="TM1-60-gbA"/>
                             <constraint firstItem="ur2-HX-3Wv" firstAttribute="leading" secondItem="YrB-qg-Jth" secondAttribute="trailing" constant="25" id="Tm7-8a-nEu"/>
-                            <constraint firstItem="22j-Ir-EKA" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="Xbd-JY-Xdj"/>
                             <constraint firstItem="22j-Ir-EKA" firstAttribute="top" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="25" id="Yae-FS-tcs"/>
                             <constraint firstItem="TSj-Gs-6IZ" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="gOH-s4-1AX"/>
+                            <constraint firstItem="22j-Ir-EKA" firstAttribute="leading" secondItem="STa-dw-ZY4" secondAttribute="leading" constant="84" id="kRi-nV-m8a"/>
+                            <constraint firstItem="hnC-G3-Qyh" firstAttribute="leading" secondItem="22j-Ir-EKA" secondAttribute="trailing" constant="25" id="pE7-xD-3rW"/>
                             <constraint firstItem="YrB-qg-Jth" firstAttribute="leading" secondItem="wvx-eT-SC5" secondAttribute="trailing" constant="25" id="x2O-8f-hgq"/>
                         </constraints>
                     </view>
@@ -161,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GBu-aI-Ird" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1011" y="699"/>
+            <point key="canvasLocation" x="-1011.4503816793892" y="698.59154929577471"/>
         </scene>
         <!--UnlockedStoryboard-->
         <scene sceneID="aor-68-ogH">
@@ -170,6 +196,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fO-HM-Qbi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1357" y="1118"/>
+        </scene>
+        <!--LeaderboardStoryboard-->
+        <scene sceneID="Ssi-To-C57">
+            <objects>
+                <viewControllerPlaceholder storyboardName="LeaderboardStoryboard" id="6N5-yj-8el" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u9Q-fQ-UsF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-458" y="931"/>
         </scene>
         <!--FriendsListStoryboard-->
         <scene sceneID="yjz-uO-gOM">

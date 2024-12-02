@@ -63,6 +63,8 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     var gameStarted = false
     var gameInstructions = "You will have 60 seconds to complete 3 rounds of finding the hidden UT Tower amongst similar objects. Press the play button to begin!" // need to prep b4 segue
     
+    var delegate: UIViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -316,75 +318,11 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
                 print("locationCoordinates is nil")
             }
             destinationVC.locationTitle = locationTitle
+            destinationVC.delegate = delegate
             print("Passing locationTitle: \(locationTitle)")
         }
     }
 
 
 }
-
-
-
-// code for sign out alert
-//
-//let controller = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
-//
-//controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: signOut(alert:)))
-//
-//present(controller, animated: true)
-//
-//
-//func signOut(alert: UIAlertAction) {
-//    do {
-//        try Auth.auth().signOut()
-//        // segue to login screen
-//    } catch {
-//        let controller = UIAlertController(title: "Error", message: "Account deletion failed. Try again.", preferredStyle: .alert)
-//
-//        controller.addAction(UIAlertAction(title: "Okay", style: .cancel))
-//    }
-//
-//    performSegue(withIdentifier: "SignOutSegure", sender: self) // add segue in storyboard
-//}
-//
-//override func prepare(for segue:UIStoryboardSegue, sender:Any?) {
-//    
-//    if segue.identifier == "SignOutSegue", let nextVC = segue.destination as? LoginViewController {
-//        // add prep code
-//    }
-//}
-
-
-
-
-// code for delete account alert
-
-//let controller = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account? All progress will be lost.", preferredStyle: .alert)
-//
-//controller.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: deleteAccount(alert:)))
-//
-//present(controller, animated: true)
-//
-//
-//func deleteAccount(alert: UIAlertAction) {
-//    let user = Auth.auth().currentUser
-//    
-//    user?.delete()
-//    
-//    performSegue(withIdentifier: "DeleteAccountSegure", sender: self) // add segue in storyboard
-//}
-//
-//override func prepare(for segue:UIStoryboardSegue, sender:Any?) {
-//    
-//    if segue.identifier == "DeleteAccountSegue", let nextVC = segue.destination as? LoginViewController {
-//        // add prep code
-//    }
-//}
-
-
-
-
-
 

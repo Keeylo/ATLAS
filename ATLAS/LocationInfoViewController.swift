@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import CoreLocation
 import GEOSwift
+import FirebaseAuth
+import FirebaseFirestore
 
 class LocationInfoViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,6 +24,8 @@ class LocationInfoViewController: UIViewController, CLLocationManagerDelegate {
     var currentImageIndex = 0
     var coordinates: Coordinate?
     var locationTitle: String = "Unknown"
+    
+    var delegate: UIViewController!
 
     // defining current dummy data
     let locationData: [Coordinate: (name: String, description: String, tags: [String], images: [String])] = [
@@ -58,20 +62,22 @@ class LocationInfoViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         
         // Debugging
-            print("LocationInfoViewController loaded")
-            print("Coordinates: \(coordinates ?? Coordinate(latitude: 0, longitude: 0))")
-            print("Title: \(locationTitle)")
+        print("LocationInfoViewController loaded")
+        print("Coordinates: \(coordinates ?? Coordinate(latitude: 0, longitude: 0))")
+        print("Title: \(locationTitle)")
         
         // Load location info if coordinates are provided
-                if let coordinates = coordinates {
-                    if let data = locationData[coordinates] {
-                        setupLocationInfo(name: data.name, description: data.description, tags: data.tags, images: data.images)
-                    } else {
-                        print("Error: No location data found for these coordinates.")
-                    }
-                } else {
-                    print("Error: Coordinates not provided.")
-                }
+        if let coordinates = coordinates {
+            if let data = locationData[coordinates] {
+                setupLocationInfo(name: data.name, description: data.description, tags: data.tags, images: data.images)
+            } else {
+                print("Error: No location data found for these coordinates.")
+            }
+        } else {
+            print("Error: Coordinates not provided.")
+        }
+        
+        unlockLocation()
     }
 
     func setupLocationInfo(name: String, description: String, tags: [String], images: [String]) {
@@ -138,6 +144,29 @@ class LocationInfoViewController: UIViewController, CLLocationManagerDelegate {
         currentImageIndex = (currentImageIndex - 1 + images.count) % images.count
         updateImageView()
     }
+    
+    func unlockLocation() {
+        if let user = Auth.auth().currentUser {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(user.uid)
+            
+            // Update the username field (or any other field you want)
+            userRef.updateData([
+                "locations": FieldValue.arrayUnion([self.locationTitle])
+            ]) { error in
+                if let error = error {
+                    print("Error updating user data: \(error.localizedDescription)")
+                } else {
+                    let otherVC = self.delegate as! LocationUnlocker
+                    
+                    otherVC.unlockLocation(locationName: self.locationTitle)
+                    print("Location successfully unlocked!")
+                }
+            } 
+        } else {
+            print("couldn't authenticate user")
+        }
+    }
 
 //    // CLLocationManagerDelegate method
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -198,5 +227,6 @@ struct Coordinate: Hashable {
     static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
+    
 }
 
