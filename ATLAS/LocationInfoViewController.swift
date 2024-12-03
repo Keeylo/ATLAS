@@ -11,7 +11,7 @@ import GEOSwift
 import FirebaseAuth
 import FirebaseFirestore
 
-class LocationInfoViewController: UIViewController{
+class LocationInfoViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -22,10 +22,12 @@ class LocationInfoViewController: UIViewController{
     var currentImageIndex = 0
     var coordinates: Coordinate?
     var locationTitle: String = "Unknown"
-    var locationName: String?
+//    var locationName: String?
+    
+    var delegate: UIViewController!
     
     let locationData: [String: (description: String, tags: [String], images: [String])] = [
-            "UT Tower": (
+            "UT Tower, Main Building": (
                 description: "The UT Tower is a symbol of the University of Texas, known for its stunning architecture and panoramic views.",
                 tags: ["Study Rooms", "Event Spaces"],
                 images: ["ut_tower_image", "ut_tower_image2"]
@@ -40,7 +42,7 @@ class LocationInfoViewController: UIViewController{
                 tags: ["Sculpture", "Conceptual Art"],
                 images: ["the_west_image1", "the_west_image2", "the_west_image3"]
             ),
-            "Monochrome for Austin": (
+            "Monochrome For Austin": (
                 description: "This sculpture features 70 canoes balanced precariously, symbolizing motion, rhythm, and solitude.",
                 tags: ["Large-Scale Art", "Sculpture"],
                 images: ["monochrome_for_austin_image1", "monochrome_for_austin_image2"]
@@ -51,14 +53,22 @@ class LocationInfoViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let locationName = locationName {
-            if let data = locationData[locationName] {
-                setupLocationInfo(name: locationName, description: data.description, tags: data.tags, images: data.images)
-            } else {
-                print("Error: No location data found for this location name.")
-            }
+//        if let locationTitle = locationTitle {
+//            if let data = locationData[locationTitle] {
+//                setupLocationInfo(name: locationTitle, description: data.description, tags: data.tags, images: data.images)
+//            } else {
+//                print("Error: No location data found for this location name.")
+//            }
+//        } else {
+//            print("Error: Location name not provided.")
+//        }
+        
+        print("mono title: \(locationTitle)")
+        
+        if let data = locationData[locationTitle] {
+            setupLocationInfo(name: locationTitle, description: data.description, tags: data.tags, images: data.images)
         } else {
-            print("Error: Location name not provided.")
+            print("Error: No location data found for this location name.")
         }
         
         unlockLocation()
@@ -103,6 +113,9 @@ class LocationInfoViewController: UIViewController{
 
             // Add the button to the stack view
             tagsStackView.addArrangedSubview(tagButton)
+            
+            tagButton.translatesAutoresizingMaskIntoConstraints = false
+            tagButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
     
@@ -141,10 +154,12 @@ class LocationInfoViewController: UIViewController{
                 if let error = error {
                     print("Error updating user data: \(error.localizedDescription)")
                 } else {
-                    let otherVC = self.delegate as! LocationUnlocker
-                    
-                    otherVC.unlockLocation(locationName: self.locationTitle)
-                    print("Location successfully unlocked!")
+                    if (self.locationTitle != "Unknown") {
+                        let otherVC = self.delegate as! LocationUnlocker
+                        
+                        otherVC.unlockLocation(locationName: self.locationTitle)
+                        print("Location successfully unlocked!")
+                    }
                 }
             } 
         } else {
@@ -185,32 +200,32 @@ class LocationInfoViewController: UIViewController{
 //    }
 }
 
-struct Coordinate: Hashable {
-    let latitude: Double
-    let longitude: Double
-    
-    init(_ coordinate: CLLocationCoordinate2D) {
-        self.latitude = coordinate.latitude
-        self.longitude = coordinate.longitude
-    }
-    
-    init(latitude: Double, longitude: Double) {
-        self.latitude = latitude
-        self.longitude = longitude
-    }
-    
-    var clCoordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(latitude)
-        hasher.combine(longitude)
-    }
-    
-    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
-        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
-    }
-    
-}
+//struct Coordinate: Hashable {
+//    let latitude: Double
+//    let longitude: Double
+//    
+//    init(_ coordinate: CLLocationCoordinate2D) {
+//        self.latitude = coordinate.latitude
+//        self.longitude = coordinate.longitude
+//    }
+//    
+//    init(latitude: Double, longitude: Double) {
+//        self.latitude = latitude
+//        self.longitude = longitude
+//    }
+//    
+//    var clCoordinate: CLLocationCoordinate2D {
+//        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//    }
+//    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(latitude)
+//        hasher.combine(longitude)
+//    }
+//    
+//    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
+//        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+//    }
+//    
+//}
 

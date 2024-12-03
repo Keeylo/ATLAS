@@ -132,7 +132,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22j-Ir-EKA">
-                                <rect key="frame" x="84" y="693" width="100" height="50"/>
+                                <rect key="frame" x="84.666666666666686" y="693" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="p1Q-UD-tR6"/>
                                     <constraint firstAttribute="height" constant="50" id="sn9-gA-jzK"/>
@@ -146,14 +146,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnC-G3-Qyh">
-                                <rect key="frame" x="209" y="693" width="100" height="50"/>
+                                <rect key="frame" x="208.66666666666663" y="693" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="32P-WR-Akb"/>
                                     <constraint firstAttribute="height" constant="50" id="tyX-Pn-yzz"/>
                                 </constraints>
                                 <color key="tintColor" red="0.85490196939999996" green="0.35686278339999999" blue="0.15686275059999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Leader board">
+                                <buttonConfiguration key="configuration" style="filled" title="Leader Board">
                                     <color key="baseBackgroundColor" red="0.85490196939999996" green="0.35686278339999999" blue="0.15686275059999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -164,6 +164,7 @@
                         <viewLayoutGuide key="safeArea" id="STa-dw-ZY4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="hnC-G3-Qyh" firstAttribute="trailing" secondItem="YrB-qg-Jth" secondAttribute="trailing" constant="62" id="6g5-Dj-KE7"/>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="TSj-Gs-6IZ" secondAttribute="bottom" id="858-Kz-Qt5"/>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="150" id="AfG-id-iqI"/>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="ur2-HX-3Wv" secondAttribute="bottom" constant="150" id="BIq-NV-QoT"/>
@@ -171,15 +172,16 @@
                             <constraint firstItem="YrB-qg-Jth" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="LVt-1V-QC8"/>
                             <constraint firstItem="STa-dw-ZY4" firstAttribute="bottom" secondItem="wvx-eT-SC5" secondAttribute="bottom" constant="150" id="TM1-60-gbA"/>
                             <constraint firstItem="ur2-HX-3Wv" firstAttribute="leading" secondItem="YrB-qg-Jth" secondAttribute="trailing" constant="25" id="Tm7-8a-nEu"/>
+                            <constraint firstItem="22j-Ir-EKA" firstAttribute="leading" secondItem="YrB-qg-Jth" secondAttribute="leading" constant="-62" id="Y0O-ry-a5g"/>
                             <constraint firstItem="22j-Ir-EKA" firstAttribute="top" secondItem="YrB-qg-Jth" secondAttribute="bottom" constant="25" id="Yae-FS-tcs"/>
                             <constraint firstItem="TSj-Gs-6IZ" firstAttribute="centerX" secondItem="7Gv-bx-BZn" secondAttribute="centerX" id="gOH-s4-1AX"/>
-                            <constraint firstItem="22j-Ir-EKA" firstAttribute="leading" secondItem="STa-dw-ZY4" secondAttribute="leading" constant="84" id="kRi-nV-m8a"/>
-                            <constraint firstItem="hnC-G3-Qyh" firstAttribute="leading" secondItem="22j-Ir-EKA" secondAttribute="trailing" constant="25" id="pE7-xD-3rW"/>
                             <constraint firstItem="YrB-qg-Jth" firstAttribute="leading" secondItem="wvx-eT-SC5" secondAttribute="trailing" constant="25" id="x2O-8f-hgq"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dismissButton" destination="TSj-Gs-6IZ" id="Xgc-2s-cPP"/>
+                        <outlet property="friendsListButton" destination="22j-Ir-EKA" id="PVU-jn-1op"/>
+                        <outlet property="leaderboardButton" destination="hnC-G3-Qyh" id="QKU-A7-Ee1"/>
                         <outlet property="settingsButton" destination="ur2-HX-3Wv" id="yI3-Cz-4Td"/>
                         <outlet property="unlockedButton" destination="TSj-Gs-6IZ" id="ZIN-D2-QFs"/>
                         <outlet property="userGuideButton" destination="YrB-qg-Jth" id="6P1-JG-G0t"/>

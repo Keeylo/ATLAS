@@ -382,7 +382,7 @@ extension UnlockedAreasViewController: UICollectionViewDataSource, UICollectionV
             let storyboard = UIStoryboard(name: "LocationInfoStoryboard", bundle: nil) // Replace "Main" with your storyboard name
             if let locationInfoVC = storyboard.instantiateViewController(withIdentifier: "LocationInfoViewController") as? LocationInfoViewController {
                 // Set the locationName
-                locationInfoVC.locationName = area.name
+                locationInfoVC.locationTitle = area.name
                 // Present the view controller
                 self.present(locationInfoVC, animated: true, completion: nil)
             }

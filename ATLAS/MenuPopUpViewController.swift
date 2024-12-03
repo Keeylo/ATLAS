@@ -14,12 +14,14 @@ class MenuPopUpViewController: UIViewController {
     @IBOutlet weak var unlockedButton: UIButton!
     @IBOutlet weak var userGuideButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var friendsListButton: UIButton!
+    @IBOutlet weak var leaderboardButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     
@@ -32,6 +34,8 @@ class MenuPopUpViewController: UIViewController {
     
     @IBAction func settingsPressed(_ sender: Any) {
     }
+    
+    
     
     @IBAction func dismissPressed(_ sender: Any) {
         UIView.animate(withDuration: 0.3, animations: {

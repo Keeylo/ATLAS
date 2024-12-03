@@ -346,6 +346,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //                print("locationCoordinates is nil")
 //            }
             print("preparing info segue")
+            print("loc name: \(self.selectedLocation?.title)")
             destinationVC.delegate = self
             destinationVC.coordinates = Coordinate(self.selectedLocation!.coordinate)
             
