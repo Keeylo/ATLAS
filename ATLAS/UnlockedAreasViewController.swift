@@ -342,24 +342,17 @@ class UnlockedAreasViewController: UIViewController {
             Area(name: "Gregory Gymnasium", image: "gregGood", coordinate: Coordinate(latitude: 30.28447, longitude: -97.73676)),
             Area(name: "Norman Hackerman Building", image: "normanGood", coordinate: Coordinate(latitude: 30.28765, longitude: -97.73801), isUnlocked: false),
             Area(name: "UT Tower, Main Building", image: "uttowerGooder", coordinate: Coordinate(latitude: 30.28593, longitude: -97.73941)),
-            Area(name: "Littlefield Fountain", image: "fountainGooder", coordinate: Coordinate(latitude: 30.28396, longitude: -97.73957)),
-            Area(name: "Texas Union", image: "unionGood", coordinate: Coordinate(latitude: 30.28674373328207,longitude: -97.74099681516714)),
+            Area(name: "The Littlefield Fountain", image: "fountainGooder", coordinate: Coordinate(latitude: 30.28396, longitude: -97.73957)),
+            Area(name: "The UT Student Union", image: "unionGood", coordinate: Coordinate(latitude: 30.28674373328207,longitude: -97.74099681516714)),
             Area(name: "EER", image: "eerGood", coordinate: Coordinate(latitude: 30.28817, longitude: -97.73553)),
-            Area(name: "Blanton Museum", image: "blantonGood", coordinate: Coordinate(latitude: 30.28096, longitude: -97.73774)),
+            Area(name: "Blanton Museum of Art", image: "blantonGood", coordinate: Coordinate(latitude: 30.28096, longitude: -97.73774)),
             Area(name: "Clock Knot", image: "clockknotGood", coordinate: Coordinate(latitude: 30.28974, longitude: -97.73606)),
             Area(name: "The West", image: "the_west_image1", coordinate:
                     Coordinate(latitude: 30.28561, longitude: 97.73824)),
             Area(name: "Monochrome For Austin", image: "monochrome_for_austin_image2",
                  coordinate: Coordinate(latitude: 30.28769, longitude: -97.73707)),
-            Area(name: "Circle with Towers", image: "circle_with_towers_image1", coordinate: Coordinate(latitude: 30.28626, longitude: -97.73694))
+            Area(name: "Circle With Towers", image: "circle_with_towers_image1", coordinate: Coordinate(latitude: 30.28626, longitude: -97.73694))
         ]
-        
-        // for testing without pins/minigames
-//        for index in areas.indices {
-//            areas[index].isUnlocked = true
-//        }
-        
-//        collectionView.reloadData()
         
         let middleIndex = areas.count / 2
         currentIndex = middleIndex

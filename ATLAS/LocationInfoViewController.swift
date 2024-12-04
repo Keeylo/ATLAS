@@ -36,7 +36,7 @@ class LocationInfoViewController: UIViewController {
                 tags: ["Study Rooms", "Event Spaces"],
                 images: ["ut_tower_image", "ut_tower_image2"]
             ),
-            "Circle with Towers": (
+            "Circle With Towers": (
                 description: "This minimalist sculpture features eight rectangular towers in a rhythmic circular formation, emphasizing geometry and simplicity.",
                 tags: ["Minimalism", "Geometry", "Art"],
                 images: ["circle_with_towers_image1", "circle_with_towers_image2"]
@@ -61,12 +61,12 @@ class LocationInfoViewController: UIViewController {
                 tags: ["Science", "Research", "Education"],
                 images: ["norman_hackerman_image1", "normanGood"]
             ),
-            "Littlefield Fountain": (
+            "The Littlefield Fountain": (
                 description: "The Littlefield Fountain is a World War I memorial adorned with bronze sculptures and cascading water, serving as a historic landmark on campus.",
                 tags: ["Memorial", "Sculpture", "History"],
                 images: ["littlefield_fountain_image1", "fountainGooder"]
             ),
-            "Texas Union": (
+            "The UT Student Union": (
                 description: "The Texas Union is a central hub for student life, offering dining options, study spaces, and venues for various events and activities.",
                 tags: ["Student Center", "Dining", "Events"],
                 images: ["texas_union_image1", "unionGood"]
@@ -76,7 +76,7 @@ class LocationInfoViewController: UIViewController {
                 tags: ["Engineering", "Innovation", "Education"],
                 images: ["eer_building_image1", "eerGood"]
             ),
-            "Blanton Museum": (
+            "Blanton Museum of Art": (
                 description: "The Blanton Museum of Art houses an extensive collection of art from various periods and cultures, featuring modern and contemporary works and rotating exhibitions.",
                 tags: ["Art Museum", "Exhibitions", "Culture"],
                 images: ["blanton_museum_image1", "blantonGood"]
@@ -110,7 +110,7 @@ class LocationInfoViewController: UIViewController {
                 print("Error: No location data found for this location name.")
             }
             
-            unlockLocation()
+//            unlockLocation()
         }
 
         func setupLocationInfo(name: String, description: String, tags: [String], images: [String]) {
