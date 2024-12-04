@@ -300,12 +300,12 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
         wonGame = true
         quitButton.setTitle("You Won!", for: .normal)
         
-        GameState.shared.unlockedAreas[gameLocation] = true
-        NotificationCenter.default.post(
-                    name: NSNotification.Name("AreaUnlocked"),
-                    object: nil,
-                    userInfo: ["areaName": gameLocation]
-                )
+//        GameState.shared.unlockedAreas[gameLocation] = true
+//        NotificationCenter.default.post(
+//                    name: NSNotification.Name("AreaUnlocked"),
+//                    object: nil,
+//                    userInfo: ["areaName": gameLocation]
+//                )
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

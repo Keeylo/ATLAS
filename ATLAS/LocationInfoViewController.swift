@@ -11,6 +11,8 @@ import GEOSwift
 import FirebaseAuth
 import FirebaseFirestore
 
+
+
 class LocationInfoViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -25,6 +27,8 @@ class LocationInfoViewController: UIViewController {
 //    var locationName: String?
     
     var delegate: UIViewController!
+    
+    
     
     let locationData: [String: (description: String, tags: [String], images: [String])] = [
             "UT Tower, Main Building": (
@@ -46,186 +50,220 @@ class LocationInfoViewController: UIViewController {
                 description: "This sculpture features 70 canoes balanced precariously, symbolizing motion, rhythm, and solitude.",
                 tags: ["Large-Scale Art", "Sculpture"],
                 images: ["monochrome_for_austin_image1", "monochrome_for_austin_image2"]
+            ),
+            "Gregory Gymnasium": ( 
+                description: "Gregory Gymnasium is the main fitness and recreation center at UT Austin, offering a variety of sports facilities including swimming pools, basketball courts, and fitness studios.",
+                tags: ["Fitness Center", "Sports"],
+                images: ["gregory_gym_image1", "gregGood"]
+            ),
+            "Norman Hackerman Building": ( 
+                description: "The Norman Hackerman Building is a state-of-the-art facility dedicated to chemistry and biology research, featuring advanced laboratories and modern lecture halls.",
+                tags: ["Science", "Research", "Education"],
+                images: ["norman_hackerman_image1", "normanGood"]
+            ),
+            "Littlefield Fountain": (
+                description: "The Littlefield Fountain is a World War I memorial adorned with bronze sculptures and cascading water, serving as a historic landmark on campus.",
+                tags: ["Memorial", "Sculpture", "History"],
+                images: ["littlefield_fountain_image1", "fountainGooder"]
+            ),
+            "Texas Union": (
+                description: "The Texas Union is a central hub for student life, offering dining options, study spaces, and venues for various events and activities.",
+                tags: ["Student Center", "Dining", "Events"],
+                images: ["texas_union_image1", "unionGood"]
+            ),
+            "EER": (
+                description: "The Engineering Education and Research Center (EER) is a cutting-edge facility that fosters innovation and collaboration among engineering students and faculty.",
+                tags: ["Engineering", "Innovation", "Education"],
+                images: ["eer_building_image1", "eerGood"]
+            ),
+            "Blanton Museum": (
+                description: "The Blanton Museum of Art houses an extensive collection of art from various periods and cultures, featuring modern and contemporary works and rotating exhibitions.",
+                tags: ["Art Museum", "Exhibitions", "Culture"],
+                images: ["blanton_museum_image1", "blantonGood"]
+            ),
+            "Clock Knot": (
+                description: "Clock Knot is a large-scale outdoor sculpture by artist Mark di Suvero, featuring interlocking red steel beams that explore themes of time and complexity.",
+                tags: ["Sculpture", "Public Art", "Modern Art"],
+                images: ["clock_knot_image1", "clockknotGood"]
             )
     ]
 
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        if let locationTitle = locationTitle {
-//            if let data = locationData[locationTitle] {
-//                setupLocationInfo(name: locationTitle, description: data.description, tags: data.tags, images: data.images)
-//            } else {
-//                print("Error: No location data found for this location name.")
-//            }
-//        } else {
-//            print("Error: Location name not provided.")
-//        }
-        
-        print("mono title: \(locationTitle)")
-        
-        if let data = locationData[locationTitle] {
-            setupLocationInfo(name: locationTitle, description: data.description, tags: data.tags, images: data.images)
-        } else {
-            print("Error: No location data found for this location name.")
+            super.viewDidLoad()
+            
+    //        if let locationTitle = locationTitle {
+    //            if let data = locationData[locationTitle] {
+    //                setupLocationInfo(name: locationTitle, description: data.description, tags: data.tags, images: data.images)
+    //            } else {
+    //                print("Error: No location data found for this location name.")
+    //            }
+    //        } else {
+    //            print("Error: Location name not provided.")
+    //        }
+            
+            print("mono title: \(locationTitle)")
+            
+            if let data = locationData[locationTitle] {
+                setupLocationInfo(name: locationTitle, description: data.description, tags: data.tags, images: data.images)
+            } else {
+                print("Error: No location data found for this location name.")
+            }
+            
+            unlockLocation()
+        }
+
+        func setupLocationInfo(name: String, description: String, tags: [String], images: [String]) {
+                titleLabel.text = name
+                descriptionLabel.text = "Description:"
+                descriptionBodyLabel.text = description
+                
+                // Ensure the labels resize to fit their content
+                titleLabel.sizeToFit()
+                descriptionBodyLabel.sizeToFit()
+            
+                // Load images
+                self.images = images.compactMap { UIImage(named: $0) }
+                updateImageView()
+                
+                // Setup tags
+                setupTags(tags)
+            }
+
+        func setupTags(_ tags: [String]) {
+            // Clear any existing tags from the stack view
+            tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+            for tag in tags {
+                let tagButton = UIButton(type: .system)
+                
+                // Use a filled configuration with padding and corner style
+                var config = UIButton.Configuration.filled()
+                config.title = tag
+                config.baseBackgroundColor = .systemOrange
+                config.baseForegroundColor = .white
+                config.cornerStyle = .capsule // Gives a rounded, capsule-style button
+                config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
+
+                tagButton.configuration = config
+
+                // Optionally, add an action if you want the button to be interactive
+                tagButton.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
+
+                // Add the button to the stack view
+                tagsStackView.addArrangedSubview(tagButton)
+                
+                tagButton.translatesAutoresizingMaskIntoConstraints = false
+                tagButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            }
         }
         
-        unlockLocation()
-    }
+        @objc func tagButtonTapped(_ sender: UIButton) {
+            if let tagTitle = sender.title(for: .normal) {
+                print("Tag \(tagTitle) tapped")
+            }
+        }
 
-    func setupLocationInfo(name: String, description: String, tags: [String], images: [String]) {
-            titleLabel.text = name
-            descriptionLabel.text = "Description:"
-            descriptionBodyLabel.text = description
-            
-            // Ensure the labels resize to fit their content
-            titleLabel.sizeToFit()
-            descriptionBodyLabel.sizeToFit()
-        
-            // Load images
-            self.images = images.compactMap { UIImage(named: $0) }
+        func updateImageView() {
+            if !images.isEmpty {
+                imageView.image = images[currentImageIndex]
+                imageView.contentMode = .scaleAspectFit // Ensure the image scales properly
+            }
+        }
+
+        @IBAction func nextImage(_ sender: UIButton) {
+            currentImageIndex = (currentImageIndex + 1) % images.count
             updateImageView()
-            
-            // Setup tags
-            setupTags(tags)
         }
 
-    func setupTags(_ tags: [String]) {
-        // Clear any existing tags from the stack view
-        tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
-        for tag in tags {
-            let tagButton = UIButton(type: .system)
-            
-            // Use a filled configuration with padding and corner style
-            var config = UIButton.Configuration.filled()
-            config.title = tag
-            config.baseBackgroundColor = .systemOrange
-            config.baseForegroundColor = .white
-            config.cornerStyle = .capsule // Gives a rounded, capsule-style button
-            config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10)
-
-            tagButton.configuration = config
-
-            // Optionally, add an action if you want the button to be interactive
-            tagButton.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
-
-            // Add the button to the stack view
-            tagsStackView.addArrangedSubview(tagButton)
-            
-            tagButton.translatesAutoresizingMaskIntoConstraints = false
-            tagButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        @IBAction func previousImage(_ sender: UIButton) {
+            currentImageIndex = (currentImageIndex - 1 + images.count) % images.count
+            updateImageView()
         }
-    }
-    
-    @objc func tagButtonTapped(_ sender: UIButton) {
-        if let tagTitle = sender.title(for: .normal) {
-            print("Tag \(tagTitle) tapped")
-        }
-    }
-
-    func updateImageView() {
-        if !images.isEmpty {
-            imageView.image = images[currentImageIndex]
-            imageView.contentMode = .scaleAspectFit // Ensure the image scales properly
-        }
-    }
-
-    @IBAction func nextImage(_ sender: UIButton) {
-        currentImageIndex = (currentImageIndex + 1) % images.count
-        updateImageView()
-    }
-
-    @IBAction func previousImage(_ sender: UIButton) {
-        currentImageIndex = (currentImageIndex - 1 + images.count) % images.count
-        updateImageView()
-    }
-    
-    func unlockLocation() {
-        if let user = Auth.auth().currentUser {
-            let db = Firestore.firestore()
-            let userRef = db.collection("users").document(user.uid)
-            
-            // Update the username field (or any other field you want)
-            userRef.updateData([
-                "locations": FieldValue.arrayUnion([self.locationTitle])
-            ]) { error in
-                if let error = error {
-                    print("Error updating user data: \(error.localizedDescription)")
-                } else {
-                    if (self.locationTitle != "Unknown") {
-                        let otherVC = self.delegate as! LocationUnlocker
-                        
-                        otherVC.unlockLocation(locationName: self.locationTitle)
-                        print("Location successfully unlocked!")
+        
+        func unlockLocation() {
+            if let user = Auth.auth().currentUser {
+                let db = Firestore.firestore()
+                let userRef = db.collection("users").document(user.uid)
+                
+                // Update the username field (or any other field you want)
+                userRef.updateData([
+                    "locations": FieldValue.arrayUnion([self.locationTitle])
+                ]) { error in
+                    if let error = error {
+                        print("Error updating user data: \(error.localizedDescription)")
+                    } else {
+                        if (self.locationTitle != "Unknown") {
+                            let otherVC = self.delegate as! LocationUnlocker
+                            
+                            otherVC.unlockLocation(locationName: self.locationTitle)
+                            print("Location successfully unlocked!")
+                        }
                     }
                 }
-            } 
-        } else {
-            print("couldn't authenticate user")
+            } else {
+                print("couldn't authenticate user")
+            }
         }
+
+    //    // CLLocationManagerDelegate method
+    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    //        guard let userLocation = locations.last else { return }
+    //
+    //        let userPoint = Point(x: userLocation.coordinate.latitude, y: userLocation.coordinate.longitude)
+    //
+    ////        // Check proximity to all predefined locations
+    ////        checkProximity(to: userPoint)
+    //    }
+
+    //    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    //        print("Failed to get user location: \(error.localizedDescription)")
+    //    }
+    //
+    //    func checkProximity(to userPoint: Point) {
+    //        // Iterate over all locations to find the closest match within 50 meters
+    //        for location in locationsData {
+    //            let distanceInMeters = try? userPoint.distance(to: location.coordinate)
+    //            if let distance = distanceInMeters, distance <= 50 {
+    //                print("User is within 50 meters of \(location.name).")
+    //                setupData(for: location)
+    //                return
+    //            }
+    //        }
+    //
+    //        // If no location is nearby, show an alert
+    //        print("User is not within 50 meters of any known location.")
+    //        let alert = UIAlertController(title: "Location Not Found", message: "You are not near any of the predefined locations.", preferredStyle: .alert)
+    //        alert.addAction(UIAlertAction(title: "OK", style: .default))
+    //        present(alert, animated: true)
+    //    }
     }
 
-//    // CLLocationManagerDelegate method
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let userLocation = locations.last else { return }
-//        
-//        let userPoint = Point(x: userLocation.coordinate.latitude, y: userLocation.coordinate.longitude)
-//        
-////        // Check proximity to all predefined locations
-////        checkProximity(to: userPoint)
-//    }
-
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print("Failed to get user location: \(error.localizedDescription)")
-//    }
-//
-//    func checkProximity(to userPoint: Point) {
-//        // Iterate over all locations to find the closest match within 50 meters
-//        for location in locationsData {
-//            let distanceInMeters = try? userPoint.distance(to: location.coordinate)
-//            if let distance = distanceInMeters, distance <= 50 {
-//                print("User is within 50 meters of \(location.name).")
-//                setupData(for: location)
-//                return
-//            }
-//        }
-//
-//        // If no location is nearby, show an alert
-//        print("User is not within 50 meters of any known location.")
-//        let alert = UIAlertController(title: "Location Not Found", message: "You are not near any of the predefined locations.", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default))
-//        present(alert, animated: true)
-//    }
-}
-
-//struct Coordinate: Hashable {
-//    let latitude: Double
-//    let longitude: Double
-//    
-//    init(_ coordinate: CLLocationCoordinate2D) {
-//        self.latitude = coordinate.latitude
-//        self.longitude = coordinate.longitude
-//    }
-//    
-//    init(latitude: Double, longitude: Double) {
-//        self.latitude = latitude
-//        self.longitude = longitude
-//    }
-//    
-//    var clCoordinate: CLLocationCoordinate2D {
-//        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-//    }
-//    
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(latitude)
-//        hasher.combine(longitude)
-//    }
-//    
-//    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
-//        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
-//    }
-//    
-//}
-
+    //struct Coordinate: Hashable {
+    //    let latitude: Double
+    //    let longitude: Double
+    //
+    //    init(_ coordinate: CLLocationCoordinate2D) {
+    //        self.latitude = coordinate.latitude
+    //        self.longitude = coordinate.longitude
+    //    }
+    //
+    //    init(latitude: Double, longitude: Double) {
+    //        self.latitude = latitude
+    //        self.longitude = longitude
+    //    }
+    //
+    //    var clCoordinate: CLLocationCoordinate2D {
+    //        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    //    }
+    //
+    //    func hash(into hasher: inout Hasher) {
+    //        hasher.combine(latitude)
+    //        hasher.combine(longitude)
+    //    }
+    //
+    //    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
+    //        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    //    }
+    //
+    //}
