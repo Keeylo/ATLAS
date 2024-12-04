@@ -327,9 +327,9 @@ class UnlockedAreasViewController: UIViewController {
         ]
         
         // for testing without pins/minigames
-        for index in areas.indices {
-            areas[index].isUnlocked = true
-        }
+//        for index in areas.indices {
+//            areas[index].isUnlocked = true
+//        }
         
         collectionView.reloadData()
         
