@@ -26,7 +26,17 @@ protocol GameWon {
     func didWinGame()
 }
 
-class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameWon {
+// protocol that resets the game
+protocol GameResetter {
+    func resetGame()
+}
+
+// protocol that segues back to the map
+protocol GameDismisser {
+    func dismissGame()
+}
+
+class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameWon, GameResetter, GameDismisser {
     
     @IBOutlet weak var controllerView: UIView!
     
@@ -50,7 +60,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
 //    var hints1: String = "hint 1" // need to prep b4 segue
 //    var hints2: String = "hint 2" // need to prep b4 segue
 //    var hints3: String = "hint 3" // need to prep b4 segue
-    var hints:[String] = ["Round 1: Look for the disco ball.", "Round 2: Look for the horse.", "Round 3: Look around the baby doll head."] // need to prep b4 segue
+    var hints:[String] = [] // need to prep b4 segue
     var totalHints = 3 // need to be prep b4 segue (might have less than 3, but max 3)
     var hintCount = 3
     var hintsIndex = 0
@@ -59,14 +69,17 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     var timeLeft: Int = 60 // possibly need to prep b4 segue
     var timerPaused: Bool = true
     
-    var gameLocation: String = "Tower" // need to prep b4 segue
+    var gameLocation: String = "Unknown"
     var gameStarted = false
-    var gameInstructions = "You will have 60 seconds to complete 3 rounds of finding the hidden UT Tower amongst similar objects. Press the play button to begin!" // need to prep b4 segue
+    var gameInstructions = "An error occurred and the game instructions can not be displayed."
     
     var delegate: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        controllerView.layer.borderColor = UIColor(.black).cgColor
+        controllerView.layer.borderWidth = 1
 
         pausePlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         
@@ -167,9 +180,14 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     func pauseResumeGame() {
         if (gameStarted == false) {
             gameStarted = true
-            if (gameLocation == "Tower") {
+            if (gameLocation == "UT Tower, Main Building") {
                 let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
                 let round1VC = storyboard.instantiateViewController(withIdentifier: "FirstRoundTower") as? FirstRoundTowerViewController
+                round1VC?.delegate = self
+                displayChildViewController(round1VC!)
+            } else if (gameLocation == "The Littlefield Fountain") {
+                let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
+                let round1VC = storyboard.instantiateViewController(withIdentifier: "FountainTrivia") as? FountainTriviaViewController
                 round1VC?.delegate = self
                 displayChildViewController(round1VC!)
             }
@@ -255,7 +273,11 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     // resets the whole game
     func resetMiniGame() {
         
+        wonGame = false
+        
         pausePlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+        quitButton.setTitle("Quit Mini Game?", for: .normal)
         
         pauseTimer()
         timeLeft = 60
@@ -293,6 +315,16 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     // pauses the timer
     func stopsTimer() {
         pauseTimer()
+    }
+    
+    // resets the game
+    func resetGame() {
+        resetMiniGame()
+    }
+    
+    //
+    func dismissGame() {
+        dismiss(animated: true)
     }
     
     // The user is victorious

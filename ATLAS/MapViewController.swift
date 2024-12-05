@@ -300,14 +300,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         selectedLocation = marker
         
-        if (marker.isUnlocked) {
+        if (marker.isUnlocked || (annotationTitle != "UT Tower, Main Building" && annotationTitle != "The Littlefield Fountain")) {
             print("PerformSegue")
             performSegue(withIdentifier: "LocationInfoSegue", sender: self)
         } else {
             
             markerRefVisual = markerView
             markerRef = marker
-            selectedLocation = marker
             let alert = UIAlertController(
                 title: "Unknown Location Found!",
                 message: "Play a mini game to unlock this map marker? :)",
@@ -332,7 +331,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
            let selectedLocation = selectedLocation {
             destinationVC.delegate = self
             destinationVC.locationTitle = selectedLocation.title ?? "Unknown"
+            destinationVC.gameLocation = selectedLocation.title ?? "Unknown"
             destinationVC.locationCoordinates = selectedLocation.coordinate
+            if (selectedLocation.title == "UT Tower, Main Building") {
+                destinationVC.gameInstructions = "You will have 60 seconds to complete 3 rounds of finding the hidden UT Tower amongst similar objects. Press the play button to begin!"
+                destinationVC.hints = ["Round 1: Look for the disco ball.", "Round 2: Look for the horse.", "Round 3: Look around the baby doll head."]
+                destinationVC.hintCount = 3
+                destinationVC.totalHints = 3
+            } else if (selectedLocation.title == "The Littlefield Fountain") {
+                destinationVC.gameInstructions = "You will have 60 seconds to correctly answer 3 trivia questions about The Littlefield Fountain. Press the play button to begin!"
+                destinationVC.hints = ["There are no hints for this game."]
+                destinationVC.hintCount = 1
+                destinationVC.totalHints = 1
+                
+            }
         } else if segue.identifier == "LocationInfoSegue",
           let destinationVC = segue.destination as? LocationInfoViewController {
                     //, let selectedLocation = selectedLocation {

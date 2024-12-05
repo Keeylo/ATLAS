@@ -37,6 +37,7 @@
 		D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */; };
 		D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53967402CC9CD570090A39E /* UserSettingsViewController.swift */; };
 		D54921392CFD568600D4AB54 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54921382CFD568600D4AB54 /* LeaderboardViewController.swift */; };
+		D54921552D01444100D4AB54 /* FountainTriviaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54921542D01444100D4AB54 /* FountainTriviaViewController.swift */; };
 		D5700B792CE41EBF00DF425D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D5BF14552CC17D1E00A0604C /* FirebaseAnalytics */; };
 		D5700B7C2CE4230800DF425D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D5700B7B2CE4230800DF425D /* FirebaseAnalytics */; };
 		D5700B7E2CE4230800DF425D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D5700B7D2CE4230800DF425D /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -113,6 +114,7 @@
 		D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpViewController.swift; sourceTree = "<group>"; };
 		D53967402CC9CD570090A39E /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		D54921382CFD568600D4AB54 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		D54921542D01444100D4AB54 /* FountainTriviaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FountainTriviaViewController.swift; sourceTree = "<group>"; };
 		D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructionsViewController.swift; sourceTree = "<group>"; };
 		D57D7B4B2CDA892B00963080 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D596C2842CBF39F60047E563 /* MiniGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				D5BF14522CC0C79C00A0604C /* WonGameViewController.swift */,
 				49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */,
 				49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */,
+				D54921542D01444100D4AB54 /* FountainTriviaViewController.swift */,
 				D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */,
 				49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */,
 				49923EE52CB7A1C900D2CBA2 /* LaunchScreen.storyboard */,
@@ -363,6 +366,7 @@
 				49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */,
 				D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */,
 				D596C2852CBF39F60047E563 /* MiniGameViewController.swift in Sources */,
+				D54921552D01444100D4AB54 /* FountainTriviaViewController.swift in Sources */,
 				D54921392CFD568600D4AB54 /* LeaderboardViewController.swift in Sources */,
 				D5BC7D182CEC1B42000D28AB /* PickProfilePictureViewController.swift in Sources */,
 				D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */,
