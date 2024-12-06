@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 import CoreLocation
-
+import FirebaseFirestore
 
 
 // protocol that changes this VC's textLabel.text
@@ -299,13 +299,39 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     func didWinGame() {
         wonGame = true
         quitButton.setTitle("You Won!", for: .normal)
+        unlockLocation()
         
-        GameState.shared.unlockedAreas[gameLocation] = true
-        NotificationCenter.default.post(
-                    name: NSNotification.Name("AreaUnlocked"),
-                    object: nil,
-                    userInfo: ["areaName": gameLocation]
-                )
+//        GameState.shared.unlockedAreas[gameLocation] = true
+//        NotificationCenter.default.post(
+//                    name: NSNotification.Name("AreaUnlocked"),
+//                    object: nil,
+//                    userInfo: ["areaName": gameLocation]
+//                )
+    }
+    
+    func unlockLocation() {
+        if let user = Auth.auth().currentUser {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(user.uid)
+            print(self.locationTitle)
+            // Update the username field (or any other field you want)
+            userRef.updateData([
+                "locations": FieldValue.arrayUnion([self.locationTitle])
+            ]) { error in
+                if let error = error {
+                    print("Error updating user data: \(error.localizedDescription)")
+                } else {
+                    if (self.locationTitle != "Unknown") {
+                        let otherVC = self.delegate as! LocationUnlocker
+                        
+                        otherVC.unlockLocation(locationName: self.locationTitle)
+                        print("Location successfully unlocked!")
+                    }
+                }
+            }
+        } else {
+            print("couldn't authenticate user")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
