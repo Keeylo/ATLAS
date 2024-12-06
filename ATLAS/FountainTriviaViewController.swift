@@ -43,7 +43,7 @@ class FountainTriviaViewController: UIViewController {
             nextQuestion(question: "What material is the fountain's statue made out of?", answerOne: "Gold", answerTwo: "Silver", answerThree: "Copper", answerFour: "Bronze")
             
         } else {
-            answerOneButton.backgroundColor = .red
+            answerOneButton.tintColor = .red
             wrongAnswerChosen()
         }
         
@@ -57,13 +57,14 @@ class FountainTriviaViewController: UIViewController {
             
             nextQuestion(question: "How many levels does the fountain have?", answerOne: "Three", answerTwo: "One", answerThree: "Four", answerFour: "Two")
         } else {
-            answerTwoButton.backgroundColor = .red
+            answerTwoButton.tintColor = .red
+            wrongAnswerChosen()
         }
         
     }
     
     @IBAction func answerThreePressed(_ sender: Any) {
-        answerOneButton.backgroundColor = .red
+        answerThreeButton.tintColor = .red
         wrongAnswerChosen()
     }
     
@@ -82,7 +83,8 @@ class FountainTriviaViewController: UIViewController {
             let otherVC3 = delegate as! GameWon
             otherVC3.didWinGame()
         } else {
-            answerFourButton.backgroundColor = .red
+            answerFourButton.tintColor = .red
+            wrongAnswerChosen()
         }
     }
     
@@ -95,8 +97,11 @@ class FountainTriviaViewController: UIViewController {
     }
     
     func wrongAnswerChosen() {
+        
         let otherVC = delegate as! TimerStops
         otherVC.stopsTimer()
+        
+        sleep(UInt32(0.5))
         
         let controller = UIAlertController(title: "Wrong Answer!", message: "You lost the game. Press 'Restart' to restart the game, or 'Quit' to quit.", preferredStyle: .alert)
         

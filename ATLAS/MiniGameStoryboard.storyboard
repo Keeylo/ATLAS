@@ -31,8 +31,12 @@
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQR-aa-oQc">
                                 <rect key="frame" x="16" y="147" width="361" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="361" id="CTc-P8-qIb"/>
+                                    <constraint firstAttribute="height" constant="414" id="Rbg-lD-FeW"/>
+                                </constraints>
                                 <connections>
-                                    <segue destination="jYM-RN-KDv" kind="embed" id="gxH-tw-crP"/>
+                                    <segue destination="jYM-RN-KDv" kind="embed" id="0X3-4d-jjh"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMH-jm-Omf">
@@ -384,6 +388,180 @@
             </objects>
             <point key="canvasLocation" x="-2422.1374045801526" y="-21.126760563380284"/>
         </scene>
+        <!--Stadium Game View Controller-->
+        <scene sceneID="OES-aw-Blx">
+            <objects>
+                <viewController storyboardIdentifier="StadiumGame" id="xe6-Z6-KHs" customClass="StadiumGameViewController" customModule="ATLAS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="09U-fO-raK">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stadium" translatesAutoresizingMaskIntoConstraints="NO" id="8nI-mh-q9W">
+                                <rect key="frame" x="16" y="219" width="361" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="414" id="Ypb-0W-ft6"/>
+                                    <constraint firstAttribute="width" constant="361" id="dqf-PV-u84"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trash" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LMy-Vr-5ev">
+                                <rect key="frame" x="297" y="227.66666666666671" width="78" height="86.333333333333286"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="78" id="QAC-DG-pWX"/>
+                                    <constraint firstAttribute="height" constant="86" id="vT8-Qw-tud"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bananaPeel" translatesAutoresizingMaskIntoConstraints="NO" id="oNr-IX-qH9">
+                                <rect key="frame" x="201" y="552" width="72" height="68"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="M5p-Ix-MF6"/>
+                                    <constraint firstAttribute="width" constant="72" id="QFa-rE-kFX"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="W8Z-WM-O8e" appends="YES" id="LQr-dL-KuB"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tomato" translatesAutoresizingMaskIntoConstraints="NO" id="Tyq-dq-aqk">
+                                <rect key="frame" x="100" y="552" width="68" height="47"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="gHo-jv-mx7"/>
+                                    <constraint firstAttribute="width" constant="68" id="nea-PA-gcW"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ZIB-9U-vbo" appends="YES" id="gCG-Hp-5NN"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crumpledPaper" translatesAutoresizingMaskIntoConstraints="NO" id="Ilt-rO-fwA">
+                                <rect key="frame" x="271" y="495" width="56" height="62"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="ktT-ke-uSn"/>
+                                    <constraint firstAttribute="height" constant="62" id="usF-qY-alh"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="txJ-Io-7TD" appends="YES" id="aLI-Do-Y8a"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paperCup" translatesAutoresizingMaskIntoConstraints="NO" id="BKf-bH-xw8">
+                                <rect key="frame" x="41" y="540" width="32" height="81"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="81" id="NGy-Tr-v27"/>
+                                    <constraint firstAttribute="width" constant="32" id="squ-TA-009"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="A1k-EU-2IF" appends="YES" id="7ah-FE-Bfx"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sodaCan" translatesAutoresizingMaskIntoConstraints="NO" id="CE6-al-ZdH">
+                                <rect key="frame" x="173" y="503" width="64" height="47"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="2vz-OJ-MXN"/>
+                                    <constraint firstAttribute="height" constant="47" id="LyD-KQ-BE0"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3Zq-1g-fqe" appends="YES" id="M2I-ck-1e5"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBottle" translatesAutoresizingMaskIntoConstraints="NO" id="EYO-fw-uHo">
+                                <rect key="frame" x="60" y="503" width="76" height="26"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="HlI-XX-c4U"/>
+                                    <constraint firstAttribute="width" constant="76" id="O4V-Zo-FpV"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="2Or-j4-2E2" appends="YES" id="jtv-41-i4i"/>
+                                </connections>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eatenApple" translatesAutoresizingMaskIntoConstraints="NO" id="Q1d-xd-OTX">
+                                <rect key="frame" x="320" y="565" width="41" height="59"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="41" id="Eca-JN-pzA"/>
+                                    <constraint firstAttribute="height" constant="59" id="RHK-gn-Ibf"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="EJX-LH-OKR" appends="YES" id="G1X-ta-NMq"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QaW-ql-JRI"/>
+                        <color key="backgroundColor" red="0.99215686319999996" green="0.94901967050000002" blue="0.71764707569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="CE6-al-ZdH" firstAttribute="leading" secondItem="8nI-mh-q9W" secondAttribute="trailing" constant="-204" id="CUJ-aF-j5C"/>
+                            <constraint firstItem="Q1d-xd-OTX" firstAttribute="top" secondItem="8nI-mh-q9W" secondAttribute="bottom" constant="-68" id="Gmc-zW-YXi"/>
+                            <constraint firstItem="Ilt-rO-fwA" firstAttribute="leading" secondItem="8nI-mh-q9W" secondAttribute="trailing" constant="-106" id="HhV-2k-cPe"/>
+                            <constraint firstItem="oNr-IX-qH9" firstAttribute="top" secondItem="8nI-mh-q9W" secondAttribute="bottom" constant="-81" id="HjD-MZ-90w"/>
+                            <constraint firstItem="Tyq-dq-aqk" firstAttribute="top" secondItem="8nI-mh-q9W" secondAttribute="bottom" constant="-81" id="HpK-M1-LjN"/>
+                            <constraint firstItem="8nI-mh-q9W" firstAttribute="centerY" secondItem="09U-fO-raK" secondAttribute="centerY" id="IMQ-3A-61m"/>
+                            <constraint firstItem="EYO-fw-uHo" firstAttribute="top" secondItem="8nI-mh-q9W" secondAttribute="bottom" constant="-130" id="QtO-v3-eyl"/>
+                            <constraint firstItem="8nI-mh-q9W" firstAttribute="centerX" secondItem="09U-fO-raK" secondAttribute="centerX" id="RjP-us-0RR"/>
+                            <constraint firstItem="8nI-mh-q9W" firstAttribute="leading" secondItem="Tyq-dq-aqk" secondAttribute="trailing" constant="-152" id="WXs-4C-QwM"/>
+                            <constraint firstItem="Q1d-xd-OTX" firstAttribute="leading" secondItem="8nI-mh-q9W" secondAttribute="trailing" constant="-57" id="Yeu-zL-Xt7"/>
+                            <constraint firstItem="8nI-mh-q9W" firstAttribute="leading" secondItem="EYO-fw-uHo" secondAttribute="trailing" constant="-120" id="cak-gA-P3h"/>
+                            <constraint firstItem="oNr-IX-qH9" firstAttribute="leading" secondItem="8nI-mh-q9W" secondAttribute="trailing" constant="-176" id="dHs-4I-1kk"/>
+                            <constraint firstItem="CE6-al-ZdH" firstAttribute="top" secondItem="8nI-mh-q9W" secondAttribute="bottom" constant="-130" id="dSF-lZ-ojr"/>
+                            <constraint firstItem="Ilt-rO-fwA" firstAttribute="top" secondItem="8nI-mh-q9W" secondAttribute="bottom" constant="-138" id="eRU-s2-Nh0"/>
+                            <constraint firstItem="8nI-mh-q9W" firstAttribute="top" secondItem="LMy-Vr-5ev" secondAttribute="bottom" constant="-95.329999999999998" id="q9j-BV-X7h"/>
+                            <constraint firstItem="BKf-bH-xw8" firstAttribute="top" secondItem="8nI-mh-q9W" secondAttribute="bottom" constant="-93" id="rcF-qB-4ro"/>
+                            <constraint firstItem="LMy-Vr-5ev" firstAttribute="leading" secondItem="8nI-mh-q9W" secondAttribute="trailing" constant="-80" id="yBc-AG-ZEC"/>
+                            <constraint firstItem="8nI-mh-q9W" firstAttribute="leading" secondItem="BKf-bH-xw8" secondAttribute="trailing" constant="-57" id="z6a-Rb-a3d"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="appleImage" destination="Q1d-xd-OTX" id="CRy-gk-bVb"/>
+                        <outlet property="bananaImage" destination="oNr-IX-qH9" id="otd-wK-s88"/>
+                        <outlet property="bottleImage" destination="EYO-fw-uHo" id="ZbD-7R-vPe"/>
+                        <outlet property="canImage" destination="CE6-al-ZdH" id="FYd-H7-6bJ"/>
+                        <outlet property="cupImage" destination="BKf-bH-xw8" id="V4I-DA-KUj"/>
+                        <outlet property="paperBallImage" destination="Ilt-rO-fwA" id="6vZ-20-69t"/>
+                        <outlet property="tomatoImage" destination="Tyq-dq-aqk" id="FPy-9s-F7L"/>
+                        <outlet property="trashCanImage" destination="LMy-Vr-5ev" id="PuN-98-IzL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J5D-vg-8g1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="2Or-j4-2E2">
+                    <connections>
+                        <action selector="handleDragGestureWithRecognizer:" destination="xe6-Z6-KHs" id="Nqq-Jk-QSM"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="3Zq-1g-fqe">
+                    <connections>
+                        <action selector="handleDragGestureWithRecognizer:" destination="xe6-Z6-KHs" id="6Ka-be-eyx"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="txJ-Io-7TD">
+                    <connections>
+                        <action selector="handleDragGestureWithRecognizer:" destination="xe6-Z6-KHs" id="aQY-BU-FWv"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="A1k-EU-2IF">
+                    <connections>
+                        <action selector="handleDragGestureWithRecognizer:" destination="xe6-Z6-KHs" id="NCC-GW-FY7"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="ZIB-9U-vbo">
+                    <connections>
+                        <action selector="handleDragGestureWithRecognizer:" destination="xe6-Z6-KHs" id="ZnT-u4-64C"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="W8Z-WM-O8e">
+                    <connections>
+                        <action selector="handleDragGestureWithRecognizer:" destination="xe6-Z6-KHs" id="n8v-34-Rgl"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="EJX-LH-OKR">
+                    <connections>
+                        <action selector="handleDragGestureWithRecognizer:" destination="xe6-Z6-KHs" id="Fmf-gl-3KE"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1133.5877862595419" y="6.3380281690140849"/>
+        </scene>
         <!--Game Instructions View Controller-->
         <scene sceneID="Ttc-XL-HlM">
             <objects>
@@ -479,10 +657,10 @@
                                 <rect key="frame" x="16" y="219" width="361" height="414"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image 6" translatesAutoresizingMaskIntoConstraints="NO" id="Jhz-ED-eXR">
-                                        <rect key="frame" x="30.666666666666657" y="7" width="300" height="400"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="414"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="9Dm-ff-5JG"/>
-                                            <constraint firstAttribute="height" constant="400" id="cPc-tT-0fo"/>
+                                            <constraint firstAttribute="width" constant="361" id="9Dm-ff-5JG"/>
+                                            <constraint firstAttribute="height" constant="414" id="cPc-tT-0fo"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -516,6 +694,8 @@
         <image name="Image 5" width="532" height="608"/>
         <image name="Image 6" width="522" height="624"/>
         <image name="arrowtriangle.down.fill" catalog="system" width="128" height="120"/>
+        <image name="bananaPeel" width="360" height="314"/>
+        <image name="beerBottle" width="246" height="76"/>
         <image name="button:Rhd-AA-U2K:image" width="98" height="286">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
@@ -26945,8 +27125,18 @@ GB2RABgdmQAYHZsAGB2dABgdnwAYHaEAGC9BABgvRgAYL1MAGC9WABgvYwAYL2gAGC9wABgvcwAYL3gA
 GC+AAAAAAAAABAEAAAAAAAAAaAAAAAAAAAAAAAAAAAAYL4M
 </mutableData>
         </image>
+        <image name="crumpledPaper" width="292" height="302"/>
+        <image name="eatenApple" width="284" height="370"/>
+        <image name="paperCup" width="210" height="516"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="questionMarks" width="1536" height="768"/>
+        <image name="sodaCan" width="422" height="308"/>
+        <image name="stadium" width="460" height="526"/>
+        <image name="tomato" width="576" height="394"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

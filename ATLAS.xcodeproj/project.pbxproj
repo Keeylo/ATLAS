@@ -34,6 +34,7 @@
 		49A44E202CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */; };
 		49C0F4272CE40DDD00206DBC /* LocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */; };
 		49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */; };
+		D52B90A82D02898800E36E4E /* StadiumGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52B90A72D02898800E36E4E /* StadiumGameViewController.swift */; };
 		D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */; };
 		D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53967402CC9CD570090A39E /* UserSettingsViewController.swift */; };
 		D54921392CFD568600D4AB54 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54921382CFD568600D4AB54 /* LeaderboardViewController.swift */; };
@@ -111,6 +112,7 @@
 		49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnlockedStoryboard.storyboard; sourceTree = "<group>"; };
 		49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoViewController.swift; sourceTree = "<group>"; };
 		49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsOfInterest.swift; sourceTree = "<group>"; };
+		D52B90A72D02898800E36E4E /* StadiumGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadiumGameViewController.swift; sourceTree = "<group>"; };
 		D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpViewController.swift; sourceTree = "<group>"; };
 		D53967402CC9CD570090A39E /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		D54921382CFD568600D4AB54 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
@@ -207,9 +209,11 @@
 				D5AE62B12CE1DF4B00ADE034 /* FriendsListViewController.swift */,
 				D5AE62B32CE2853600ADE034 /* FriendsListTableViewCell.swift */,
 				42397A602CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift */,
+				D54921542D01444100D4AB54 /* FountainTriviaViewController.swift */,
 				D57170D02CBF93F7002326DE /* GameInstructionsViewController.swift */,
 				D5BC7D3B2CF29D9D000D28AB /* LeaderboardTableViewCell.swift */,
 				D54921382CFD568600D4AB54 /* LeaderboardViewController.swift */,
+				49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */,
 				D57D7B4B2CDA892B00963080 /* LoginViewController.swift */,
 				493358522CC7076900AD4797 /* MapViewController.swift */,
 				D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */,
@@ -218,6 +222,7 @@
 				D5BC7D172CEC1B42000D28AB /* PickProfilePictureViewController.swift */,
 				49923EDC2CB7A1C700D2CBA2 /* SceneDelegate.swift */,
 				D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */,
+				D52B90A72D02898800E36E4E /* StadiumGameViewController.swift */,
 				D5BF14502CC07C8A00A0604C /* ThirdRoundTowerViewController.swift */,
 				D53967402CC9CD570090A39E /* UserSettingsViewController.swift */,
 				493358562CC71F7800AD4797 /* UserGuideViewController.swift */,
@@ -225,8 +230,6 @@
 				42BE6B012CF081B6007C020F /* GameState.swift */,
 				D5BF14522CC0C79C00A0604C /* WonGameViewController.swift */,
 				49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */,
-				49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */,
-				D54921542D01444100D4AB54 /* FountainTriviaViewController.swift */,
 				D5BF14852CC17E8900A0604C /* GoogleService-Info.plist */,
 				49923EE32CB7A1C900D2CBA2 /* Assets.xcassets */,
 				49923EE52CB7A1C900D2CBA2 /* LaunchScreen.storyboard */,
@@ -360,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42397A612CC6EC6F00AB85EA /* ForgotChangePasswordViewController.swift in Sources */,
+				D52B90A82D02898800E36E4E /* StadiumGameViewController.swift in Sources */,
 				D5BF14512CC07C8A00A0604C /* ThirdRoundTowerViewController.swift in Sources */,
 				D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */,
 				D5AE62B22CE1DF4B00ADE034 /* FriendsListViewController.swift in Sources */,

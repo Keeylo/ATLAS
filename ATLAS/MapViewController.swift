@@ -300,7 +300,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         selectedLocation = marker
         
-        if (marker.isUnlocked || (annotationTitle != "UT Tower, Main Building" && annotationTitle != "The Littlefield Fountain")) {
+        if (marker.isUnlocked || (annotationTitle != "UT Tower, Main Building" && annotationTitle != "The Littlefield Fountain") && annotationTitle != "Darrell K Royal–Texas Memorial Stadium") {
             print("PerformSegue")
             performSegue(withIdentifier: "LocationInfoSegue", sender: self)
         } else {
@@ -339,11 +339,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 destinationVC.hintCount = 3
                 destinationVC.totalHints = 3
             } else if (selectedLocation.title == "The Littlefield Fountain") {
-                destinationVC.gameInstructions = "You will have 60 seconds to correctly answer 3 trivia questions about The Littlefield Fountain. Press the play button to begin!"
+                destinationVC.gameInstructions = "You will have 30 seconds to correctly answer 3 trivia questions about The Littlefield Fountain. Press the play button to begin!"
                 destinationVC.hints = ["There are no hints for this game."]
                 destinationVC.hintCount = 1
                 destinationVC.totalHints = 1
+                destinationVC.timeLeft = 30
                 
+            } else if (selectedLocation.title == "Darrell K Royal–Texas Memorial Stadium") {
+                destinationVC.gameInstructions = "You will have 15 seconds to clean up the UT Stadium. Drag all trash items onto the trash can. Press the play button to begin!"
+                destinationVC.hints = ["There are no hints for this game."]
+                destinationVC.hintCount = 1
+                destinationVC.totalHints = 1
+                destinationVC.timeLeft = 15
             }
         } else if segue.identifier == "LocationInfoSegue",
           let destinationVC = segue.destination as? LocationInfoViewController {

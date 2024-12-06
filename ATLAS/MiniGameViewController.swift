@@ -187,9 +187,14 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
                 displayChildViewController(round1VC!)
             } else if (gameLocation == "The Littlefield Fountain") {
                 let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
-                let round1VC = storyboard.instantiateViewController(withIdentifier: "FountainTrivia") as? FountainTriviaViewController
-                round1VC?.delegate = self
-                displayChildViewController(round1VC!)
+                let otherVC = storyboard.instantiateViewController(withIdentifier: "FountainTrivia") as? FountainTriviaViewController
+                otherVC?.delegate = self
+                displayChildViewController(otherVC!)
+            } else if (gameLocation == "Darrell K Royal–Texas Memorial Stadium") {
+                let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
+                let otherVC = storyboard.instantiateViewController(withIdentifier: "StadiumGame") as? StadiumGameViewController
+                otherVC?.delegate = self
+                displayChildViewController(otherVC!)
             }
         }
         timerPaused.toggle()
