@@ -26,6 +26,7 @@ class UserSettingsViewController: UIViewController, UIImagePickerControllerDeleg
     @IBOutlet weak var profilePicture: UIImageView!
     
     @IBOutlet weak var profilePicView: UIView!
+    weak var delegate: UserSettingsDelegate?
     
     
     let picker = UIImagePickerController()
@@ -174,6 +175,7 @@ class UserSettingsViewController: UIViewController, UIImagePickerControllerDeleg
     // if sign out fails, alert is shown that prompts the user to try again.
     // else if sign out is successful, then user is taken to login screen
     func signOut(alert: UIAlertAction) {
+        delegate?.signalSave()
         do {
             try Auth.auth().signOut()
         } catch {
