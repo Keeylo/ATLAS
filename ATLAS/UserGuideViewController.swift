@@ -34,7 +34,7 @@ class UserGuideViewController: UIViewController {
 
     private let sectionData: [Section: (images: [UIImage], description: String)] = [
         .markerTypes: (
-            images: [UIImage(named: "Buildings")!, UIImage(named: "HistoricalLandmarks")!, UIImage(named: "StudyArea")!, UIImage(named: "Recreational")!],
+            images: [UIImage(named: "Buildings")!, UIImage(named: "HistoricalLandmarks")!, UIImage(named: "Food")!, UIImage(named: "StudyArea")!, UIImage(named: "Recreational")!],
             description: "Orange: Buildings\nBlue: Historical Landmarks\nGreen: Food\nRed: Study Areas\nCyan: Recreational"
         ),
         .mapDiscovery: (
