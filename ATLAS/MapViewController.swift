@@ -138,7 +138,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //        for annotation in annotations {
 //            atlasMap.addAnnotation(annotation)
 //        }
-//        clearCoreData() // Uncomment to reset overlay in core data
+        clearCoreData() // Uncomment to reset overlay in core data
         holes = loadHolesFromCoreData()
         // make the entire fillIn only once
         polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count, interiorPolygons: holes)
