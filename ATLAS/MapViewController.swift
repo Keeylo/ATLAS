@@ -300,7 +300,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         selectedLocation = marker
         
-        if (marker.isUnlocked || (annotationTitle != "UT Tower, Main Building" && annotationTitle != "The Littlefield Fountain") && annotationTitle != "Darrell K Royal–Texas Memorial Stadium") {
+        if (marker.isUnlocked || (annotationTitle != "UT Tower, Main Building" && annotationTitle != "The Littlefield Fountain") && annotationTitle != "Darrell K Royal–Texas Memorial Stadium" && annotationTitle != "Perry-Castañeda Library" && annotationTitle != "The UT Student Union") {
             print("PerformSegue")
             performSegue(withIdentifier: "LocationInfoSegue", sender: self)
         } else {
@@ -338,19 +338,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 destinationVC.hints = ["Round 1: Look for the disco ball.", "Round 2: Look for the horse.", "Round 3: Look around the baby doll head."]
                 destinationVC.hintCount = 3
                 destinationVC.totalHints = 3
+                destinationVC.totalTime = 60
             } else if (selectedLocation.title == "The Littlefield Fountain") {
                 destinationVC.gameInstructions = "You will have 30 seconds to correctly answer 3 trivia questions about The Littlefield Fountain. Press the play button to begin!"
                 destinationVC.hints = ["There are no hints for this game."]
                 destinationVC.hintCount = 1
                 destinationVC.totalHints = 1
-                destinationVC.timeLeft = 30
-                
+                destinationVC.totalTime = 30
             } else if (selectedLocation.title == "Darrell K Royal–Texas Memorial Stadium") {
                 destinationVC.gameInstructions = "You will have 15 seconds to clean up the UT Stadium. Drag all trash items onto the trash can. Press the play button to begin!"
                 destinationVC.hints = ["There are no hints for this game."]
                 destinationVC.hintCount = 1
                 destinationVC.totalHints = 1
-                destinationVC.timeLeft = 15
+                destinationVC.totalTime = 15
+            } else if (selectedLocation.title == "Perry-Castañeda Library") {
+                destinationVC.gameInstructions = "You will have 30 seconds to sort 10 books into a fiction or non-fiction pile. Drag each book onto the right genre. Press the play button to begin!"
+                destinationVC.hints = ["There are no hints for this game."]
+                destinationVC.hintCount = 1
+                destinationVC.totalHints = 1
+                destinationVC.totalTime = 30
+            } else if (selectedLocation.title == "The UT Student Union") {
+                destinationVC.gameInstructions = "You will have 3 minutes to play a game of memory. Tap the cards to flip them over and find their matches. Press the play button to begin!"
+                destinationVC.hints = ["There are no hints for this game."]
+                destinationVC.hintCount = 1
+                destinationVC.totalHints = 1
+                destinationVC.totalTime = 180
             }
         } else if segue.identifier == "LocationInfoSegue",
           let destinationVC = segue.destination as? LocationInfoViewController {

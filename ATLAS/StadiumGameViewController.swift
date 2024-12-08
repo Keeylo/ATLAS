@@ -28,7 +28,9 @@ class StadiumGameViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    // if a trash item is dragged to the trash can, then the item is hidden.
+    // if the user has dragged all of the items to trashcan, then they win
+    // the game
     @IBAction func handleDragGesture(recognizer: UIPanGestureRecognizer) {
         
         let translation = recognizer.translation(in: self.view)

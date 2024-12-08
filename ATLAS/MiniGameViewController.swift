@@ -66,7 +66,8 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     var hintsIndex = 0
     
     var timer: Timer?
-    var timeLeft: Int = 60 // possibly need to prep b4 segue
+    var totalTime: Int = 60
+    var timeLeft: Int = 60
     var timerPaused: Bool = true
     
     var gameLocation: String = "Unknown"
@@ -82,6 +83,8 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
         controllerView.layer.borderWidth = 1
 
         pausePlayButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+        timeLeft = totalTime
         
         timerLabel.text = ""
         
@@ -180,19 +183,25 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     func pauseResumeGame() {
         if (gameStarted == false) {
             gameStarted = true
+            let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
             if (gameLocation == "UT Tower, Main Building") {
-                let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
                 let round1VC = storyboard.instantiateViewController(withIdentifier: "FirstRoundTower") as? FirstRoundTowerViewController
                 round1VC?.delegate = self
                 displayChildViewController(round1VC!)
             } else if (gameLocation == "The Littlefield Fountain") {
-                let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
                 let otherVC = storyboard.instantiateViewController(withIdentifier: "FountainTrivia") as? FountainTriviaViewController
                 otherVC?.delegate = self
                 displayChildViewController(otherVC!)
             } else if (gameLocation == "Darrell K Royal–Texas Memorial Stadium") {
-                let storyboard = UIStoryboard(name: "MiniGameStoryboard", bundle: nil)
                 let otherVC = storyboard.instantiateViewController(withIdentifier: "StadiumGame") as? StadiumGameViewController
+                otherVC?.delegate = self
+                displayChildViewController(otherVC!)
+            } else if (gameLocation == "Perry-Castañeda Library") {
+                let otherVC = storyboard.instantiateViewController(withIdentifier: "PCLGame") as? PCLGameViewController
+                otherVC?.delegate = self
+                displayChildViewController(otherVC!)
+            } else if (gameLocation == "The UT Student Union") {
+                let otherVC = storyboard.instantiateViewController(withIdentifier: "UnionGame") as? UnionGameViewController
                 otherVC?.delegate = self
                 displayChildViewController(otherVC!)
             }
@@ -285,7 +294,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
         quitButton.setTitle("Quit Mini Game?", for: .normal)
         
         pauseTimer()
-        timeLeft = 60
+        timeLeft = totalTime
         timerLabel.text = ""
         
         gameStarted = false

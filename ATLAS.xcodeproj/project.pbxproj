@@ -35,6 +35,8 @@
 		49C0F4272CE40DDD00206DBC /* LocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */; };
 		49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */; };
 		D52B90A82D02898800E36E4E /* StadiumGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52B90A72D02898800E36E4E /* StadiumGameViewController.swift */; };
+		D52B90AA2D03A5CA00E36E4E /* PCLGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52B90A92D03A5C900E36E4E /* PCLGameViewController.swift */; };
+		D52B90AC2D03E71D00E36E4E /* UnionGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52B90AB2D03E71D00E36E4E /* UnionGameViewController.swift */; };
 		D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */; };
 		D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53967402CC9CD570090A39E /* UserSettingsViewController.swift */; };
 		D54921392CFD568600D4AB54 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54921382CFD568600D4AB54 /* LeaderboardViewController.swift */; };
@@ -113,6 +115,8 @@
 		49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoViewController.swift; sourceTree = "<group>"; };
 		49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsOfInterest.swift; sourceTree = "<group>"; };
 		D52B90A72D02898800E36E4E /* StadiumGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadiumGameViewController.swift; sourceTree = "<group>"; };
+		D52B90A92D03A5C900E36E4E /* PCLGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCLGameViewController.swift; sourceTree = "<group>"; };
+		D52B90AB2D03E71D00E36E4E /* UnionGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionGameViewController.swift; sourceTree = "<group>"; };
 		D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPopUpViewController.swift; sourceTree = "<group>"; };
 		D53967402CC9CD570090A39E /* UserSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		D54921382CFD568600D4AB54 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 		49923ECE2CB7A1C700D2CBA2 = {
 			isa = PBXGroup;
 			children = (
+				D52B90A92D03A5C900E36E4E /* PCLGameViewController.swift */,
 				49923ED92CB7A1C700D2CBA2 /* ATLAS */,
 				49923ED82CB7A1C700D2CBA2 /* Products */,
 			);
@@ -216,6 +221,7 @@
 				49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */,
 				D57D7B4B2CDA892B00963080 /* LoginViewController.swift */,
 				493358522CC7076900AD4797 /* MapViewController.swift */,
+				D52B90AB2D03E71D00E36E4E /* UnionGameViewController.swift */,
 				D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */,
 				D596C2842CBF39F60047E563 /* MiniGameViewController.swift */,
 				42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */,
@@ -368,7 +374,9 @@
 				D539673F2CC8A5C30090A39E /* MenuPopUpViewController.swift in Sources */,
 				D5AE62B22CE1DF4B00ADE034 /* FriendsListViewController.swift in Sources */,
 				49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */,
+				D52B90AA2D03A5CA00E36E4E /* PCLGameViewController.swift in Sources */,
 				D53967412CC9CD570090A39E /* UserSettingsViewController.swift in Sources */,
+				D52B90AC2D03E71D00E36E4E /* UnionGameViewController.swift in Sources */,
 				D596C2852CBF39F60047E563 /* MiniGameViewController.swift in Sources */,
 				D54921552D01444100D4AB54 /* FountainTriviaViewController.swift in Sources */,
 				D54921392CFD568600D4AB54 /* LeaderboardViewController.swift in Sources */,
