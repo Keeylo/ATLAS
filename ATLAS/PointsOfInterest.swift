@@ -36,5 +36,7 @@ let pointsOfInterest: [PointOfInterest] = [
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.285636, longitude: -97.738276), color: .blue, title: "The West"),
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.286235, longitude: -97.737111), color: .blue, title: "Circle With Towers"),
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.287975, longitude: -97.740116), color: .blue, title: "Forever Free"),
-    PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28587, longitude: -97.73572), color: .orange, title: "Jackson School of Geosciences")
+    PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28587, longitude: -97.73572), color: .orange, title: "Jackson School of Geosciences"),
+    PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28668, longitude: -97.73639), color: .green, title: "O's Campus Cafe and Catering"),
+    PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28603, longitude: -97.74116), color: .green, title: "Union Coffee House")
 ]

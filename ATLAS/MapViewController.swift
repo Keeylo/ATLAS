@@ -9,11 +9,19 @@ import UIKit
 import MapKit
 import CoreLocation
 import GEOSwift
+import CoreData
 import FirebaseAuth
 import FirebaseFirestore
 
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+let context = appDelegate.persistentContainer.viewContext
+
 protocol LocationUnlocker {
     func unlockLocation(locationName: String)
+}
+
+protocol UserSettingsDelegate: AnyObject {
+    func signalSave()
 }
 
 class CustomMarker: MKPointAnnotation {
@@ -21,8 +29,7 @@ class CustomMarker: MKPointAnnotation {
     var isUnlocked: Bool = false
 }
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, LocationUnlocker {
-    
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UserSettingsDelegate, LocationUnlocker {
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var atlasMap: MKMapView!
     
@@ -38,6 +45,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var testPath: [CLLocation] = []
     let startPoint = CLLocation(latitude: 30.29194, longitude: -97.74113)
     let utLoc = CLLocation(latitude: 30.286236060447308, longitude: -97.739378471749)
+    private var saveTimer: Timer?
     
     private var lastLocation: CLLocation? // for simulation purposes, can be deleted later
     
@@ -122,19 +130,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         atlasMap.userTrackingMode = .follow
         atlasMap.pointOfInterestFilter = .excludingAll // removes all default POIs (PointsOfInterest)
         
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.mapViewController = self
+        }
+        
         // Uncomment to see all Map Markers (our own POIs)
 //        for annotation in annotations {
 //            atlasMap.addAnnotation(annotation)
 //        }
-        
+        clearCoreData() // Uncomment to reset overlay in core data
+        holes = loadHolesFromCoreData()
         // make the entire fillIn only once
-        polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count)
+        polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count, interiorPolygons: holes)
         MKutLocRegion = polyOverlay // will be used to check boundaries later
         atlasMap.addOverlay(polyOverlay!)
+        saveTimer = Timer.scheduledTimer(timeInterval: 600, target: self, selector: #selector(savePeriodically), userInfo: nil, repeats: true)
         
         let buttonSize: CGFloat = 30
         menuButton.frame = CGRect(x: self.view.frame.width - 65, y: self.view.frame.height - 65, width: buttonSize, height: buttonSize)
-        
     }
     
     // this happens every time the view has appeared on the screen, it is reoccuring
@@ -225,79 +238,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
     }
-    
-    
+
     // In the future I want this to look more unique, custom alert with design
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 //        , marker.isVisible
 //        view.annotation?.title
-            
-        
         guard let annotationTitle = view.annotation?.title else { return }
         guard let markerView = view as? MKMarkerAnnotationView, let marker = annotations.first(where: { $0.title == annotationTitle }) else { return }
         
-//        if let user = Auth.auth().currentUser {
-//            let db = Firestore.firestore()
-//            let userRef = db.collection("users").document(user.uid)
-//            
-//            // Update the username field (or any other field you want)
-//            userRef.getDocument { (document, error) in
-//                if let error = error {
-//                    print("Error fetching document: \(error)")
-//                } else {
-//                    if let document = document, document.exists {
-//                        // Get the array from the document
-//                        if let locationsList = document.get("locations") as? [String] {
-//                            // Loop through the array
-//                            for location in locationsList {
-//                                if (location == annotationTitle) {
-//                                    marker.isUnlocked = true
-//                                    print("Location: \(location)")
-//                                    break
-//                                }
-//                            }
-//                        } else {
-//                            print("No array found in the document.")
-//                        }
-//                    } else {
-//                        print("Document does not exist.")
-//                    }
-//                }
-//                
-//                if (marker.isUnlocked) {
-//                    print("PerformSegue")
-//                    self.performSegue(withIdentifier: "LocationInfoSegue", sender: self)
-//                } else {
-//                    
-//                    self.markerRefVisual = markerView
-//                    self.markerRef = marker
-//                    self.selectedLocation = marker
-//                    let alert = UIAlertController(
-//                        title: "Unknown Location Found!",
-//                        message: "Play a mini game to unlock this map marker? :)",
-//                        preferredStyle: .alert
-//                    )
-//                    
-//                    alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
-//                        self.performSegue(withIdentifier: "ShowMiniGame", sender: self)
-//                    }))
-//                    
-//                    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-//                    
-//                    self.present(alert, animated: true, completion: nil)
-//                    
-//                }
-//            }
-//        } else {
-//            print("couldn't authenticate user")
-//        }
-        
-        for location in userUnlockedLocations {
-            if location == annotationTitle {
-                marker.isUnlocked = true
-            }
+        if userUnlockedLocations.contains(annotationTitle!) {
+            marker.isUnlocked = true
         }
         
+        markerRefVisual = markerView
+        markerRef = marker
         selectedLocation = marker
         
         if (marker.isUnlocked || (annotationTitle != "UT Tower, Main Building" && annotationTitle != "The Littlefield Fountain") && annotationTitle != "Darrell K Royal–Texas Memorial Stadium" && annotationTitle != "Perry-Castañeda Library" && annotationTitle != "The UT Student Union") {
@@ -320,9 +274,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
             
             present(alert, animated: true, completion: nil)
-            
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -377,7 +329,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //                print("locationCoordinates is nil")
 //            }
             print("preparing info segue")
-            print("loc name: \(self.selectedLocation?.title)")
+            print("loc name: \(String(describing: self.selectedLocation?.title))")
             destinationVC.delegate = self
             destinationVC.coordinates = Coordinate(self.selectedLocation!.coordinate)
             
@@ -385,7 +337,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //            destinationVC.locationCoordinates = selectedLocation.coordinate
 //            print("Passing locationTitle: \(locationTitle)")
         }
-        
     }
 
     
@@ -423,6 +374,225 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         polyOverlay = MKPolygon(coordinates: utLocRegion, count: utLocRegion.count, interiorPolygons: holes)
         atlasMap.addOverlay(polyOverlay!)
     }
+    
+    // *****************************************************************************************************
+    private func loadHolesFromCoreData() -> [MKPolygon] {
+        let fetchedResults = fetchCoordinates()
+
+        // Group coordinates by polygonNumber
+        let groupedCoordinates = Dictionary(grouping: fetchedResults, by: { $0.value(forKey: "polygonNumber") as? Int32 })
+
+        var polygons: [MKPolygon] = []
+
+        // Convert each group into an MKPolygon
+        for (_, entries) in groupedCoordinates {
+            var coordinates: [CLLocationCoordinate2D] = []
+            
+            // Sort by coorNumber to ensure the order is correct
+            let sortedEntries = entries.sorted {
+                let coord1 = $0.value(forKey: "coorNumber") as? Int32 ?? 0
+                let coord2 = $1.value(forKey: "coorNumber") as? Int32 ?? 0
+                return coord1 < coord2
+            }
+
+            // Extract coordinates
+            for entry in sortedEntries {
+                if let latitude = entry.value(forKey: "latitude") as? Double,
+                   let longitude = entry.value(forKey: "longitude") as? Double {
+                    coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+                }
+            }
+
+            // Create MKPolygon and add it to the array
+            let polygon = MKPolygon(coordinates: coordinates, count: coordinates.count)
+            polygons.append(polygon)
+        }
+        return polygons
+    }
+    
+    // store core data points when we log out
+    func signalSave() {
+        print("We got to signalSave function")
+        saveAllHoles()
+        saveTimer?.invalidate()
+        saveTimer = nil
+    }
+    
+    @objc private func savePeriodically() {
+        saveAllHoles()
+    }
+    
+    func saveAllHoles() {
+        guard !holes.isEmpty else { return }
+        for polygon in holes {
+            savePolygon(polygon: polygon)
+        }
+    }
+    
+    // This is for saving and updating a polyon in core data
+    func savePolygon(polygon: MKPolygon) {
+        // handle two cases
+        
+        // 1. search for instances of the polygon parameter, return array of polygonNumbers, delete any associated polygonNumbers in core data
+        let foundPolyNumber = searchForPolygon(polygon: polygon)
+        if !foundPolyNumber.isEmpty {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreMapHole")
+            fetchRequest.predicate = NSPredicate(format: "polygonNumber IN %@", foundPolyNumber)
+            
+            do {
+                let entriesToDelete = try context.fetch(fetchRequest) as! [NSManagedObject]
+                for entry in entriesToDelete {
+                    context.delete(entry)
+                }
+                
+                // Save changes
+                try context.save()
+            } catch {
+                print("Failed to delete CoreMapHole entries: \(error)")
+            }
+        }
+        
+        // 2. add new polygon (disjoint or union)
+        let polygonNumber = getOrder() // New polygonNumber for the union or disjoint polygon
+        let polygonCoordinates = UnsafeBufferPointer(start: polygon.points(), count: polygon.pointCount).map { point -> (longitude: Double, latitude: Double) in
+            let coordinate = point.coordinate
+            return (longitude: coordinate.longitude, latitude: coordinate.latitude)
+        }
+        
+        // index is zero based indexed/polygonNumber is not zero based indexed
+        for (index, coordinate) in polygonCoordinates.enumerated() {
+            saveCoordinate(polygonNumber: Int32(polygonNumber), coorNumber: Int32(index), latitude: coordinate.latitude, longitude: coordinate.longitude)
+        }
+        
+        // Save changes
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save new CoreMapHole entries: \(error)")
+        }
+    }
+    
+    // total amount of polygons (should always be ordered 1-to-n) find by polygonNumber
+    // integral piece
+    func getOrder() -> Int {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreMapHole")
+        fetchRequest.resultType = .dictionaryResultType
+        
+        let maxExpression = NSExpressionDescription()
+        maxExpression.name = "maxPolygonNumber"
+        maxExpression.expression = NSExpression(forFunction: "max:", arguments: [NSExpression(forKeyPath: "polygonNumber")])
+        maxExpression.expressionResultType = .integer32AttributeType
+        fetchRequest.propertiesToFetch = [maxExpression]
+
+        var nextPolygonNumber: Int32 = 1
+        do {
+            if let result = try context.fetch(fetchRequest).first as? [String: Int32],
+               let maxPolygonNumber = result["maxPolygonNumber"] {
+                nextPolygonNumber = maxPolygonNumber + 1
+            }
+        } catch {
+            print("Failed to fetch max polygonNumber: \(error)")
+        }
+        return Int(nextPolygonNumber)
+    }
+    
+    // search for Polygon in Core Data model, by individual coordinate pair points
+    // use a search on the Core Database
+    func searchForPolygon(polygon: MKPolygon) -> [Int] {
+        var polysToDelete: [Int] = []
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreMapHole")
+        
+        // make my life easier and have an array of coordinate pairs
+        let polygonCoordinates = UnsafeBufferPointer(start: polygon.points(), count: polygon.pointCount).map { point -> (longitude: Double, latitude: Double) in
+            let coordinate = point.coordinate
+            return (longitude: coordinate.longitude, latitude: coordinate.latitude)
+        }
+        
+        let coordinatePredicates = polygonCoordinates.map { coordinate -> NSPredicate in
+            return NSPredicate(format: "(longitude == %@ AND latitude == %@)", argumentArray: [coordinate.longitude, coordinate.latitude])
+        }
+        
+        let compoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: coordinatePredicates)
+        request.predicate = compoundPredicate
+        
+        do {
+            // Fetch all matching entries at once
+            let fetchedEntries = try context.fetch(request) as! [NSManagedObject]
+            
+            // Extract unique polygon numbers from the fetched entries
+            for entry in fetchedEntries {
+                if let polygonNumber = entry.value(forKey: "polygonNumber") as? Int, !polysToDelete.contains(polygonNumber) {
+                    polysToDelete.append(polygonNumber)
+                }
+            }
+        } catch {
+            print("Error fetching polygon data: \(error)")
+        }
+        return polysToDelete
+    }
+    
+    func saveCoordinate(polygonNumber: Int32, coorNumber: Int32, latitude: Double, longitude: Double) {
+        let newHole = NSEntityDescription.insertNewObject(forEntityName: "CoreMapHole", into: context)
+        newHole.setValue(polygonNumber, forKey: "polygonNumber")
+        newHole.setValue(coorNumber, forKey: "coorNumber")
+        newHole.setValue(latitude, forKey: "latitude")
+        newHole.setValue(longitude, forKey: "longitude")
+
+        do {
+            try context.save()
+            print("Coordinate saved!")
+        } catch {
+            print("Failed to save coordinate: \(error)")
+        }
+    }
+    
+    // gets all coordinates
+    func fetchCoordinates() -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreMapHole")
+        var fetchedResults: [NSManagedObject]?
+
+        do {
+            try fetchedResults = context.fetch(request) as? [NSManagedObject]
+        } catch {
+            print("Failed to fetch coordinates: \(error)")
+            return []
+        }
+        return(fetchedResults)!
+    }
+    
+    func clearCoreData() {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreMapHole")
+        var fetchedResults: [NSManagedObject]
+        
+        do {
+            try fetchedResults = context.fetch(request) as! [NSManagedObject]
+            
+            if fetchedResults.count > 0 {
+                for result in fetchedResults {
+                    context.delete(result)
+                    print("Polygon Number: \(result.value(forKey: "polygonNumber")!), Coordinate Number: \(result.value(forKey: "coorNumber")!) has been deleted")
+                }
+            }
+            saveContext()
+            
+        } catch {
+            print("Error occurred while clearing data")
+            abort()
+        }
+        
+    }
+    
+    func saveContext () {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    // *****************************************************************************************************
     
     // Return MKPolygon list of intersections
     private func findIntersectingPolygons(for polygon: Polygon) -> [MKPolygon] {
@@ -604,72 +774,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             return nil // If no matching CustomMarker is found, return nil
         }
         
-//        if let user = Auth.auth().currentUser {
-//            let db = Firestore.firestore()
-//            let userRef = db.collection("users").document(user.uid)
-//            
-//            // Update the username field (or any other field you want)
-//            userRef.getDocument { (document, error) in
-//                if let error = error {
-//                    print("Error fetching document: \(error)")
-//                } else {
-//                    if let document = document, document.exists {
-//                        // Get the array from the document
-//                        if let locationsList = document.get("locations") as? [String] {
-//                            // Loop through the array
-//                            for location in locationsList {
-//                                if (location == annotationTitle) {
-//                                    pointAnnotation.isUnlocked = true
-//                                    print("Location: \(location)")
-//                                    break
-//                                }
-//                            }
-//                        } else {
-//                            print("No array found in the document.")
-//                        }
-//                    } else {
-//                        print("Document does not exist.")
-//                    }
-//                }
-//
-//                
-//                print("point annotation unlocked: \(pointAnnotation.isUnlocked)")
-//                
-//                if pointAnnotation.isUnlocked {
-//                    print("marker nil")
-//                    return
-//                }
-//                
-//                var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
-//                if annotationView == nil {
-//                    annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-//                    annotationView?.canShowCallout = true
-//                    
-//                }
-//                
-//                annotationView?.glyphImage = UIImage(systemName: "lock.fill")
-//
-//                // Set the marker color dynamically based on the annotation
-//                if let point = pointsOfInterest.first(where: { $0.title == pointAnnotation.title }) {
-//                    annotationView?.markerTintColor = point.color // Set marker color from pointsOfInterest
-//                }
-//                
-//            }
-//            
-////            fetchUserLocations(userRef: userRef, locationName: annotationTitle!) { isUnlocked in
-////                
-////                locationUnlocked = isUnlocked
-////                
-////            }
-//        } else {
-//            print("couldn't authenticate user")
-//        }
-        
-//        pointAnnotation.isUnlocked = locationUnlocked
-//        
-//        print("point annotation unlocked: \(pointAnnotation.isUnlocked)")
-//        
-        
         for location in userUnlockedLocations {
             if location == annotationTitle {
                 pointAnnotation.isUnlocked = true
@@ -677,7 +781,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
 //        if pointAnnotation.isUnlocked {
-//            print("marker nil")
 //            return nil
 //        }
         
@@ -691,7 +794,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if !pointAnnotation.isUnlocked {
             annotationView?.glyphImage = UIImage(systemName: "lock.fill")
         }
-
+        
         // Set the marker color dynamically based on the annotation
         if let point = pointsOfInterest.first(where: { $0.title == pointAnnotation.title }) {
             annotationView?.markerTintColor = point.color // Set marker color from pointsOfInterest
@@ -732,18 +835,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBAction func menuButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "HamburgerMenuStoryboard", bundle: nil)
-        let popUpMenu = storyboard.instantiateViewController(withIdentifier: "MenuPopUp") as? MenuPopUpViewController
-        
-        let menuHeight = CGFloat(252) //self.view.frame.height / 3.7
-        popUpMenu!.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: menuHeight)
-        
-        addChild(popUpMenu!)
-        view.addSubview(popUpMenu!.view)
-        popUpMenu!.didMove(toParent: self)
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            popUpMenu!.view.frame.origin.y = self.view.frame.height - menuHeight
-        })
+        if let popUpMenu = storyboard.instantiateViewController(withIdentifier: "MenuPopUp") as? MenuPopUpViewController {
+            
+            popUpMenu.delegate = self
+            let menuHeight = CGFloat(252) // self.view.frame.height / 3.7
+            popUpMenu.view.frame = CGRect(x: 0, y: self.view.frame.height, width: self.view.frame.width, height: menuHeight)
+            
+            addChild(popUpMenu)
+            view.addSubview(popUpMenu.view)
+            popUpMenu.didMove(toParent: self)
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                popUpMenu.view.frame.origin.y = self.view.frame.height - menuHeight
+            })
+        }
     }
     
     // Unwind back to this instance of the map
@@ -777,7 +882,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             }
         }
     }
-    
 }
 
 // I wanna go to bed and dream about flying monkeys
+

@@ -33,6 +33,7 @@
 		49A44E152CD1E82C0005FD65 /* LoadingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */; };
 		49A44E202CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */; };
 		49C0F4272CE40DDD00206DBC /* LocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */; };
+		49C0F5CC2D03A6A200206DBC /* ATLAS_core.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49C0F5CA2D03A6A200206DBC /* ATLAS_core.xcdatamodeld */; };
 		49D3DB3F2CE1AC73001FC303 /* PointsOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */; };
 		D52B90A82D02898800E36E4E /* StadiumGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52B90A72D02898800E36E4E /* StadiumGameViewController.swift */; };
 		D52B90AA2D03A5CA00E36E4E /* PCLGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52B90A92D03A5C900E36E4E /* PCLGameViewController.swift */; };
@@ -76,7 +77,6 @@
 		D5BC7D182CEC1B42000D28AB /* PickProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BC7D172CEC1B42000D28AB /* PickProfilePictureViewController.swift */; };
 		D5BC7D3A2CF2956B000D28AB /* LeaderboardStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5BC7D392CF2956B000D28AB /* LeaderboardStoryboard.storyboard */; };
 		D5BC7D3C2CF29D9D000D28AB /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BC7D3B2CF29D9D000D28AB /* LeaderboardTableViewCell.swift */; };
-		D5BC7D622CF6759C000D28AB /* ATLAS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D5BC7D602CF6759C000D28AB /* ATLAS.xcdatamodeld */; };
 		D5BF144D2CC0579700A0604C /* FirstRoundTowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */; };
 		D5BF144F2CC0727400A0604C /* SecondRoundTowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */; };
 		D5BF14512CC07C8A00A0604C /* ThirdRoundTowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF14502CC07C8A00A0604C /* ThirdRoundTowerViewController.swift */; };
@@ -113,6 +113,7 @@
 		49A44E142CD1E82C0005FD65 /* LoadingStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingStoryboard.storyboard; sourceTree = "<group>"; };
 		49A44E1F2CD1EB9E0005FD65 /* UnlockedStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnlockedStoryboard.storyboard; sourceTree = "<group>"; };
 		49C0F4262CE40DDD00206DBC /* LocationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoViewController.swift; sourceTree = "<group>"; };
+		49C0F5CB2D03A6A200206DBC /* ATLAS_core.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ATLAS_core.xcdatamodel; sourceTree = "<group>"; };
 		49D3DB3E2CE1AC73001FC303 /* PointsOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsOfInterest.swift; sourceTree = "<group>"; };
 		D52B90A72D02898800E36E4E /* StadiumGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadiumGameViewController.swift; sourceTree = "<group>"; };
 		D52B90A92D03A5C900E36E4E /* PCLGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCLGameViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +131,6 @@
 		D5BC7D172CEC1B42000D28AB /* PickProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickProfilePictureViewController.swift; sourceTree = "<group>"; };
 		D5BC7D392CF2956B000D28AB /* LeaderboardStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LeaderboardStoryboard.storyboard; sourceTree = "<group>"; };
 		D5BC7D3B2CF29D9D000D28AB /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
-		D5BC7D612CF6759C000D28AB /* ATLAS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ATLAS.xcdatamodel; sourceTree = "<group>"; };
 		D5BF144C2CC0579700A0604C /* FirstRoundTowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRoundTowerViewController.swift; sourceTree = "<group>"; };
 		D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRoundTowerViewController.swift; sourceTree = "<group>"; };
 		D5BF14502CC07C8A00A0604C /* ThirdRoundTowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdRoundTowerViewController.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 				2E65EBD22CC78E6A00972C99 /* logo.png */,
 				49A1839C2CDD9CAE00539CDF /* gpxStudio_path.gpx */,
 				49A1839A2CDD9C1700539CDF /* gpxgenerator_path.gpx */,
-				D5BC7D602CF6759C000D28AB /* ATLAS.xcdatamodeld */,
+				49C0F5CA2D03A6A200206DBC /* ATLAS_core.xcdatamodeld */,
 			);
 			path = ATLAS;
 			sourceTree = "<group>";
@@ -382,13 +382,13 @@
 				D54921392CFD568600D4AB54 /* LeaderboardViewController.swift in Sources */,
 				D5BC7D182CEC1B42000D28AB /* PickProfilePictureViewController.swift in Sources */,
 				D57170D12CBF93F7002326DE /* GameInstructionsViewController.swift in Sources */,
+				49C0F5CC2D03A6A200206DBC /* ATLAS_core.xcdatamodeld in Sources */,
 				42397A5F2CC6D2A100AB85EA /* NewUserSetupViewController.swift in Sources */,
 				49C0F4272CE40DDD00206DBC /* LocationInfoViewController.swift in Sources */,
 				D5BC7D3C2CF29D9D000D28AB /* LeaderboardTableViewCell.swift in Sources */,
 				493358592CC745B300AD4797 /* UnlockedAreasViewController.swift in Sources */,
 				49923EDB2CB7A1C700D2CBA2 /* AppDelegate.swift in Sources */,
 				493358532CC7076900AD4797 /* MapViewController.swift in Sources */,
-				D5BC7D622CF6759C000D28AB /* ATLAS.xcdatamodeld in Sources */,
 				493358572CC71F7800AD4797 /* UserGuideViewController.swift in Sources */,
 				D5BF14532CC0C79C00A0604C /* WonGameViewController.swift in Sources */,
 				D57D7B4C2CDA892B00963080 /* LoginViewController.swift in Sources */,
@@ -772,13 +772,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		D5BC7D602CF6759C000D28AB /* ATLAS.xcdatamodeld */ = {
+		49C0F5CA2D03A6A200206DBC /* ATLAS_core.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D5BC7D612CF6759C000D28AB /* ATLAS.xcdatamodel */,
+				49C0F5CB2D03A6A200206DBC /* ATLAS_core.xcdatamodel */,
 			);
-			currentVersion = D5BC7D612CF6759C000D28AB /* ATLAS.xcdatamodel */;
-			path = ATLAS.xcdatamodeld;
+			currentVersion = 49C0F5CB2D03A6A200206DBC /* ATLAS_core.xcdatamodel */;
+			path = ATLAS_core.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

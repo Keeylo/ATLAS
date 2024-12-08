@@ -1,19 +1,10 @@
-//
-//  AppDelegate.swift
-//  temp
-//
-//  Created by Valerie Ferman on 11/26/24.
-//
-
 import UIKit
-import CoreData
 import FirebaseCore
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    var mapViewController: MapViewController?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
@@ -33,7 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("We get here to the termination")
+        if let mapViewController = mapViewController {
+            mapViewController.saveAllHoles()
+        }
+    }
 
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -43,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "temp")
+        let container = NSPersistentContainer(name: "ATLAS_core")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -78,8 +77,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
-
-
-

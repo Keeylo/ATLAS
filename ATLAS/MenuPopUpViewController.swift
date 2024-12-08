@@ -17,6 +17,7 @@ class MenuPopUpViewController: UIViewController {
     @IBOutlet weak var friendsListButton: UIButton!
     @IBOutlet weak var leaderboardButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
+    weak var delegate: UserSettingsDelegate?
     
     
     override func viewDidLoad() {
@@ -45,6 +46,11 @@ class MenuPopUpViewController: UIViewController {
             self.removeFromParent()
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SettingsSegue", let userSettingsVC = segue.destination as? UserSettingsViewController {
+            userSettingsVC.delegate = self.delegate
+        }
+    }
     
 }

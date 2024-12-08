@@ -7,20 +7,15 @@
 
 import UIKit
 import CoreLocation
+import FirebaseAuth
+import FirebaseFirestore
 
 // MARK: - Area Model
 struct Area {
     let name: String
     let image: String
     let coordinate: Coordinate
-    var isUnlocked: Bool {
-        get {
-            return GameState.shared.unlockedAreas[name] ?? false
-        }
-        set {
-            GameState.shared.unlockedAreas[name] = newValue
-        }
-    }
+    var isUnlocked: Bool = false
 }
 
 // MARK: - Custom Layout
@@ -263,14 +258,47 @@ class UnlockedAreasViewController: UIViewController {
         collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
     }
     
+    func fetchUnlockedAreasFromFirebase() {
+        guard let user = Auth.auth().currentUser else {
+            print("User not authenticated")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(user.uid)
+        
+        userRef.getDocument { (document, error) in
+            if let error = error {
+                print("Error fetching document: \(error)")
+            } else if let document = document, document.exists {
+                if let locationsList = document.get("locations") as? [String] {
+                    self.updateUnlockedAreas(locationsList)
+                } else {
+                    print("No locations array found in the document.")
+                    self.updateUnlockedAreas([])
+                }
+            } else {
+                print("Document does not exist.")
+                self.updateUnlockedAreas([])
+            }
+        }
+    }
+    
+    func updateUnlockedAreas(_ unlockedLocations: [String]) {
+        for index in areas.indices {
+            areas[index].isUnlocked = unlockedLocations.contains(areas[index].name)
+        }
+        collectionView.reloadData()
+    }
+
+    
     @IBAction func backToMap(_ sender: Any) {
         self.dismiss(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadAreas()
-        collectionView.reloadData()
+        fetchUnlockedAreasFromFirebase()
     }
     
     private func setupViews() {
@@ -312,21 +340,19 @@ class UnlockedAreasViewController: UIViewController {
     private func loadAreas() {
         areas = [
             Area(name: "Gregory Gymnasium", image: "gregGood", coordinate: Coordinate(latitude: 30.28447, longitude: -97.73676)),
-            Area(name: "Norman Hackerman", image: "normanGood", coordinate: Coordinate(latitude: 30.28765, longitude: -97.73801)),
-            Area(name: "UT Tower", image: "uttowerGooder", coordinate: Coordinate(latitude: 30.28593, longitude: -97.73941)),
-            Area(name: "Fountain", image: "fountainGooder", coordinate: Coordinate(latitude: 30.28396, longitude: -97.73957)),
-            Area(name: "Union", image: "unionGood", coordinate: Coordinate(latitude: 30.28674373328207,longitude: -97.74099681516714)),
-            Area(name: "Engineering Building", image: "eerGood", coordinate: Coordinate(latitude: 30.28817, longitude: -97.73553)),
-            Area(name: "Blanton Museum", image: "blantonGood", coordinate: Coordinate(latitude: 30.28096, longitude: -97.73774)),
-            Area(name: "Clock Knot", image: "clockknotGood", coordinate: Coordinate(latitude: 30.28974, longitude: -97.73606))
+            Area(name: "Norman Hackerman Building", image: "normanGood", coordinate: Coordinate(latitude: 30.28765, longitude: -97.73801), isUnlocked: false),
+            Area(name: "UT Tower, Main Building", image: "uttowerGooder", coordinate: Coordinate(latitude: 30.28593, longitude: -97.73941)),
+            Area(name: "The Littlefield Fountain", image: "fountainGooder", coordinate: Coordinate(latitude: 30.28396, longitude: -97.73957)),
+            Area(name: "The UT Student Union", image: "unionGood", coordinate: Coordinate(latitude: 30.28674373328207,longitude: -97.74099681516714)),
+            Area(name: "EER", image: "eerGood", coordinate: Coordinate(latitude: 30.28817, longitude: -97.73553)),
+            Area(name: "Blanton Museum of Art", image: "blantonGood", coordinate: Coordinate(latitude: 30.28096, longitude: -97.73774)),
+            Area(name: "Clock Knot", image: "clockknotGood", coordinate: Coordinate(latitude: 30.28974, longitude: -97.73606)),
+            Area(name: "The West", image: "the_west_image1", coordinate:
+                    Coordinate(latitude: 30.28561, longitude: 97.73824)),
+            Area(name: "Monochrome For Austin", image: "monochrome_for_austin_image2",
+                 coordinate: Coordinate(latitude: 30.28769, longitude: -97.73707)),
+            Area(name: "Circle With Towers", image: "circle_with_towers_image1", coordinate: Coordinate(latitude: 30.28626, longitude: -97.73694))
         ]
-        
-        // for testing without pins/minigames
-//        for index in areas.indices {
-//            areas[index].isUnlocked = true
-//        }
-        
-        collectionView.reloadData()
         
         let middleIndex = areas.count / 2
         currentIndex = middleIndex
