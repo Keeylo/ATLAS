@@ -338,7 +338,7 @@ class UnlockedAreasViewController: UIViewController {
     
     private func loadAreas() {
         areas = [
-            Area(name: "Gregory Gymnasium", image: "gregGood"),
+            Area(name: "Gregory Gymnasium", image: "GregGood"),
             Area(name: "Norman Hackerman Building", image: "normanGood"),
             Area(name: "UT Tower, Main Building", image: "uttowerGooder"),
             Area(name: "The Littlefield Fountain", image: "fountainGooder"),
