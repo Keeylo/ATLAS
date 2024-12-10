@@ -155,19 +155,32 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
     // if the quit button is pressed, then user is taken back
     // to the map screen
     @IBAction func quitButtonPressed(_ sender: Any) {
-        let title = wonGame ? "Congratulations!" : "You are attempting to leave this mini game"
-        let message = wonGame ? "Let's see what you found" : "Are you sure you want to quit now?"
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        if (wonGame) {
+            let title = "Congratulations!"
+            let message = "Let's see what you found"
             
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { _ in
-            if self.wonGame == true {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { _ in
+                
                 self.performSegue(withIdentifier: "ShowLocationInfo", sender: self)
-            } else {
+                
+            }))
+            present(alert, animated: true, completion: nil)
+        } else {
+            let title = "You are attempting to leave this mini game"
+            let message = "Are you sure you want to quit now?"
+            
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                
                 self.dismiss(animated: true)
-            }
-        }))
-        present(alert, animated: true, completion: nil)
+                
+            }))
+            alert.addAction(UIAlertAction(title: "No", style: .default))
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     // pauses/plays game
@@ -264,7 +277,10 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
             if (className != "WonGameViewController") {
                 let controller = UIAlertController(title: "You ran out of time!", message: "Do you want to try again?", preferredStyle: .alert)
                 
-                controller.addAction(UIAlertAction(title: "No", style: .default))
+                controller.addAction(UIAlertAction(title: "No", style: .default, handler: {
+                    (action: UIAlertAction!) in
+                    self.dismissGame()
+                }))
                 controller.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                     self.resetMiniGame()
                 }))
@@ -303,6 +319,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
 //        givenHints.text = """
 //            hint 1
 //            hint 2
+//            hint 3
 //            hint 3
 //        """
         givenHints.text = ""

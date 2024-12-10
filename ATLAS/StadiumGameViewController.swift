@@ -17,6 +17,7 @@ class StadiumGameViewController: UIViewController {
     @IBOutlet weak var paperBallImage: UIImageView!
     @IBOutlet weak var appleImage: UIImageView!
     @IBOutlet weak var trashCanImage: UIImageView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     var trashItemsLeft = 7
     
@@ -33,10 +34,30 @@ class StadiumGameViewController: UIViewController {
     // the game
     @IBAction func handleDragGesture(recognizer: UIPanGestureRecognizer) {
         
+//        let translation = recognizer.translation(in: self.view)
+//        
+//        if let view = recognizer.view {
+//            view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+//        }
+//        
+//        recognizer.setTranslation(.zero, in: self.view)
+        
         let translation = recognizer.translation(in: self.view)
         
+        let trashPiece = recognizer.view!
+        
+        var newX = trashPiece.center.x + translation.x
+        var newY = trashPiece.center.y + translation.y
+        
+        let backgroundBounds = backgroundImage.frame
+        
+        newX = max(backgroundBounds.minX + trashPiece.frame.width / 2, min(backgroundBounds.maxX - trashPiece.frame.width / 2, newX))
+                
+        // Constrain the y-coordinate (top and bottom limits)
+        newY = max(backgroundBounds.minY + trashPiece.frame.height / 2, min(backgroundBounds.maxY - trashPiece.frame.height / 2, newY))
+        
         if let view = recognizer.view {
-            view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+            view.center = CGPoint(x: newX, y: newY)
         }
         
         recognizer.setTranslation(.zero, in: self.view)
