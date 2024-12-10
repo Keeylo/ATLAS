@@ -37,6 +37,9 @@ class ForgotChangePasswordViewController: UIViewController, UITextFieldDelegate 
         
     }
     
+    // allows user to change their password by entering their current one
+    // and entering their new, desired one, and then reconfirming the new
+    // password
     @IBAction func changePasswordPressed(_ sender: UIButton) {
         guard let email = usernameTextField.text,
               let oldPassword = oldPasswordTextField.text,
@@ -104,18 +107,15 @@ class ForgotChangePasswordViewController: UIViewController, UITextFieldDelegate 
         return true
     }
     
-    
-    // ADD KEYBOARD CODE LATER
-    
-//    // Called when 'return' key pressed
-//    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//        
-//    // Called when the user clicks on the view outside of the UITextField
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    // Called when 'return' key pressed
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+        
+    // Called when the user clicks on the view outside of the UITextField
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 
 }

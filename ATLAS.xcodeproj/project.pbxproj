@@ -178,7 +178,6 @@
 		49923ECE2CB7A1C700D2CBA2 = {
 			isa = PBXGroup;
 			children = (
-				D52B90A92D03A5C900E36E4E /* PCLGameViewController.swift */,
 				49923ED92CB7A1C700D2CBA2 /* ATLAS */,
 				49923ED82CB7A1C700D2CBA2 /* Products */,
 			);
@@ -225,6 +224,7 @@
 				D539673E2CC8A5C30090A39E /* MenuPopUpViewController.swift */,
 				D596C2842CBF39F60047E563 /* MiniGameViewController.swift */,
 				42397A5E2CC6D2A100AB85EA /* NewUserSetupViewController.swift */,
+				D52B90A92D03A5C900E36E4E /* PCLGameViewController.swift */,
 				D5BC7D172CEC1B42000D28AB /* PickProfilePictureViewController.swift */,
 				49923EDC2CB7A1C700D2CBA2 /* SceneDelegate.swift */,
 				D5BF144E2CC0727400A0604C /* SecondRoundTowerViewController.swift */,

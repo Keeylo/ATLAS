@@ -45,6 +45,8 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    // creates the new account for the user if the username is not
+    // already taken, and the email has not already been used
     @IBAction func createAccountPressed(_ sender: UIButton) {
         if let email = emailTextField.text,
            let username = usernameTextField.text,
@@ -90,9 +92,6 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
                         // User was created successfully, now store the user details in Firestore
                         if let userId = authResult?.user.uid {
                             self.newUserID = userId
-//                            var imageURL = self.addProfilePicture() { (imageURL) in
-//                                self.storeUserData(userId: userId, email: email, username: username, imageURL: imageURL!)
-//                            }
                             self.storeUserData(userId: userId, email: email, username: username)
                         }
                         
@@ -107,6 +106,7 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // stores the data for the new user in firebase
     func storeUserData(userId: String, email: String, username: String) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)
@@ -129,73 +129,6 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-//    // creates default image for no profile picture
-//    func defaultProfilePicture() -> UIImage {
-//        let config = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default)
-//        guard let defaultImage = UIImage(systemName: "person.circle.fill", withConfiguration: config) else {
-//            print("could not create default image")
-//            return UIImage()
-//        }
-//        print("default image successful")
-//        return defaultImage
-//    }
-//    
-//    func addProfilePicture(completion: @escaping (String?) -> Void) {
-//        let storageRef = Storage.storage().reference()
-//        let defaultImage = defaultProfilePicture()
-//
-//        // Convert the UIImage to data
-//        guard let imageData = defaultImage.jpegData(compressionQuality: 0.75) else {
-//            print("image could not be converted")
-//            completion(nil)
-//            return
-//        }
-//        
-//        let fileName = "\(newUserID).jpg"
-//        
-//        // Create a unique path for the image in Firebase Storage (e.g., "profile_images/{userId}.jpg")
-//        guard let profileImageRef = storageRef.child("profile_images/\(fileName)") else {
-//            
-//        }
-//        // Upload the image data to Firebase Storage
-//        profileImageRef.putData(imageData, metadata: nil) { metadata, error in
-//            if let error = error {
-//                // Handle error during upload
-//                if let nsError = error as NSError? {
-//                    print("157 Error uploading default profile image: \(nsError.localizedDescription)")
-//                    print("158 Error code: \(nsError.code), domain: \(nsError.domain)")
-//                } else {
-//                    print("160 Error uploading default profile image: \(error.localizedDescription)")
-//                }
-//                completion(nil)
-//                return
-//            }
-//            
-//            // Get the download URL for the uploaded image
-//            profileImageRef.downloadURL { (url, error) in
-//                if let error = error {
-//                    if let nsError = error as NSError? {
-//                        print("170 Error uploading default profile image: \(nsError.localizedDescription)")
-//                        print("Error code: \(nsError.code), domain: \(nsError.domain)")
-//                    } else {
-//                        print("173 Error uploading default profile image: \(error.localizedDescription)")
-//                    }
-//                    completion(nil)
-//                }
-//                
-//                if let downloadURL = url {
-//                    print("url for image was created: \(downloadURL.absoluteString)")
-//                    completion(downloadURL.absoluteString)
-//                } else {
-//                    print("error getting download url")
-//                    completion(nil)
-//                }
-//            }
-//        }
-//    }
-    
-    
-    
     // adds shadow to a textfield
     func addBottomShadow(to textField: UITextField) {
         textField.layer.shadowColor = UIColor.black.cgColor
@@ -205,17 +138,14 @@ class NewUserSetupViewController: UIViewController, UITextFieldDelegate {
         textField.layer.masksToBounds = false
     }
     
-    
-    // ADD KEYBOARD CODE LATER
-    
-//    // Called when 'return' key pressed
-//    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//        
-//    // Called when the user clicks on the view outside of the UITextField
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    // Called when 'return' key pressed
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+        
+    // Called when the user clicks on the view outside of the UITextField
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
