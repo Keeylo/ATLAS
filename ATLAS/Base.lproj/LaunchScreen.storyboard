@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -11,15 +13,48 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange_background" translatesAutoresizingMaskIntoConstraints="NO" id="GU9-m3-aa1">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot_2024-10-21_at_2.34.15_PM-removebg" translatesAutoresizingMaskIntoConstraints="NO" id="hJQ-rS-BZ1">
+                                <rect key="frame" x="76" y="482" width="240" height="128"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="transparent_background" translatesAutoresizingMaskIntoConstraints="NO" id="Jre-00-Y6F">
+                                <rect key="frame" x="89" y="227" width="214" height="282"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jre-00-Y6F" secondAttribute="bottom" constant="309" id="0M2-hR-8B0"/>
+                            <constraint firstItem="hJQ-rS-BZ1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="76" id="85p-bU-hWL"/>
+                            <constraint firstItem="GU9-m3-aa1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="D9R-As-wGO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hJQ-rS-BZ1" secondAttribute="trailing" constant="77" id="HT6-3w-7dg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hJQ-rS-BZ1" secondAttribute="bottom" constant="208" id="LTs-Zd-cDj"/>
+                            <constraint firstItem="Jre-00-Y6F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="89" id="VPn-yS-0e7"/>
+                            <constraint firstItem="Jre-00-Y6F" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="168" id="icb-Ui-muY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jre-00-Y6F" secondAttribute="trailing" constant="90" id="nVo-o3-6Bd"/>
+                            <constraint firstAttribute="bottom" secondItem="GU9-m3-aa1" secondAttribute="bottom" id="pbs-5s-2FE"/>
+                            <constraint firstItem="GU9-m3-aa1" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="rh9-ai-eA9"/>
+                            <constraint firstItem="hJQ-rS-BZ1" firstAttribute="top" secondItem="Jre-00-Y6F" secondAttribute="bottom" constant="-27" id="sox-tf-O4e"/>
+                            <constraint firstItem="GU9-m3-aa1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tp3-C6-TMX"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Screenshot_2024-10-21_at_2.34.15_PM-removebg" width="1372" height="530"/>
+        <image name="orange_background" width="500" height="962"/>
+        <image name="transparent_background" width="1148" height="1392"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
