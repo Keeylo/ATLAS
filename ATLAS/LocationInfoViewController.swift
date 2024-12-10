@@ -85,6 +85,116 @@ class LocationInfoViewController: UIViewController {
                 description: "Clock Knot is a large-scale outdoor sculpture by artist Mark di Suvero, featuring interlocking red steel beams that explore themes of time and complexity.",
                 tags: ["Sculpture", "Public Art", "Modern Art"],
                 images: ["clock_knot_image1", "clockknotGood"]
+            ),
+            "Darrell K Royal–Texas Memorial Stadium": (
+                description: "Home to the Texas Longhorns football team, this iconic stadium is known for its roaring crowds and state-of-the-art facilities.",
+                tags: ["Sports", "Football", "Landmark"],
+                images: ["darrell_k_royal_stadium_image1", "darrell_k_royal_stadium_image2"]
+            ),
+            "LBJ Library": (
+                description: "The Lyndon B. Johnson Library and Museum offers a glimpse into the life and legacy of the 36th U.S. president, with exhibits and archives detailing American history.",
+                tags: ["Presidential Library", "History", "Education"],
+                images: ["lbj_library_image1", "lbj_library_image2"]
+            ),
+            "Texas Memorial Museum": (
+                description: "Dedicated to natural history, this museum features exhibits on fossils, wildlife, and geological wonders of Texas.",
+                tags: ["Natural History", "Education", "Museum"],
+                images: ["texas_memorial_museum_image1", "texas_memorial_museum_image2"]
+            ),
+            "Harry Ransom Center": (
+                description: "A world-class research library and museum, the Harry Ransom Center houses rare books, manuscripts, and art collections.",
+                tags: ["Research", "Art", "Library"],
+                images: ["harry_ransom_center_image1", "harry_ransom_center_image2"]
+            ),
+            "South Mall": (
+                description: "A picturesque area of the UT campus featuring lush greenery, historic statues, and a stunning view of the UT Tower.",
+                tags: ["Landmark", "History", "Scenic"],
+                images: ["south_mall_image1", "south_mall_image2"]
+            ),
+            "Jester Center": (
+                description: "Jester Center is a vibrant hub for student life, offering housing, dining, and communal spaces for UT students.",
+                tags: ["Student Housing", "Dining", "Community"],
+                images: ["jester_center_image1", "jester_center_image2"]
+            ),
+            "Perry-Castañeda Library": (
+                description: "The PCL is UT's largest library, offering extensive study spaces, academic resources, and digital archives.",
+                tags: ["Library", "Study Spaces", "Education"],
+                images: ["pcl_library_image1", "pcl_library_image2"]
+            ),
+            "Bass Concert Hall": (
+                description: "This premier performing arts venue hosts a wide range of events, from Broadway productions to live music and lectures.",
+                tags: ["Performing Arts", "Concerts", "Theater"],
+                images: ["bass_concert_hall_image1", "bass_concert_hall_image2"]
+            ),
+            "UT Law School Building": (
+                description: "The UT Law School Building features state-of-the-art classrooms, lecture halls, and study spaces for aspiring lawyers.",
+                tags: ["Education", "Law", "Research"],
+                images: ["ut_law_school_image1", "ut_law_school_image2"]
+            ),
+            "The Tower Garden": (
+                description: "Located near the UT Tower, this serene garden provides a peaceful environment for relaxation and reflection.",
+                tags: ["Garden", "Relaxation", "Landmark"],
+                images: ["tower_garden_image1", "tower_garden_image2"]
+            ),
+            "UT's Outdoor Amphitheater": (
+                description: "This open-air venue is perfect for performances, events, and casual gatherings under the Texas sky.",
+                tags: ["Outdoor", "Events", "Performances"],
+                images: ["ut_amphitheater_image1", "ut_amphitheater_image2"]
+            ),
+            "Seven Mountains": (
+                description: "A unique outdoor art installation featuring seven towering, colorful stone pillars stacked to symbolize unity and balance.",
+                tags: ["Art Installation", "Sculpture", "Outdoor"],
+                images: ["seven_mountains_image1", "seven_mountains_image2"]
+            ),
+            "Welch Patio": (
+                description: "An outdoor area near Welch Hall, providing a quiet space for students and faculty to study or relax.",
+                tags: ["Outdoor", "Study Spaces", "Relaxation"],
+                images: ["welch_patio_image1", "welch_patio_image2"]
+            ),
+            "The Color Inside": (
+                description: "A Skyspace installation by artist James Turrell, creating a mesmerizing play of light and color at sunset and sunrise.",
+                tags: ["Skyspace", "Light Art", "Installation"],
+                images: ["the_color_inside_image1", "the_color_inside_image2"]
+            ),
+            "And That's The Way It Is": (
+                description: "A striking wall sculpture paying homage to Walter Cronkite, featuring iconic quotes and themes from his journalism career.",
+                tags: ["Journalism", "Art", "Tribute"],
+                images: ["and_thats_the_way_it_is_image1", "and_thats_the_way_it_is_image2"]
+            ),
+            "Spiral of the Galaxy": (
+                description: "This large, spiraling outdoor sculpture symbolizes the vastness and complexity of the universe.",
+                tags: ["Sculpture", "Public Art", "Abstract"],
+                images: ["spiral_of_the_galaxy_image1", "spiral_of_the_galaxy_image2"]
+            ),
+            "Square Tilt": (
+                description: "A modern geometric sculpture exploring themes of balance and perspective through its tilted square design.",
+                tags: ["Sculpture", "Modern Art", "Geometry"],
+                images: ["square_tilt_image1", "square_tilt_image2"]
+            ),
+            "C-010106": (
+                description: "A contemporary art installation known for its abstract design and thought-provoking themes.",
+                tags: ["Art Installation", "Abstract", "Contemporary"],
+                images: ["c_010106_image1", "c_010106_image2"]
+            ),
+            "Forever Free": (
+                description: "A memorial sculpture celebrating the enduring spirit of freedom and justice.",
+                tags: ["Memorial", "Sculpture", "Tribute"],
+                images: ["forever_free_image1", "forever_free_image2"]
+            ),
+            "Jackson School of Geosciences": (
+                description: "A leading institution for geological research and education, with facilities for advanced scientific exploration.",
+                tags: ["Geosciences", "Education", "Research"],
+                images: ["jackson_school_image1", "jackson_school_image2"]
+            ),
+            "O's Campus Cafe and Catering": (
+                description: "A popular campus dining spot known for its fresh, locally sourced meals and catering services.",
+                tags: ["Dining", "Cafe", "Catering"],
+                images: ["os_campus_cafe_image1", "os_campus_cafe_image2"]
+            ),
+            "Union Coffee House": (
+                description: "Located in the Texas Union, this cozy coffee house serves a variety of beverages and snacks, perfect for studying or socializing.",
+                tags: ["Coffee", "Student Center", "Relaxation"],
+                images: ["union_coffee_house_image1", "union_coffee_house_image2"]
             )
     ]
 

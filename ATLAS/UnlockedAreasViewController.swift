@@ -14,7 +14,6 @@ import FirebaseFirestore
 struct Area {
     let name: String
     let image: String
-    let coordinate: Coordinate
     var isUnlocked: Bool = false
 }
 
@@ -339,19 +338,39 @@ class UnlockedAreasViewController: UIViewController {
     
     private func loadAreas() {
         areas = [
-            Area(name: "Gregory Gymnasium", image: "gregGood", coordinate: Coordinate(latitude: 30.28447, longitude: -97.73676)),
-            Area(name: "Norman Hackerman Building", image: "normanGood", coordinate: Coordinate(latitude: 30.28765, longitude: -97.73801), isUnlocked: false),
-            Area(name: "UT Tower, Main Building", image: "uttowerGooder", coordinate: Coordinate(latitude: 30.28593, longitude: -97.73941)),
-            Area(name: "The Littlefield Fountain", image: "fountainGooder", coordinate: Coordinate(latitude: 30.28396, longitude: -97.73957)),
-            Area(name: "The UT Student Union", image: "unionGood", coordinate: Coordinate(latitude: 30.28674373328207,longitude: -97.74099681516714)),
-            Area(name: "EER", image: "eerGood", coordinate: Coordinate(latitude: 30.28817, longitude: -97.73553)),
-            Area(name: "Blanton Museum of Art", image: "blantonGood", coordinate: Coordinate(latitude: 30.28096, longitude: -97.73774)),
-            Area(name: "Clock Knot", image: "clockknotGood", coordinate: Coordinate(latitude: 30.28974, longitude: -97.73606)),
-            Area(name: "The West", image: "the_west_image1", coordinate:
-                    Coordinate(latitude: 30.28561, longitude: 97.73824)),
-            Area(name: "Monochrome For Austin", image: "monochrome_for_austin_image2",
-                 coordinate: Coordinate(latitude: 30.28769, longitude: -97.73707)),
-            Area(name: "Circle With Towers", image: "circle_with_towers_image1", coordinate: Coordinate(latitude: 30.28626, longitude: -97.73694))
+            Area(name: "Gregory Gymnasium", image: "gregGood"),
+            Area(name: "Norman Hackerman Building", image: "normanGood"),
+            Area(name: "UT Tower, Main Building", image: "uttowerGooder"),
+            Area(name: "The Littlefield Fountain", image: "fountainGooder"),
+            Area(name: "The UT Student Union", image: "unionGood"),
+            Area(name: "EER", image: "eerGood"),
+            Area(name: "Blanton Museum of Art", image: "blantonGood"),
+            Area(name: "Clock Knot", image: "clockknotGood"),
+            Area(name: "The West", image: "the_west_image1"),
+            Area(name: "Monochrome For Austin", image: "monochrome_for_austin_image2"),
+            Area(name: "Circle With Towers", image: "circle_with_towers_image1"),
+            Area(name: "Darrell K Royal–Texas Memorial Stadium", image: "darrell_k_royal_stadium_image1"),
+            Area(name: "LBJ Library", image: "lbj_library_image1"),
+            Area(name: "Texas Memorial Museum", image: "texas_memorial_museum_image1"),
+            Area(name: "Harry Ransom Center", image: "harry_ransom_center_image1"),
+            Area(name: "South Mall", image: "south_mall_image1"),
+            Area(name: "Jester Center", image: "jester_center_image1"),
+            Area(name: "Perry-Castañeda Library", image: "pcl_library_image1"),
+            Area(name: "Bass Concert Hall", image: "bass_concert_hall_image1"),
+            Area(name: "UT Law School Building", image: "ut_law_school_image1"),
+            Area(name: "The Tower Garden", image: "tower_garden_image1"),
+            Area(name: "UT's Outdoor Amphitheater", image: "ut_amphitheater_image1"),
+            Area(name: "Seven Mountains", image: "seven_mountains_image1"),
+            Area(name: "Welch Patio", image: "welch_patio_image1"),
+            Area(name: "The Color Inside", image: "the_color_inside_image1"),
+            Area(name: "And That's The Way It Is", image: "and_thats_the_way_it_is_image1"),
+            Area(name: "Spiral of the Galaxy", image: "spiral_of_the_galaxy_image1"),
+            Area(name: "Square Tilt", image: "square_tilt_image1"),
+            Area(name: "C-010106", image: "c_010106_image1"),
+            Area(name: "Forever Free", image: "forever_free_image1"),
+            Area(name: "Jackson School of Geosciences", image: "jackson_school_image1"),
+            Area(name: "O's Campus Cafe and Catering", image: "os_campus_cafe_image1"),
+            Area(name: "Union Coffee House", image: "union_coffee_house_image1")
         ]
         
         let middleIndex = areas.count / 2
