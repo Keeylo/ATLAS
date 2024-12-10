@@ -21,7 +21,7 @@ let pointsOfInterest: [PointOfInterest] = [
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28302, longitude: -97.73708), color: .orange, title: "Jester Center"),
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28375, longitude: -97.73962), color: .blue, title: "The Littlefield Fountain"),
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28304, longitude: -97.73805), color: .red, title: "Perry-Castañeda Library"),
-    PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28573, longitude: -97.73131), color: .cyan, title: "Texas Performing Arts Complex\nBass Concert hall"),
+    PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28573, longitude: -97.73131), color: .cyan, title: "Bass Concert Hall"),
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28832, longitude: -97.73080), color: .orange, title: "UT Law School Building"),
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.28359, longitude: -97.73964), color: .blue, title: "The Tower Garden"),
     PointOfInterest(coordinate: CLLocationCoordinate2D(latitude: 30.27482, longitude: -97.73631), color: .cyan, title: "UT's Outdoor Amphitheater"),
