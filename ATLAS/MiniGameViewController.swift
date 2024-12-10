@@ -160,14 +160,13 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { _ in
             if self.wonGame == true {
                 self.performSegue(withIdentifier: "ShowLocationInfo", sender: self)
             } else {
                 self.dismiss(animated: true)
             }
         }))
-        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
@@ -200,7 +199,7 @@ class MiniGameViewController: UIViewController, ScreenChanger, TimerStops, GameW
                 let otherVC = storyboard.instantiateViewController(withIdentifier: "PCLGame") as? PCLGameViewController
                 otherVC?.delegate = self
                 displayChildViewController(otherVC!)
-            } else if (gameLocation == "The UT Student Union") {
+            } else if (gameLocation != "Unknown") {
                 let otherVC = storyboard.instantiateViewController(withIdentifier: "UnionGame") as? UnionGameViewController
                 otherVC?.delegate = self
                 displayChildViewController(otherVC!)

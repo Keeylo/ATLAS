@@ -29,6 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    // adds a slight shadow to the bottom of the textfields
     func addBottomShadow(to textField: UITextField) {
         textField.layer.shadowColor = UIColor.black.cgColor
         textField.layer.shadowOpacity = 0.3
@@ -37,6 +38,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textField.layer.masksToBounds = false // Make sure shadow is outside the bounds
     }
     
+    // adds a border to the buttons
     func addBorderToButton(_ button: UIButton) {
         button.layer.borderWidth = 2  // Set border width
         button.layer.borderColor = UIColor.darkGray.cgColor  // Set border color
@@ -44,6 +46,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         button.layer.masksToBounds = true  // Ensures content inside button is clipped to the corner radius
     }
     
+    // allows the user to login using firebase
     @IBAction func loginPressed(_ sender: UIButton) {
         sender.isEnabled = false
         
@@ -71,32 +74,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func newAccountPressed(_ sender: Any) {
     }
     
-    // checks if segue can be performed
-//    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-//        
-//        if identifier == "LoginSegue" {
-//            return shouldLogin
-//        }
-//        
-//        return true
-//    }
+    // Called when 'return' key pressed
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+        
+    // Called when the user clicks on the view outside of the UITextField
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
-    
-    
-    
-    
-    // ADD KEYBOARD CODE LATER
-//    // Called when 'return' key pressed
-//    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//        
-//    // Called when the user clicks on the view outside of the UITextField
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
-    
+    // passes on the right data to the next screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ChangePasswordSegue", let nextVC = segue.destination as? ForgotChangePasswordViewController {
             nextVC.prevScreen = "Login"

@@ -254,13 +254,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         markerRef = marker
         selectedLocation = marker
         
-        if (marker.isUnlocked || (annotationTitle != "UT Tower, Main Building" && annotationTitle != "The Littlefield Fountain") && annotationTitle != "Darrell K Royal–Texas Memorial Stadium" && annotationTitle != "Perry-Castañeda Library" && annotationTitle != "The UT Student Union") {
-            print("PerformSegue")
+        if (marker.isUnlocked) {
             performSegue(withIdentifier: "LocationInfoSegue", sender: self)
-        } else {
+        } 
+        // else {
+//
+//            markerRefVisual = markerView
+//            markerRef = marker
+//            let alert = UIAlertController(
+//                title: "Unknown Location Found!",
+//                message: "Play a mini game to unlock this map marker? :)",
+//                preferredStyle: .alert
+//            )
+//            
+//            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+//                self.performSegue(withIdentifier: "ShowMiniGame", sender: self)
+//            }))
+//            
+//            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+//            
+//            present(alert, animated: true, completion: nil)
+//        }
+        
+        if (!marker.isUnlocked) {
             
             markerRefVisual = markerView
             markerRef = marker
+            
             let alert = UIAlertController(
                 title: "Unknown Location Found!",
                 message: "Play a mini game to unlock this map marker? :)",
@@ -309,7 +329,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 destinationVC.hintCount = 1
                 destinationVC.totalHints = 1
                 destinationVC.totalTime = 30
-            } else if (selectedLocation.title == "The UT Student Union") {
+            } else {
                 destinationVC.gameInstructions = "You will have 3 minutes to play a game of memory. Tap the cards to flip them over and find their matches. Press the play button to begin!"
                 destinationVC.hints = ["There are no hints for this game."]
                 destinationVC.hintCount = 1
