@@ -15,6 +15,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orange_background" translatesAutoresizingMaskIntoConstraints="NO" id="Vnr-6z-rWP">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zk7-PF-RL2">
                                 <rect key="frame" x="6.6666666666666572" y="344" width="380" height="40"/>
                                 <constraints>
@@ -97,17 +100,21 @@
                         <viewLayoutGuide key="safeArea" id="x0L-g8-y9P"/>
                         <color key="backgroundColor" red="0.90980386729999996" green="0.89803922179999995" blue="0.89803922179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="Vnr-6z-rWP" firstAttribute="leading" secondItem="x0L-g8-y9P" secondAttribute="leading" id="3AB-Cr-xvg"/>
                             <constraint firstItem="tak-rF-zvq" firstAttribute="top" secondItem="x0L-g8-y9P" secondAttribute="top" id="3wK-2q-5ig"/>
                             <constraint firstItem="Usw-7v-WQd" firstAttribute="centerX" secondItem="X7L-vx-auH" secondAttribute="centerX" id="7dJ-yY-CdS"/>
                             <constraint firstItem="kp1-Oo-5lh" firstAttribute="top" secondItem="gCV-3k-St0" secondAttribute="bottom" constant="100" id="9lV-VL-mvR"/>
                             <constraint firstItem="Zk7-PF-RL2" firstAttribute="centerX" secondItem="X7L-vx-auH" secondAttribute="centerX" id="B2W-lE-R20"/>
                             <constraint firstItem="tak-rF-zvq" firstAttribute="leading" secondItem="x0L-g8-y9P" secondAttribute="leading" id="DQ8-46-1fB"/>
+                            <constraint firstAttribute="bottom" secondItem="Vnr-6z-rWP" secondAttribute="bottom" id="IhU-ao-fFy"/>
                             <constraint firstItem="wh3-ZJ-ofM" firstAttribute="top" secondItem="Zk7-PF-RL2" secondAttribute="bottom" constant="28" id="LdJ-o5-psE"/>
                             <constraint firstItem="gCV-3k-St0" firstAttribute="top" secondItem="bJw-fb-F7V" secondAttribute="bottom" constant="30" id="MJU-jQ-53p"/>
                             <constraint firstItem="rVG-iC-QyE" firstAttribute="centerX" secondItem="X7L-vx-auH" secondAttribute="centerX" id="Q5E-i5-9n1"/>
                             <constraint firstItem="Zk7-PF-RL2" firstAttribute="top" secondItem="rVG-iC-QyE" secondAttribute="bottom" constant="28" id="RLl-H4-Jal"/>
                             <constraint firstItem="kp1-Oo-5lh" firstAttribute="centerX" secondItem="X7L-vx-auH" secondAttribute="centerX" id="Smn-h0-2xa"/>
                             <constraint firstItem="gCV-3k-St0" firstAttribute="centerX" secondItem="X7L-vx-auH" secondAttribute="centerX" id="Spf-ts-nke"/>
+                            <constraint firstItem="Vnr-6z-rWP" firstAttribute="trailing" secondItem="x0L-g8-y9P" secondAttribute="trailing" id="cyG-9a-te8"/>
+                            <constraint firstItem="Vnr-6z-rWP" firstAttribute="top" secondItem="X7L-vx-auH" secondAttribute="top" id="fuu-Py-sdj"/>
                             <constraint firstItem="wh3-ZJ-ofM" firstAttribute="centerX" secondItem="X7L-vx-auH" secondAttribute="centerX" id="lrs-7y-vvX"/>
                             <constraint firstItem="Usw-7v-WQd" firstAttribute="top" secondItem="x0L-g8-y9P" secondAttribute="top" constant="39" id="mVa-h9-Goi"/>
                             <constraint firstItem="rVG-iC-QyE" firstAttribute="top" secondItem="Usw-7v-WQd" secondAttribute="bottom" constant="50" id="qqZ-Ed-DoX"/>
@@ -148,5 +155,6 @@
     <resources>
         <image name="Screenshot_2024-10-21_at_2.34.15_PM-removebg" width="1372" height="530"/>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="orange_background" width="500" height="962"/>
     </resources>
 </document>
